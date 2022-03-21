@@ -1,5 +1,16 @@
+import Layout from "./layout/Layout";
+import Header from "./components/header/Header";
+import Main from "./components/main/Main";
+import Footer from "./components/footer/Footer";
+
 function App() {
-  return <div>Hello World!</div>;
+  return (
+    <Layout>
+      <Header />
+      <Main></Main>
+      <Footer />
+    </Layout>
+  );
 }
 
 export default App;

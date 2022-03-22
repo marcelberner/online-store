@@ -1,3 +1,7 @@
+@import "../../styles/variables.scss";
+
+$input-border: 1px solid rgb(221, 221, 221);
+
 .search {
   &__container {
     display: flex;
@@ -13,11 +17,11 @@
     align-items: center;
   }
   &__input {
-    width: 90%;
+    width: 75%;
     height: 5rem;
     padding: 1rem;
     font-size: 1.6rem;
-    border: 1px solid rgb(221, 221, 221);
+    border: $input-border;
     border-radius: 8px 0 0 8px;
   }
   &__input:focus {
@@ -27,17 +31,18 @@
       color: rgb(201, 201, 201);
   }
   &__button {
-    width: 5rem;
+    width: 15%;
+    min-width: 5rem;
     height: 5rem;
     font-size: 2rem;
     border-radius: 0 8px 8px 0;
     transition: 0.3s;
     color: azure;
-    border: 1px solid rgb(221, 221, 221);
-    background-color: #fc6161;
+    border: $input-border;
+    background-color: $main-color;
     cursor: pointer;
   }
   &__button:hover {
-    background-color: #d83939;
+    background-color: $main-color-hover;
   }
 }

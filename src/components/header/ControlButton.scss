@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .control{
     &__button{
         display: flex;
@@ -8,9 +10,13 @@
     &__button:hover &__button-text{
         text-decoration: underline;
     }
+    &__button:hover &__button-icon{
+        color: $main-color-hover;
+    }
     &__button-icon{
         font-size: 2.5rem;
-        color: #fc6161;
+        transition: .3s;
+        color: $main-color;
     }
     &__button-text{
         font-size: 1.6rem;

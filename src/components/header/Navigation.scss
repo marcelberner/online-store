@@ -20,7 +20,6 @@
     flex-direction: column;
     list-style: none;
     width: 100%;
-    transition: 0.1s;
     cursor: pointer;
   }
   &__item:hover .list__item--show {
@@ -30,24 +29,32 @@
     z-index: 2;
   }
   &__item:hover .list__item--hide {
-    display: block;
+    height: 100%;
+    overflow: visible;
+    color: black;
   }
 }
 
 .list {
   &__item {
-    line-height: $header-nav-height;
     width: 100%;
     text-align: center;
+    line-height: $header-nav-height;
   }
   &__item--hide {
+    height: 0px;
+    transition: .5s;
     border-bottom: $thin-border;
+    border-left: $thin-border;
+    border-right: $thin-border;
     background-color: white;
-    display: none;
+    color: transparent;
+    overflow: hidden;
     z-index: 1;
   }
   &__item--hide:hover {
-    color: $main-color;
+    transition: 0s;
     font-weight: $font-weight;
+    color: $main-color !important;
   }
 }

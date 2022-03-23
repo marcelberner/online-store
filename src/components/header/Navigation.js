@@ -8,7 +8,7 @@ const Navigation = () => {
           <li className="list__item list__item--show">Laptopy</li>
           <li className="list__item list__item--hide">Laptopy 2w1</li>
           <li className="list__item list__item--hide">Tablety</li>
-          <li className="list__item list__item--hide">czytniki e-book</li>
+          <li className="list__item list__item--hide">Czytniki e-book</li>
           <li className="list__item list__item--hide">Podstawki chłodzące</li>
           <li className="list__item list__item--hide">Baterie do laptopów</li>
           <li className="list__item list__item--hide">Etui do laptopów</li>

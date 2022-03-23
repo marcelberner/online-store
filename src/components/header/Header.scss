@@ -18,6 +18,7 @@
     box-shadow: $basic-box-shadow;
     overflow: hidden;
     background-color: white;
+    z-index: 3;
   }
   &--fixed {
     position: fixed;

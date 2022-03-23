@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+
+.window {
+  position: relative;
+  display: flex;
+  height: 75%;
+  box-shadow: $basic-box-shadow;
+  &__button {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 1.5rem;
+    font-size: 2rem;
+    background-color: transparent;
+    color: $main-color;
+    border-radius: 50%;
+    border: 2px solid $main-color;
+    transition: 0.2s;
+    z-index: 1;
+  }
+  &__button:hover {
+    background-color: $main-color;
+    color: white;
+  }
+  &__button--forward {
+    right: 1.5rem;
+  }
+  &__button--backward {
+    left: 1.5rem;
+  }
+  &__content {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    width: 100%;
+  }
+  &__slide{
+      display: block;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: 2s;
+      position:absolute;
+    }
+    &__slide--active{
+        opacity: 1;
+    }
+}

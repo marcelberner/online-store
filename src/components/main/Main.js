@@ -1,9 +1,11 @@
+import HomePage from "../../pages/HomePage/HomePage";
+
 import "./Main.scss";
 
 const Main = () => {
   return (
     <main className="main">
-      <div>Main</div>
+      <HomePage />
     </main>
   );
 };

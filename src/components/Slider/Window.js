@@ -22,12 +22,12 @@ const Window = (props) => {
             className = "window__slide window__slide--active";
 
           return (
-            <img
+            <div
               key={Math.random()}
-              src={slide.img}
+              style={{backgroundImage: `url(${slide.img})`}}
               alt={"slide"}
               className={className}
-            ></img>
+            ></div>
           );
         })}
       </div>

@@ -41,6 +41,9 @@
       opacity: 0;
       transition: 2s;
       position:absolute;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     &__slide--active{
         opacity: 1;

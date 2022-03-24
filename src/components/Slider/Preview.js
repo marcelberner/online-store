@@ -9,16 +9,14 @@ const Preview = (props) => {
           className = "preview__content preview__content--active";
 
         return (
-          <div key={Math.random()} className={className}>
-            <img
-              key={Math.random()}
-              data-id={slide.id}
-              src={slide.img}
-              alt={"slide"}
-              className="preview__item"
-              onClick={props.selectSlide}
-            ></img>
-          </div>
+          <div
+            key={Math.random()}
+            className={className}
+            data-id={slide.id}
+            style={{ backgroundImage: `url(${slide.img})` }}
+            alt={"slide"}
+            onClick={props.selectSlide}
+          ></div>
         );
       })}
     </div>

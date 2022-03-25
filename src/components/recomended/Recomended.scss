@@ -1,0 +1,13 @@
+@import "../../styles/variables.scss";
+
+.recomended {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 2rem;
+  justify-content: space-around;
+  margin-top: 5rem;
+  border-radius: $border-radius;
+  box-shadow: $basic-box-shadow;
+  background-color: white;
+}

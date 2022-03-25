@@ -24,7 +24,7 @@ const Window = (props) => {
           return (
             <div
               key={Math.random()}
-              style={{backgroundImage: `url(${slide.img})`}}
+              style={{ backgroundImage: `url(${slide.img})` }}
               alt={"slide"}
               className={className}
             ></div>

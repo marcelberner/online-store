@@ -10,14 +10,14 @@
   overflow-x: auto;
   &__content {
     min-width: 35rem;
-    height: 80%;
+    height: 85%;
     border-radius: $border-radius;
     box-shadow: $basic-box-shadow;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     margin-right: 1rem;
-    overflow: hidden;
+    cursor: pointer;
   }
   &__content--active {
     border: 4px solid $main-color;

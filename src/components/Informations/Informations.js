@@ -8,7 +8,9 @@ const Informations = (props) => {
         {props.content.map((news) => (
           <div key={Math.random()} className="news">
             <div
-              className="news__image"
+              className={`news__image ${
+                props.mediumSize ? "news__image--medium" : null
+              }`}
               style={{ backgroundImage: `url(${news.img})` }}
             ></div>
             <div className="news__title">{news.header}</div>

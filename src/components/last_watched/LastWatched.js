@@ -1,3 +1,5 @@
+import "./LastWatched.scss";
+
 const LastWatched = () => {
   return <section className="last-watched"></section>;
 };

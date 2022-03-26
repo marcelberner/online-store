@@ -1,11 +1,11 @@
 import ProductItem from "../Products/ProductItem";
 
-import "./LastWatched.scss";
+import "./Bestselers.scss";
 
-const LastWatched = (props) => {
-  return <section className="last-watched">
-    <h2 className="last-watched__header">{props.title}</h2>
-      <div className="last-watched__content">
+const Bestselers = (props) => {
+  return <section className="bestselers">
+    <h2 className="bestselers__header">{props.title}</h2>
+      <div className="bestselers__content">
         {props.products.map((product) => (
            <ProductItem
            key={Math.random()}
@@ -18,4 +18,4 @@ const LastWatched = (props) => {
   </section>;
 };
 
-export default LastWatched;
+export default Bestselers;

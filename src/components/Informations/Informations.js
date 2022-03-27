@@ -1,3 +1,5 @@
+import News from "./News";
+
 import "./Informations.scss";
 
 const Informations = (props) => {
@@ -6,15 +8,12 @@ const Informations = (props) => {
       <h2 className="informations__header">{props.title}</h2>
       <div className="informations__content">
         {props.content.map((news) => (
-          <div key={Math.random()} className="news">
-            <div
-              className={`news__image ${
-                props.mediumSize ? "news__image--medium" : null
-              }`}
-              style={{ backgroundImage: `url(${news.img})` }}
-            ></div>
-            <div className="news__title">{news.header}</div>
-          </div>
+          <News
+            key={Math.random()}
+            img={news.img}
+            header={news.header}
+            mediumSize={props.mediumSize}
+          />
         ))}
       </div>
     </section>

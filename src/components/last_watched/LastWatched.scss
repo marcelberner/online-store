@@ -17,9 +17,12 @@
   &__content {
     display: flex;
     width: 100%;
-    justify-content: center;
+    overflow-x: scroll;
     align-items: center;
     border-top: $section-border;
     border-bottom: $section-border;
+    &::-webkit-scrollbar {
+      height: 0rem;
+    }
   }
 }

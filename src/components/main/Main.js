@@ -1,13 +1,7 @@
-import HomePage from "../../pages/HomePage/HomePage";
-
 import "./Main.scss";
 
-const Main = () => {
-  return (
-    <main className="main">
-      <HomePage />
-    </main>
-  );
+const Main = (props) => {
+  return <main className="main">{props.children}</main>;
 };
 
 export default Main;

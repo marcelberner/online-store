@@ -2,12 +2,12 @@ import Slider from "../../components/slider/Slider";
 import Recomended from "../../components/recomended/Recomended";
 import Informations from "../../components/Informations/Informations";
 import LastWatched from "../../components/last_watched/LastWatched";
-import Bestselers from "../../components/Bestselers/Bestselers";
+import Bestsellers from "../../components/Bestsellers/Bestsellers";
 
 import NEWS from "../../data/news";
 import TUTORIALS from "../../data/tutorials";
 import INFORMATIONS from "../../data/informations";
-import PRODUCTS from "../../data/Products";
+import PRODUCTS from "../../data/products";
 
 import "./HomePage.scss";
 
@@ -21,7 +21,7 @@ const HomePage = () => {
         content={INFORMATIONS}
         mediumSize={true}
       />
-      <Bestselers title={"Bestselery"} products={PRODUCTS}/>
+      <Bestsellers title={"Bestsellery"} products={PRODUCTS} />
       <Informations title={"Aktualności"} content={NEWS} />
       <LastWatched title={"Ostatnio oglądane"} products={PRODUCTS} />
       <Informations title={"Poradniki"} content={TUTORIALS} />

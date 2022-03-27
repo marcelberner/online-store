@@ -1,4 +1,4 @@
-import PRODUCTS from "../../data/Products";
+import PRODUCTS from "../../data/products";
 
 import "./HotShot.scss";
 

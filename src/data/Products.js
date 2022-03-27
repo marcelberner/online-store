@@ -1,6 +1,6 @@
 const PRODUCTS = [
     {
-        id: Math.random(),
+        id: `${Math.floor(Math.random() * 1000000000)}`,
         name: "Apple iPhone 13 128GB Alpine Green",
         img: "./images/iphone_green.png",
         category: "phone",
@@ -15,7 +15,7 @@ const PRODUCTS = [
         }
     },
     {
-        id: Math.random(),
+        id: `${Math.floor(Math.random() * 1000000000)}`,
         name: "realme Pad 10.4 LTE 6/128GB Real Grey",
         img: "./images/realmePad_grey.png",
         category: "tablet",
@@ -30,7 +30,7 @@ const PRODUCTS = [
         }
     },
     {
-        id: Math.random(),
+        id: `${Math.floor(Math.random() * 1000000000)}`,
         name: "Gigabyte GeForce RTX 3050 GAMING OC 8GB GDDR6",
         img: "./images/gigabyte_RTX3050.png",
         category: "graphic-card",
@@ -45,7 +45,7 @@ const PRODUCTS = [
         }
     },
     {
-        id: Math.random(),
+        id: `${Math.floor(Math.random() * 1000000000)}`,
         name: "Apple MacBook Air M1/8GB/256/Space Gray",
         img: "./images/macbook_grey.png",
         category: "laptop",
@@ -60,7 +60,7 @@ const PRODUCTS = [
         }
     },
     {
-        id: Math.random(),
+        id: `${Math.floor(Math.random() * 1000000000)}`,
         name: "HERO i5-11400F/16GB/1TB/RTX3060",
         img: "./images/computer_hero.png",
         category: "computer",
@@ -74,7 +74,7 @@ const PRODUCTS = [
         }
     },
     {
-        id: Math.random(),
+        id: `${Math.floor(Math.random() * 1000000000)}`,
         name: "ASUS ROG SWIFT PG32UQX 4K HDR",
         img: "./images/monitor_asus.png",
         category: "monitor",
@@ -88,7 +88,7 @@ const PRODUCTS = [
         }
     },
     {
-        id: Math.random(),
+        id: `${Math.floor(Math.random() * 1000000000)}`,
         name: "Microsoft Xbox Series X",
         img: "./images/xbox_x.png",
         category: "console",
@@ -103,7 +103,7 @@ const PRODUCTS = [
         }
     },
     {
-        id: Math.random(),
+        id: `${Math.floor(Math.random() * 1000000000)}`,
         name: "HTC VIVE Cosmos Elite",
         img: "./images/vr_htc.png",
         category: "vr",

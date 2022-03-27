@@ -1,4 +1,4 @@
-import PRODUCTS from "../../data/Products";
+import PRODUCTS from "../../data/products";
 import ProductItem from "../Products/ProductItem";
 
 import "./RecomendedList.scss";
@@ -16,7 +16,8 @@ const RecomendedList = () => {
       <div className="recomended-list__content">
         {productsArray.map((product) => (
           <ProductItem
-            key={Math.random()}
+            key={product.id}
+            id={product.id}
             img={product.img}
             name={product.name}
             price={product.price}

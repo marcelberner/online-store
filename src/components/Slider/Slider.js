@@ -3,28 +3,11 @@ import { useState, useEffect } from "react";
 import Window from "./Window";
 import Preview from "./Preview";
 
+import SLIDES from "../../data/slides";
+
 import "./Slider.scss";
 
 const Slider = () => {
-  const SLIDES = [
-    {
-      id: 1,
-      img: "./images/slide_1.png",
-    },
-    {
-      id: 2,
-      img: "./images/slide_2.png",
-    },
-    {
-      id: 3,
-      img: "./images/slide_3.png",
-    },
-    {
-      id: 4,
-      img: "./images/slide_4.png",
-    },
-  ];
-
   const [currentPosition, setCurrentPosition] = useState(0);
 
   useEffect(() => {

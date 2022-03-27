@@ -1,6 +1,6 @@
 import ProductItem from "../Products/ProductItem";
 
-import "./Bestselers.scss";
+import "./Bestsellers.scss";
 
 const Bestselers = (props) => {
   return <section className="bestselers">
@@ -8,7 +8,8 @@ const Bestselers = (props) => {
       <div className="bestselers__content">
         {props.products.map((product) => (
            <ProductItem
-           key={Math.random()}
+           key={product.id}
+           id={product.id}
            img={product.img}
            name={product.name}
            price={product.price}

@@ -2,15 +2,13 @@
 @import "./HeaderVariables.scss";
 
 .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: $header-height;
+  background-color: white;
   &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: $header-height;
-    background-color: white;
-  }
-  &__main {
     display: flex;
     justify-content: center;
     width: inherit;
@@ -20,7 +18,7 @@
     background-color: white;
     z-index: 3;
   }
-  &--fixed {
+  &__container--fixed {
     position: fixed;
   }
   &__content {
@@ -31,12 +29,14 @@
     max-width: $content-width-limit;
     height: inherit;
   }
-}
-
-.logo {
-  display: block;
-  width: 24rem;
-  height: 8rem;
-  padding: 1rem;
-  cursor: pointer;
+  &__logo {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    width: 24rem;
+    height: 8rem;
+    padding: 1rem;
+    cursor: pointer;
+  }
 }

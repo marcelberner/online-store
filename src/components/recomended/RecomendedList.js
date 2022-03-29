@@ -1,5 +1,5 @@
 import PRODUCTS from "../../data/products";
-import ProductItem from "../Products/ProductItem";
+import ProductItem from "../Products/ProductPreview/ProductItem";
 
 import "./RecomendedList.scss";
 

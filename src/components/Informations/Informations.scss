@@ -21,5 +21,9 @@
     align-items: center;
     border-top: $section-border;
     border-bottom: $section-border;
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+      height: 0rem;
+    }
   }
 }

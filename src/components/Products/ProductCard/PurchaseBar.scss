@@ -1,0 +1,28 @@
+@import "../../../styles/variables.scss";
+
+.purchase-bar {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    flex-basis: 20%;
+    box-shadow: $basic-box-shadow;
+    border-radius: $border-radius;
+    &__panel {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 25%;
+      border-bottom: $section-border;
+    }
+    &__price {
+      display: block;
+      flex-basis: 50%;
+      width: 100%;
+      font-size: 3.5rem;
+      text-align: right;
+    }
+    &__buttons {
+      flex-basis: 50%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }

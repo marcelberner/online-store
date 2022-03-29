@@ -1,0 +1,31 @@
+@import "../../../styles/variables.scss";
+
+.recomendation{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    font-size: 1.5rem;
+    width: 40rem;
+    padding: 2rem;
+    margin-top: 5rem;
+    background-color: #fef7ec;
+    border-radius: $border-radius;
+    box-shadow: $basic-box-shadow;
+    &__header{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        left: 0;
+        top: 0;
+        transform: translate(0,-50%);
+        font-size: 1.5rem;
+        height: 1rem;
+        position: absolute;
+        background-color: #f8d08c;
+        padding: 1rem;
+        font-weight: $font-weight;
+        border-radius: $border-radius;
+    }
+}

@@ -6,6 +6,8 @@ const PRODUCTS = [
         category: "phone",
         price: "4 199",
         amount: 19,
+        reputation: "4.4",
+        recomendation: "Bardzo mocny procesor Apple A15 Bionic, wyświetlacz OLED Super Retina XDR, świetne głośniki stereo i wieloletnie wsparcie dla nowych systemów pozwoli cieszyć się urządzeniem przez długi czas.",
         specyfication: {
             color: "green",
             memory: "128GB",
@@ -21,6 +23,7 @@ const PRODUCTS = [
         category: "tablet",
         price: "1 399",
         amount: 29,
+        reputation: "4.7",
         specyfication: {
             color: "grey",
             memory: "128GB",
@@ -36,6 +39,7 @@ const PRODUCTS = [
         category: "graphic-card",
         price: "2 199",
         amount: 8,
+        reputation: "3.8",
         specyfication: {
             color: "black",
             memory: "8GB",
@@ -51,6 +55,7 @@ const PRODUCTS = [
         category: "laptop",
         price: "4 599",
         amount: 16,
+        reputation: "5.0",
         specyfication: {
             color: "grey",
             memory: "256GB",
@@ -66,6 +71,7 @@ const PRODUCTS = [
         category: "computer",
         price: "6 600",
         amount: 31,
+        reputation: "4.4",
         specyfication: {
             memory: "16GB",
             graphic: "NVIDIA GeForce RTX 3060",
@@ -80,6 +86,7 @@ const PRODUCTS = [
         category: "monitor",
         price: "15 999",
         amount: 3,
+        reputation: "2.3",
         specyfication: {
             color: "black",
             screen: "32",
@@ -94,6 +101,7 @@ const PRODUCTS = [
         category: "console",
         price: "2 449",
         amount: 12,
+        reputation: "3.9",
         specyfication: {
             color: "black",
             memory: "1TB",
@@ -109,6 +117,7 @@ const PRODUCTS = [
         category: "vr",
         price: "4 649",
         amount: 8,
+        reputation: "4.1",
         specyfication: {
             color: "black",
             screen: "2 x 3,4",

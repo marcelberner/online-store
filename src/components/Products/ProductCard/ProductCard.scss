@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.product-card {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 50rem;
+  background-color: white;
+  padding: 2rem;
+  margin-top: 5rem;
+  border-radius: $border-radius;
+  box-shadow: $basic-box-shadow;
+}
+
+

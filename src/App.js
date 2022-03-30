@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+import ScrollToTop from "./hooks/ScrollToTop";
 import Layout from "./layout/Layout";
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
@@ -12,15 +13,17 @@ import ProductList from "./pages/Products/ProductList";
 function App() {
   return (
     <Layout>
-      <Header />
-      <Main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductList />} />
-          <Route path="/product/:productId" element={<ProductDetail />} />
-        </Routes>
-      </Main>
-      <Footer />
+      <ScrollToTop>
+        <Header />
+        <Main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={<ProductList />} />
+            <Route path="/product/:productId" element={<ProductDetail />} />
+          </Routes>
+        </Main>
+        <Footer />
+      </ScrollToTop>
     </Layout>
   );
 }

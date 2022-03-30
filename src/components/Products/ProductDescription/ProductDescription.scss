@@ -1,0 +1,17 @@
+@import "../../../styles/variables.scss";
+
+.description {
+  display: flex;
+justify-content: center;
+  background-color: white;
+  margin-top: 5rem;
+  padding: 2rem;
+  width: 100%;
+  border-radius: $border-radius;
+  box-shadow: $basic-box-shadow;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+  }
+}

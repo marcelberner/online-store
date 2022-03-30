@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
 import ProductCard from "../../components/Products/ProductCard/ProductCard";
-import ProductDescryption from "../../components/Products/ProductDescryption/ProductDescription";
+import ProductDescription from "../../components/Products/ProductDescription/ProductDescription";
 import ProductSpecyfication from "../../components/Products/ProductSpecyfication/ProductSpecyfication";
 
 import PRODUCTS from "../../data/products";
@@ -22,7 +22,7 @@ const ProductDetail = () => {
         rep={product.reputation}
         recomendation={product.recomendation}
       />
-      <ProductDescryption />
+      <ProductDescription description={product.description}/>
       <ProductSpecyfication />
     </div>
   );

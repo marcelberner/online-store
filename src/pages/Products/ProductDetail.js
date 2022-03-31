@@ -22,8 +22,8 @@ const ProductDetail = () => {
         rep={product.reputation}
         recomendation={product.recomendation}
       />
-      <ProductDescription description={product.description}/>
-      <ProductSpecyfication />
+      <ProductDescription description={product.description} />
+      <ProductSpecyfication spec={product.specyfication} />
     </div>
   );
 };

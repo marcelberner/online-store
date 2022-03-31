@@ -7,16 +7,30 @@
   padding: 1.5rem 0;
   border-top: $section-border;
   border-bottom: $section-border;
+  &--large {
+    width: 50%;
+    justify-content: space-between;
+    font-size: 2rem;
+  }
   &__item {
+    display: flex;
     line-height: 3rem;
   }
-  &__item::first-letter {
-    text-transform: uppercase;
+  &__item--large {
+    width: 100%;
+  }
+  &__item--large:nth-child(2n + 1) {
+    background-color: $background-color;
   }
   &__name {
+    display: block;
     color: $light-gray;
   }
+  &__name--large {
+    margin-left: 5rem;
+  }
   &__value {
+    display: block;
     margin-left: 1rem;
   }
 }

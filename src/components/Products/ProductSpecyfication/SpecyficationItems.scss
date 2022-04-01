@@ -27,10 +27,14 @@
     color: $light-gray;
   }
   &__name--large {
-    margin-left: 5rem;
+    width: 50%;
   }
   &__value {
     display: block;
     margin-left: 1rem;
+  }
+  &__value--large {
+    display: block;
+    width: 50%;
   }
 }

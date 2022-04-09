@@ -4,9 +4,15 @@
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
-  padding: 1.5rem 0;
   border-top: $section-border;
   border-bottom: $section-border;
+  &--medium{
+    font-size: 1.35rem;
+    margin-top: 0;
+    padding: 0;
+    border-top: none;
+    border-bottom: none;
+  }
   &--large {
     width: 50%;
     justify-content: space-between;
@@ -15,26 +21,30 @@
   &__item {
     display: flex;
     line-height: 3rem;
-  }
-  &__item--large {
-    width: 100%;
-  }
-  &__item--large:nth-child(2n + 1) {
-    background-color: $background-color;
+    &--medium{
+      line-height: 2rem;
+    }
+    &--large {
+      width: 100%;
+    }
+    &--large:nth-child(2n + 1) {
+      background-color: $background-color;
+    }
   }
   &__name {
     display: block;
     color: $light-gray;
-  }
-  &__name--large {
-    width: 50%;
+    &--large {
+      width: 50%;
+      padding-left: 1rem;
+    }
   }
   &__value {
     display: block;
     margin-left: 1rem;
-  }
-  &__value--large {
-    display: block;
-    width: 50%;
+    &--large {
+      display: block;
+      width: 50%;
+    }
   }
 }

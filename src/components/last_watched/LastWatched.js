@@ -14,6 +14,7 @@ const LastWatched = (props) => {
             img={product.img}
             name={product.name}
             price={product.price}
+            size={"small"}
           />
         ))}
       </div>

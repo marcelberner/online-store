@@ -9,7 +9,7 @@ const CartButton = (props) => {
         props.size === "small" && "cart-button--small"
       }`}
     >
-      <i className="fa-solid fa-cart-arrow-down"></i>{props.size !== 'small' && <span className="cart-button__text">Dodaj do koszyka</span>}
+      <i className="fa-solid fa-cart-arrow-down"></i>{props.size === 'large' && <span className="cart-button__text">Dodaj do koszyka</span>}
     </button>
   );
 };

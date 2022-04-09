@@ -6,13 +6,15 @@ import ProductSpecyfication from "../../components/Products/ProductSpecyfication
 
 import PRODUCTS from "../../data/products";
 
+import "./ProductDetail.scss";
+
 const ProductDetail = () => {
   const params = useParams();
 
   const product = PRODUCTS.find((product) => product.id === params.productId);
 
   return (
-    <div className="page">
+    <div className="product-detail-page">
       <ProductCard
         id={product.id}
         images={product.img}

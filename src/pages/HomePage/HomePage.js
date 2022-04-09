@@ -13,7 +13,7 @@ import "./HomePage.scss";
 
 const HomePage = () => {
   return (
-    <div className="page">
+    <div className="home-page">
       <Slider />
       <Recomended />
       <Informations

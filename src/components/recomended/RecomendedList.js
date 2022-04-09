@@ -21,6 +21,7 @@ const RecomendedList = () => {
             img={product.img}
             name={product.name}
             price={product.price}
+            size={"small"}
           />
         ))}
       </div>

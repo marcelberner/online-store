@@ -10,6 +10,11 @@
   transition: 0.3s;
   border-radius: $border-radius;
   cursor: pointer;
+  &--medium{
+    width: 30rem;
+    height: 40rem;
+    padding: 2rem;
+  }
   &:hover .cart-button{
     opacity: 1;
   }
@@ -21,6 +26,9 @@
   }
   &__element {
     font-size: 1.4rem;
+    &--medium{
+      font-size: 1.6rem;
+    }
   }
   &__image {
     flex-grow: 1;
@@ -28,13 +36,28 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    &--medium{
+      flex-grow: 0;
+      flex-basis: 50%;
+    }
   }
   &__title {
     text-align: center;
     margin: 0 1rem;
+    &--medium{
+      font-size: 1.6rem;
+      margin: 0;
+      margin-bottom: .5rem;
+      text-align: left;
+    }
   }
   &__price {
     margin: 1rem 2rem;
     font-weight: $font-weight;
+    &--medium{
+      margin: 0;
+      margin-top: 2rem;
+      font-size: 2rem;
+    }
   }
 }

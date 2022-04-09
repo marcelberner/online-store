@@ -29,7 +29,9 @@
     font-weight: $font-weight;
   }
   &__item:hover .list__item--hide {
-    height: 100%;
+    display: block;
+    // height: 100%;
+    opacity: 1;
     overflow: visible;
     color: black;
   }
@@ -42,7 +44,9 @@
     line-height: $header-nav-height;
   }
   &__item--hide {
-    height: 0px;
+    display: none;
+    // height: 0px;
+    opacity: 0;
     transition: .5s;
     border-bottom: $thin-border;
     border-left: $thin-border;

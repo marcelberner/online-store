@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.product-reputation {
+  font-size: 1.8rem;
+  &--medium {
+    font-size: 1.5rem;
+  }
+  &__stars {
+    color: #f7b000;
+  }
+  &__text{
+      color: $light-gray;
+      margin-left: .5rem;
+  }
+}

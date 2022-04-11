@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./Sort.scss";
 
 const Sort = () => {

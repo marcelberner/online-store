@@ -1,6 +1,8 @@
+import React from "react";
+
 import { Routes, Route } from "react-router-dom";
 
-import ScrollToTop from "./hooks/ScrollToTop";
+import ScrollToTop from "./scripts/ScrollToTop";
 import Layout from "./layout/Layout";
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";

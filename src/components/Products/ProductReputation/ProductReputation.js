@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./ProductReputation.scss";
 
 const ProductReputation = (props) => {

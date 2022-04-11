@@ -1,3 +1,5 @@
+import React from "react";
+
 import Slider from "../../components/slider/Slider";
 import Recomended from "../../components/recomended/Recomended";
 import Informations from "../../components/Informations/Informations";

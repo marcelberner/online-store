@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./ControlButton.scss";
 
 const ControlButton = (props) => {

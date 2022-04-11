@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 
 import Window from "./Window";
@@ -17,7 +18,7 @@ const Slider = () => {
     }, 10000);
 
     return () => clearInterval(sliderInterval);
-  }, [currentPosition, SLIDES.length]);
+  }, [currentPosition]);
 
   const selectSlide = (e) => {
     setCurrentPosition(e.target.dataset.id - 1);

@@ -1,3 +1,5 @@
+import React from "react";
+
 import PRODUCTS from "../../data/products";
 
 import "./HotShot.scss";

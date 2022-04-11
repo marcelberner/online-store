@@ -1,6 +1,7 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 
-import Filter from "../../components/Filter/Filter";
+// import Filter from "../../components/Filter/Filter";
 import Sort from "../../components/Filter/Sort";
 import ProductItem from "../../components/Products/ProductPreview/ProductItem";
 
@@ -19,7 +20,7 @@ const ProductList = () => {
 
   return (
     <div className="product-list-page">
-      <Filter />
+      {/* <Filter /> */}
       <div className="product-list">
         <Sort />
         <div className="products-container">

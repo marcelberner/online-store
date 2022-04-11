@@ -1,3 +1,5 @@
+import React from "react";
+
 import PurchaseInfo from "./PurchaseInfo";
 import WishButton from "../../Button/WishButton";
 import CartButton from "../../Button/CartButton";

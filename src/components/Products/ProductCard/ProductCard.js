@@ -1,3 +1,5 @@
+import React from "react";
+
 import PurchaseBar from "./PurchaseBar";
 import ProductSlider from "./ProductSlider";
 import ProductDetails from "./ProductDetails";

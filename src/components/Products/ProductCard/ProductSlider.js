@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./ProductSlider.scss";
 
 const ProductSlider = (props) => {

@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./WishButton.scss";
 
 const WishButton = (props) => {

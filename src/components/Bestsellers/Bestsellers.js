@@ -1,3 +1,5 @@
+import React from "react";
+
 import ProductItem from "../Products/ProductPreview/ProductItem";
 
 import "./Bestsellers.scss";

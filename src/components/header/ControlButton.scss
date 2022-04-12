@@ -4,7 +4,8 @@
     &__button{
         display: flex;
         align-items: center;
-        width: 15rem;
+        justify-content: center;
+        flex-grow: 1;
         cursor: pointer;
     }
     &__button:hover &__button-text{
@@ -20,7 +21,6 @@
     }
     &__button-text{
         font-size: 1.6rem;
-        width: 45%;
         margin-left: 1rem;
     }
 }

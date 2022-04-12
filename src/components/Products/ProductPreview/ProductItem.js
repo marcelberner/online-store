@@ -21,8 +21,8 @@ const ProductItem = (props) => {
         {props.size === 'medium' && <ProductReputation rep={props.rep} size={props.size}/>}
         {props.size === 'medium' && <SpecyficationItems spec={props.spec} size={props.size}/>}
         <div className={`product__element product__price ${props.size === 'medium' && 'product__price--medium product__element--medium'}`}>{props.price} zł</div>
-        <WishButton hide={true} size={props.size}/>
-        <CartButton hide={true} size={props.size}/>
+        <WishButton id={props.id} hide={true} size={props.size}/>
+        <CartButton id={props.id} hide={true} size={props.size}/>
       </div>
     </Link>
   );

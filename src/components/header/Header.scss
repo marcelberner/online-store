@@ -8,6 +8,9 @@
   width: 100%;
   height: $header-height;
   background-color: white;
+  &--hide{
+    display: none;
+  }
   &__container {
     display: flex;
     justify-content: center;
@@ -28,15 +31,5 @@
     width: inherit;
     max-width: $content-width-limit;
     height: inherit;
-  }
-  &__logo {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    display: block;
-    width: 24rem;
-    height: 8rem;
-    padding: 1rem;
-    cursor: pointer;
   }
 }

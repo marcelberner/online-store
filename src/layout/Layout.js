@@ -1,9 +1,22 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
-import "./Layout.scss"
+import "./Layout.scss";
 
 const Layout = (props) => {
-  return <div className="box">{props.children}</div>;
+  const location = useLocation();
+
+  return (
+    <div
+      className={`box ${
+        (location.pathname === "/logowanie" ||
+          location.pathname === "/rejestracja") &&
+        "box--minsize"
+      }`}
+    >
+      {props.children}
+    </div>
+  );
 };
 
 export default Layout;

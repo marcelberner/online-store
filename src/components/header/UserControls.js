@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import ControlButton from "./ControlButton";
 
 import "./UserControls.scss";
 
 const UserControls = () => {
+  const state = useSelector((state) => state.userAuth.token);
+
   return (
     <div className="controls__container">
       <Link to="/kontakt">
@@ -20,10 +23,10 @@ const UserControls = () => {
           description={"Listy zakupowe"}
         />
       </Link>
-      <Link to="/konto">
+      <Link to={state ? "/konto" : "/logowanie"}>
         <ControlButton
           icon={<i className="fa-solid fa-user control__button-icon"></i>}
-          description={"Twoje konto"}
+          description={state ? "Twoje konto" : "Zaloguj się"}
         />
       </Link>
       <Link to="/koszyk">

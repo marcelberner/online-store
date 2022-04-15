@@ -15,7 +15,7 @@ const ProductItem = (props) => {
       <div className={`product ${props.size === 'medium' && 'product--medium product__element--medium'}`}>
         <div
           className={`product__element product__image ${props.size === 'medium' && 'product__image--medium product__element--medium'}`}
-          style={{ backgroundImage: `url(.${props.img})` }}
+          style={{ backgroundImage: `url(${props.img})` }}
         ></div>
         <div className={`product__element product__title ${props.size === 'medium' && 'product__title--medium product__element--medium'}`}>{props.name}</div>
         {props.size === 'medium' && <ProductReputation rep={props.rep} size={props.size}/>}

@@ -6,7 +6,7 @@ const ProductSlider = (props) => {
   return (
     <div
       className="product-slider"
-      style={{ backgroundImage: `url(.${props.images})` }}
+      style={{ backgroundImage: `url(${props.images})` }}
     ></div>
   );
 };

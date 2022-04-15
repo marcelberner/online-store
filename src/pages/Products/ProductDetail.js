@@ -1,34 +1,39 @@
-import React from "react";
+import { React } from "react";
 
 import { useParams } from "react-router-dom";
+import useProducts from "../../hooks/useProducts";
 
 import ProductCard from "../../components/Products/ProductCard/ProductCard";
 import ProductDescription from "../../components/Products/ProductDescription/ProductDescription";
 import ProductSpecyfication from "../../components/Products/ProductSpecyfication/ProductSpecyfication";
-
-import PRODUCTS from "../../data/products";
 
 import "./ProductDetail.scss";
 
 const ProductDetail = () => {
   const params = useParams();
 
-  const product = PRODUCTS.find((product) => product.id === params.productId);
+  const { data } = useProducts({ method: "GET", database: "products" });
+
+  const product = data && data.find((product) => product.id === params.productId);
 
   return (
-    <div className="product-detail-page">
-      <ProductCard
-        id={product.id}
-        images={product.img}
-        name={product.name}
-        price={product.price}
-        spec={product.specyfication}
-        rep={product.reputation}
-        recomendation={product.recomendation}
-      />
-      <ProductDescription description={product.description} />
-      <ProductSpecyfication spec={product.specyfication} />
-    </div>
+    <>
+      {data && (
+        <div className="product-detail-page">
+          <ProductCard
+            id={product.id}
+            images={product.img}
+            name={product.name}
+            price={product.price}
+            spec={product.specyfication}
+            rep={product.reputation}
+            recomendation={product.recomendation}
+          />
+          <ProductDescription description={product.description} />
+          <ProductSpecyfication spec={product.specyfication} />
+        </div>
+      )}
+    </>
   );
 };
 

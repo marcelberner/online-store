@@ -1,4 +1,8 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { login } from "../../../store/userAuth";
 
 import SubmitButton from "../../Button/SubmitButton";
 
@@ -10,35 +14,65 @@ const AuthForm = (props) => {
   const cnfPassword = useRef();
   const checkbox = useRef();
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const userAuthHandler = (event) => {
     event.preventDefault();
 
     const currentEmail = email.current.value;
     const currentPassword = password.current.value;
-    const currentCnfPassword = props.signup && cnfPassword.current.value;
-    const currentCheckbox = props.signup && checkbox.current.value;
+    const currentCnfPassword =
+      props.currentForm === "signup"
+        ? cnfPassword.current.value
+        : currentPassword;
+    const currentCheckbox =
+      props.currentForm === "signup" ? checkbox.current.value : true;
+
+    if (currentPassword !== currentCnfPassword) {
+      console.log("potwierdz");
+      return;
+    }
+    if (!currentCheckbox) {
+      console.log("pusty chbx");
+      return;
+    }
 
     const loginURL =
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU";
     const signupURL =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU";
-      // `${props.currentForm === "login" ? loginURL : ""}${
-      //   props.currentForm === "signup" ? signupURL : ""
-      // }`,
 
-    fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU",
+    fetch(
+      `${props.currentForm === "login" ? loginURL : ""}${
+        props.currentForm === "signup" ? signupURL : ""
+      }`,
       {
         method: "POST",
         body: JSON.stringify({
           email: currentEmail,
-          password: currentCnfPassword,
+          password: currentPassword,
           returnSecureToken: true,
         }),
         headers: {
           "Content-Type": "application/json",
         },
       }
-    );
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json().then((data) => {
+            navigate("/");
+            localStorage.setItem("token", data.localId);
+            dispatch(login(data.localId));
+          });
+        } else {
+          return response
+            .json()
+            .then((data) => console.log(data.error.message));
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

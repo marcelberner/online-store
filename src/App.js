@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import { Routes, Route } from "react-router-dom";
+import useProducts from "./hooks/useProducts";
 
 import ScrollToTop from "./scripts/ScrollToTop";
 import Layout from "./layout/Layout";
@@ -14,6 +16,10 @@ import ProductDetail from "./pages/Products/ProductDetail";
 import ProductList from "./pages/Products/ProductList";
 
 function App() {
+  const loginState = useSelector((state) => state.userAuth.token);
+  const { data } = useProducts({ method: "GET", database: "products" });
+
+
   return (
     <Layout>
       <ScrollToTop>
@@ -22,8 +28,9 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/products/:productCategory" element={<ProductList />} />
-            <Route path="/product/:productId" element={<ProductDetail />} />
-            <Route path="/logowanie" element={<LoginPage />} />
+            {data && <Route path="/product/:productId" element={<ProductDetail />} />}
+            {!loginState && <Route path="/logowanie" element={<LoginPage />} />}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Main>
         <Footer />

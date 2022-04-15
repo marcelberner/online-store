@@ -5,11 +5,11 @@ import RecomendedList from "./RecomendedList";
 
 import "./Recomended.scss";
 
-const Recomended = () => {
+const Recomended = (props) => {
   return (
     <section className="recomended">
-      <Hotshot />
-      <RecomendedList />
+      {props.products && <Hotshot products={props.products}/>}
+      {props.products && <RecomendedList products={props.products}/>}
     </section>
   );
 };

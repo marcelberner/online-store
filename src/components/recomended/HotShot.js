@@ -1,11 +1,9 @@
 import React from "react";
 
-import PRODUCTS from "../../data/products";
-
 import "./HotShot.scss";
 
-const Hotshot = () => {
-  const randomProduct = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
+const Hotshot = (props) => {
+  const randomProduct = props.products[Math.floor(Math.random() * props.products.length)];
 
   return (
     <div className="hotshot">

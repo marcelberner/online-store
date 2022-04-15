@@ -1,22 +1,15 @@
 import React from "react";
 
-import PRODUCTS from "../../data/products";
 import ProductItem from "../Products/ProductPreview/ProductItem";
 
 import "./RecomendedList.scss";
 
-const RecomendedList = () => {
-  const productsArray = [];
-
-  for (let i = 0; i < 8; i++) {
-    productsArray.push(PRODUCTS[i]);
-  }
-
+const RecomendedList = (props) => {
   return (
     <section className="recomended-list">
       <h2 className="recomended-list__header">Polecamy</h2>
       <div className="recomended-list__content">
-        {productsArray.map((product) => (
+        {props.products.map((product) => (
           <ProductItem
             key={product.id}
             id={product.id}

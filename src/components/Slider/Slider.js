@@ -1,4 +1,4 @@
-import React from "react";
+import  React  from "react";
 import { useState, useEffect } from "react";
 
 import Window from "./Window";
@@ -33,7 +33,6 @@ const Slider = () => {
     if (currentPosition === 0) setCurrentPosition(SLIDES.length - 1);
     else setCurrentPosition(currentPosition - 1);
   };
-
 
   return (
     <section className="slider">

@@ -31,9 +31,7 @@ const UserControls = () => {
       </Link>
       <Link to="/koszyk">
         <ControlButton
-          icon={
-            <i className="fa-solid fa-cart-shopping control__button-icon"></i>
-          }
+          icon={<i className="fa-solid fa-cart-shopping control__button-icon"></i>}
           description={"0,00 zł"}
         />
       </Link>

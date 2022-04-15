@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import PRODUCTS from "../../data/products";
+import useProducts from "../../hooks/useProducts";
 
 import { add } from "../../store/wishList";
 
@@ -10,7 +10,9 @@ import "./WishButton.scss";
 const WishButton = (props) => {
   const dispatch = useDispatch();
 
-  const product = PRODUCTS.find((product) => product.id === props.id);
+  const { data } = useProducts({ method: "GET", database: "products" });
+
+  const product = data && data.find((product) => product.id === props.id);
 
   const clickHandler = () => {
     dispatch(add(product));

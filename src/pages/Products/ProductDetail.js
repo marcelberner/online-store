@@ -1,7 +1,7 @@
-import { React } from "react";
+import { React,useEffect } from "react";
 
 import { useParams } from "react-router-dom";
-import useProducts from "../../hooks/useProducts";
+import useData from "../../hooks/useData";
 
 import ProductCard from "../../components/Products/ProductCard/ProductCard";
 import ProductDescription from "../../components/Products/ProductDescription/ProductDescription";
@@ -12,13 +12,17 @@ import "./ProductDetail.scss";
 const ProductDetail = () => {
   const params = useParams();
 
-  const { data } = useProducts({ method: "GET", database: "products" });
+  const { resData, dataRequest } = useData();
 
-  const product = data && data.find((product) => product.id === params.productId);
+  useEffect(() => {
+    dataRequest({ method: "GET", database: "products" });
+  },[dataRequest]);
+  
+  const product = resData && resData.find((product) => product.id === params.productId);
 
   return (
     <>
-      {data && (
+      {resData && (
         <div className="product-detail-page">
           <ProductCard
             id={product.id}

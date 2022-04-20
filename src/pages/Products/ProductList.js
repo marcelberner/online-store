@@ -1,7 +1,7 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import useProducts from "../../hooks/useProducts";
+import useData from "../../hooks/useData";
 
 // import Filter from "../../components/Filter/Filter";
 import Sort from "../../components/Filter/Sort";
@@ -12,20 +12,26 @@ import "./ProductList.scss";
 const ProductList = () => {
   const params = useParams();
 
-  const { data } = useProducts({ method: "GET", database: "products" });
+  const { resData, dataRequest } = useData();
 
-  const product = data && data.filter(
-    (product) =>
-      product.category.category === params.productCategory ||
-      product.category.subcategory === params.productCategory
-  );
+  useEffect(() => {
+    dataRequest({ method: "GET", database: "products" });
+  }, [dataRequest]);
+
+  const product =
+  resData &&
+  resData.filter(
+      (product) =>
+        product.category.category === params.productCategory ||
+        product.category.subcategory === params.productCategory
+    );
 
   return (
     <div className="product-list-page">
       {/* <Filter /> */}
       <div className="product-list">
         <Sort />
-        {data && (
+        {resData && (
           <div className="products-container">
             {product.map((product) => (
               <ProductItem

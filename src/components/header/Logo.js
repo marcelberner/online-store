@@ -8,7 +8,7 @@ const Logo = () => {
     <Link to="/">
       <div
         className="logo"
-        style={{ backgroundImage: `url(./images/logo.png)` }}
+        style={{ backgroundImage: `url(../images/logo.png)` }}
       ></div>
     </Link>
   );

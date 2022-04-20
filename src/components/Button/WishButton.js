@@ -1,21 +1,32 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import { React } from "react";
+import { useSelector } from "react-redux";
 
-import useProducts from "../../hooks/useProducts";
-
-import { add } from "../../store/wishList";
+import useData from "../../hooks/useData";
 
 import "./WishButton.scss";
 
 const WishButton = (props) => {
-  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData.userData);
 
-  const { data } = useProducts({ method: "GET", database: "products" });
+  const { dataRequest } = useData();
 
-  const product = data && data.find((product) => product.id === props.id);
+  const addWishlistProduct = (resData) => {
+    resData.forEach((product) => {
+      if (product.id === props.id) {
+        dataRequest({
+          method: "POST",
+          database: `users/${userData.id}/wishlist`,
+          body: {
+            productId: product.id,
+          },
+        });
+      }
+    });
+  };
 
-  const clickHandler = () => {
-    dispatch(add(product));
+  const clickHandler = async () => {
+    const resData = await dataRequest({ method: "GET", database: "products" });
+    addWishlistProduct(resData);
   };
 
   return (

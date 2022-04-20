@@ -1,8 +1,6 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
-import { login } from "../../../store/userAuth";
+import useAuth from "../../../hooks/useAuth";
 
 import SubmitButton from "../../Button/SubmitButton";
 
@@ -14,8 +12,7 @@ const AuthForm = (props) => {
   const cnfPassword = useRef();
   const checkbox = useRef();
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { authRequest } = useAuth();
 
   const userAuthHandler = (event) => {
     event.preventDefault();
@@ -29,50 +26,13 @@ const AuthForm = (props) => {
     const currentCheckbox =
       props.currentForm === "signup" ? checkbox.current.value : true;
 
-    if (currentPassword !== currentCnfPassword) {
-      console.log("potwierdz");
-      return;
-    }
-    if (!currentCheckbox) {
-      console.log("pusty chbx");
-      return;
-    }
-
-    const loginURL =
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU";
-    const signupURL =
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU";
-
-    fetch(
-      `${props.currentForm === "login" ? loginURL : ""}${
-        props.currentForm === "signup" ? signupURL : ""
-      }`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: currentEmail,
-          password: currentPassword,
-          returnSecureToken: true,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json().then((data) => {
-            navigate("/");
-            localStorage.setItem("token", data.localId);
-            dispatch(login(data.localId));
-          });
-        } else {
-          return response
-            .json()
-            .then((data) => console.log(data.error.message));
-        }
-      })
-      .catch((err) => console.log(err));
+    authRequest({
+      currentForm: props.currentForm,
+      email: currentEmail,
+      password: currentPassword,
+      cnfPassword: currentCnfPassword,
+      checkbox: currentCheckbox,
+    });
   };
 
   return (

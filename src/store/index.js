@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import wishListReducer from "./wishList";
+import userDataReducer from "./userData";
 import userAuthReducer from "./userAuth";
 import isLoadingReducer from "./loading";
 
 const store = configureStore({
   reducer: {
-    wishList: wishListReducer,
+    userData: userDataReducer,
     userAuth: userAuthReducer,
-    isLoading: isLoadingReducer,
+    isLoading: isLoadingReducer
   },
 });
 

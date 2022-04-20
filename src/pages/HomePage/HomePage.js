@@ -1,7 +1,6 @@
-import { React } from "react";
-// import { useSelector } from "react-redux";
+import { React, useEffect } from "react";
 
-import useProducts from "../../hooks/useProducts";
+import useData from "../../hooks/useData";
 
 import Slider from "../../components/slider/Slider";
 import Recomended from "../../components/recomended/Recomended";
@@ -16,21 +15,24 @@ import INFORMATIONS from "../../data/informations";
 import "./HomePage.scss";
 
 const HomePage = () => {
-  // const isloading = useSelector((state) => state.isLoading.isLoading);
-  const { data } = useProducts({ method: "GET", database: "products" });
+  const { resData, dataRequest } = useData();
+
+  useEffect(() => {
+    dataRequest({ method: "GET", database: "products" });
+  },[dataRequest]);
 
   return (
     <div className="home-page">
       <Slider />
-      <Recomended products={data}/>
+      <Recomended products={resData}/>
       <Informations
         title={"Odkryj Online Store"}
         content={INFORMATIONS}
         mediumSize={true}
       />
-      {data && <Bestsellers title={"Bestsellery"} products={data} />}
+      {resData && <Bestsellers title={"Bestsellery"} products={resData} />}
       <Informations title={"Aktualności"} content={NEWS} />
-      {data && <LastWatched title={"Ostatnio oglądane"} products={data} />}
+      {resData && <LastWatched title={"Ostatnio oglądane"} products={resData} />}
       <Informations title={"Poradniki"} content={TUTORIALS} />
     </div>
   );

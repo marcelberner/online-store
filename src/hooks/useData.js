@@ -44,7 +44,6 @@ const useData = () => {
         else if (body.database === "users") {
           loadedData.push({
             id: key,
-            test: "test",
             name: data[key].name,
             surname: data[key].surname,
             email: data[key].email,

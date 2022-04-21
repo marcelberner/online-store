@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import useData from "./hooks/useData";
-import { wishlistAdd, setUserData } from "./store/userData";
+import { setWishlist, setUserData } from "./store/userData";
 
 import ScrollToTop from "./scripts/ScrollToTop";
 import Layout from "./layout/Layout";
@@ -21,6 +21,8 @@ import ProductList from "./pages/Products/ProductList";
 
 function App() {
   const userId = useSelector((state) => state.userAuth.token);
+  const requestStatus = useSelector((state) => state.dataRequest.requestStatus);
+
   const dispatch = useDispatch();
 
   const { dataRequest } = useData();
@@ -38,9 +40,20 @@ function App() {
               address: user.address,
             })
           );
-
+          
           if (user.wishlist === "false") return;
-          else dispatch(wishlistAdd(user.wishlist));
+          else {
+            const wishlistArray = [];
+  
+            for(const key in user.wishlist){
+              wishlistArray.push({
+                id: key,
+                productId: user.wishlist[key].productId
+              })
+            }
+
+            dispatch(setWishlist(wishlistArray));
+          }
         }
       });
     },
@@ -55,7 +68,7 @@ function App() {
 
   useEffect(() => {
     initialDataImport();
-  }, [initialDataImport]);
+  }, [initialDataImport, requestStatus]);
 
   return (
     <Layout>

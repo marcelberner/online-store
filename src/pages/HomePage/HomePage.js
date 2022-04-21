@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 
 import useData from "../../hooks/useData";
 
-import Slider from "../../components/slider/Slider";
+import Slider from "../../components/Slider/Slider";
 import Recomended from "../../components/recomended/Recomended";
 import Informations from "../../components/Informations/Informations";
 import LastWatched from "../../components/LastWatched/LastWatched";

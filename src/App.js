@@ -19,6 +19,12 @@ import AccountPage from "./pages/Account/AccountPage";
 import ProductDetail from "./pages/Products/ProductDetail";
 import ProductList from "./pages/Products/ProductList";
 
+import UserDetail from "./pages/Account/UserDetail";
+import OwnProducts from "./pages/Account/OwnProducts";
+import Orders from "./pages/Account/Orders";
+import Refund from "./pages/Account/Refund";
+import Questions from "./pages/Account/Questions";
+
 function App() {
   const userId = useSelector((state) => state.userAuth.token);
   const requestStatus = useSelector((state) => state.dataRequest.requestStatus);
@@ -31,6 +37,7 @@ function App() {
     (resData) => {
       resData.forEach((user) => {
         if (user.userId === userId) {
+          console.log(user)
           dispatch(
             setUserData({
               id: user.id,
@@ -38,6 +45,7 @@ function App() {
               surname: user.surname,
               email: user.email,
               address: user.address,
+              phone: user.phone
             })
           );
           
@@ -81,7 +89,13 @@ function App() {
             <Route path="/product/:productId" element={<ProductDetail />} />
             <Route path="/listy-zakupowe" element={<WishlistPage />} />
             {!userId && <Route path="/logowanie" element={<LoginPage />} />}
-            {userId && <Route path="/konto" element={<AccountPage />} />}
+            {userId && <Route path="/konto" element={<AccountPage />}>
+              <Route path="" element={<UserDetail />} />
+              <Route path="twoje-produkty" element={<OwnProducts />} />
+              <Route path="zamowienia-w-realizacji" element={<Orders />} />
+              <Route path="zwroty-i-reklamacje" element={<Refund />} />
+              <Route path="wyslij-zapytanie" element={<Questions />} />
+            </Route>}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Main>

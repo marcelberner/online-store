@@ -47,6 +47,7 @@ const useData = () => {
             name: data[key].name,
             surname: data[key].surname,
             email: data[key].email,
+            phone: data[key].phone,
             userId: data[key].userId,
             admin: data[key].admin,
             address: data[key].address,

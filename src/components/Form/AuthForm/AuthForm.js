@@ -86,10 +86,10 @@ const AuthForm = (props) => {
         )}
         <div className="auth-form__content">
           {props.currentForm === "login" && (
-            <SubmitButton text={"Zaloguj się"} />
+            <SubmitButton text={"Zaloguj się"} size={"large"}/>
           )}
           {props.currentForm === "signup" && (
-            <SubmitButton text={"Załóż konto"} />
+            <SubmitButton text={"Załóż konto"} size={"large"}/>
           )}
         </div>
       </form>

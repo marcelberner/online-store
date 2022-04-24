@@ -1,7 +1,6 @@
 @import "../../styles/variables.scss";
 
 .submit-button{
-    width: 95%;
     height: 6rem;
     padding: 2rem;
     font-size: 1.8rem;
@@ -10,6 +9,15 @@
     background-color: $main-color;
     border-radius: 10px;
     border: none;
+    &--large{
+        width: 95%;
+    }
+    &--small{
+        padding: 0;
+        font-size: 1.6rem;
+        width: 10rem;
+        height: 4rem;
+    }
     &:hover{
         background-color: $main-color-hover;
     }

@@ -1,5 +1,6 @@
 import { useEffect, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import ProductItem from "../../components/Products/ProductPreview/ProductItem";
 import useData from "../../hooks/useData";
@@ -28,7 +29,6 @@ const WishlistPage = () => {
         if (isCorrect) return product;
       })
     );
-    
   }, [dataRequest, wishlistItems]);
 
   useEffect(() => {
@@ -38,29 +38,41 @@ const WishlistPage = () => {
   const showWishlist = () => {
     if (isLogged)
       return wishlistItems.length >= 1 ? (
-        wishProducts && wishProducts.map(
-          (listItem) =>
-          listItem !== undefined && (
-              <ProductItem
-                key={listItem.id}
-                id={listItem.id}
-                img={listItem.img}
-                name={listItem.name}
-                price={listItem.price}
-                size={"small"}
-              />
-            )
-        )
+        wishProducts &&
+          wishProducts.map(
+            (listItem) =>
+              listItem !== undefined && (
+                <ProductItem
+                  key={listItem.id}
+                  id={listItem.id}
+                  img={listItem.img}
+                  name={listItem.name}
+                  price={listItem.price}
+                  size={"small"}
+                />
+              )
+          )
       ) : (
-        <h3>Nie posiadasz żadnych produktów na liście</h3>
+        <h3 className="wishlist__info">
+          Nie posiadasz żadnych produktów na liście
+        </h3>
       );
     else if (!isLogged)
-      return <h3>Zaloguj się aby wyświetlić zawartość listy</h3>;
+      return (
+        <h3 className="wishlist__info">
+          <Link to="/logowanie">
+            <span className="wishlist__info--link">Zaloguj się</span>
+          </Link>
+          , aby wyświetlić zawartość listy
+        </h3>
+      );
   };
 
   return (
     <section className="wishlist">
-      <div className="wishlist__header"><h2 className="wishlist__text">Twoje listy zakupowe</h2></div>
+      <div className="wishlist__header">
+        <h2 className="wishlist__text">Twoje listy zakupowe</h2>
+      </div>
       <div className="wishlist__container">{showWishlist()}</div>
     </section>
   );

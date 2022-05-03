@@ -28,7 +28,7 @@ const UserForm = (props) => {
 
   const cancleChangeHandler = () => {
     setIsChanged(false);
-    console.log(props.userData)
+    console.log(props.userData);
     name.current.value = props.userData.name ? props.userData.name : "";
     surname.current.value = props.userData.surname
       ? props.userData.surname
@@ -63,7 +63,8 @@ const UserForm = (props) => {
         phone: phone.current.value,
       },
     });
-
+    
+    setIsChanged(false);
     dispatch(changeRequestStatus());
   };
 
@@ -106,69 +107,66 @@ const UserForm = (props) => {
           <div className="user-form__item"></div>
           <div className="user-form__item"></div>
         </div>
+
         <div className="user-form__container">
-          <div className="user-form__container">
-            <div className="user-form__title">Dane zamieszkania</div>
-            <div className="user-form__item">
-              <label className="user-form__label">
-                ulica i numer mieszkania:
-              </label>
-              <input
-                type={"text"}
-                className="user-form__input"
-                defaultValue={props.userData.address.street}
-                ref={street}
-              ></input>
-            </div>
-            <div className="user-form__item">
-              <label className="user-form__label">kod pocztowy:</label>
-              <input
-                type={"text"}
-                className="user-form__input"
-                defaultValue={props.userData.address.zipcode}
-                ref={code}
-              ></input>
-            </div>
-            <div className="user-form__item">
-              <label className="user-form__label">miejscowość:</label>
-              <input
-                type={"text"}
-                className="user-form__input"
-                defaultValue={
-                  props.userData.address.city && props.userData.address.city
-                }
-                ref={city}
-              ></input>
-            </div>
-            <div className="user-form__item"></div>
-            <div className="user-form__item"></div>
+          <div className="user-form__title">Dane zamieszkania</div>
+          <div className="user-form__item">
+            <label className="user-form__label">
+              ulica i numer mieszkania:
+            </label>
+            <input
+              type={"text"}
+              className="user-form__input"
+              defaultValue={props.userData.address.street}
+              ref={street}
+            ></input>
           </div>
+          <div className="user-form__item">
+            <label className="user-form__label">kod pocztowy:</label>
+            <input
+              type={"text"}
+              className="user-form__input"
+              defaultValue={props.userData.address.zipcode}
+              ref={code}
+            ></input>
+          </div>
+          <div className="user-form__item">
+            <label className="user-form__label">miejscowość:</label>
+            <input
+              type={"text"}
+              className="user-form__input"
+              defaultValue={
+                props.userData.address.city && props.userData.address.city
+              }
+              ref={city}
+            ></input>
+          </div>
+          <div className="user-form__item"></div>
+          <div className="user-form__item"></div>
         </div>
         <div className="user-form__container">
-          <div className="user-form__container">
-            <div className="user-form__title">Dane logowania</div>
-            <div className="user-form__item">
-              <label className="user-form__label">adres-email:</label>
-              <input
-                type={"text"}
-                className="user-form__input"
-                defaultValue={props.userData.email}
-                ref={email}
-                disabled
-              ></input>
-            </div>
-            <div className="user-form__item">
-              <label className="user-form__label">hasło:</label>
-              <input
-                type={"text"}
-                className="user-form__input"
-                ref={password}
-                disabled
-              ></input>
-            </div>
-            <div className="user-form__item"></div>
-            <div className="user-form__item"></div>
+          <div className="user-form__title">Dane logowania</div>
+          <div className="user-form__item">
+            <label className="user-form__label">adres-email:</label>
+            <input
+              type={"text"}
+              className="user-form__input"
+              defaultValue={props.userData.email}
+              ref={email}
+              disabled
+            ></input>
           </div>
+          <div className="user-form__item">
+            <label className="user-form__label">hasło:</label>
+            <input
+              type={"text"}
+              className="user-form__input"
+              ref={password}
+              disabled
+            ></input>
+          </div>
+          <div className="user-form__item"></div>
+          <div className="user-form__item"></div>
         </div>
         <div className="user-form__buttons">
           {isChanged && <SubmitButton text={"Zatwierdź"} size={"small"} />}

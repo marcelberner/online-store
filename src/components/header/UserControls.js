@@ -8,6 +8,15 @@ import "./UserControls.scss";
 
 const UserControls = () => {
   const state = useSelector((state) => state.userAuth.token);
+  const userData = useSelector((state) => state.userData.userData);
+  const cart = useSelector((state) => state.userData.cart);
+
+  
+  let cartTotalPrice = 0;
+  
+  for (let i = 0; i < cart.length; i++) {
+    cartTotalPrice += parseFloat(cart[i].price.replace(" ","").replace(",","."))  * cart[i].amount;
+  }
 
   return (
     <div className="controls__container">
@@ -26,13 +35,19 @@ const UserControls = () => {
       <Link to={state ? "/konto" : "/logowanie"}>
         <ControlButton
           icon={<i className="fa-solid fa-user control__button-icon"></i>}
-          description={state ? "Twoje konto" : "Zaloguj się"}
+          description={`${
+            state
+              ? `${userData && userData.name ? userData.name : "Twoje konto"}`
+              : "Zaloguj się"
+          }`}
         />
       </Link>
       <Link to="/koszyk">
         <ControlButton
-          icon={<i className="fa-solid fa-cart-shopping control__button-icon"></i>}
-          description={"0,00 zł"}
+          icon={
+            <i className="fa-solid fa-cart-shopping control__button-icon"></i>
+          }
+          description={`${cartTotalPrice.toFixed(2)} zł`}
         />
       </Link>
     </div>

@@ -1,0 +1,31 @@
+@import "../../../styles/variables.scss";
+
+.promo-code {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-bottom: 1px solid $background-color;
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+  &__title{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 0;
+  }
+  &__text{
+      font-weight: $font-weight;
+  }
+  &__input {
+    margin-right: 0.5rem;
+    width: 18rem;
+    font-weight: 300;
+    height: 3rem;
+    padding: 1rem;
+    font-size: 1.7rem;
+    border-radius: $border-radius;
+    border: 1px solid $light-gray;
+  }
+}

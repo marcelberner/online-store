@@ -1,50 +1,50 @@
 @import "../../../styles/variables.scss";
 
-.user-form{
+.user-form {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  &__form {
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
     flex-grow: 1;
-    &__form{
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        flex-grow: 1;
-        height: 100%;
-        margin-top: 5rem;
-        justify-content: space-around;
-    }
-    &__container{
-        flex-basis: 25%;
-    }
-    &__title{
-        font-size: 2rem;
-        font-weight: $font-weight;
-        color: $light-gray;
-    }
-    &__item{
-        display: flex;
-        flex-direction: column;
-        margin-top: 2rem;
-    }
-    &__label{
-        font-size: 1.6rem;
-        font-weight: 500;
-    }
-    &__input{
-        margin-top: .5rem;
-        font-weight: 300;
-        padding: .8rem;
-        font-size: 1.7rem;
-        border-radius: $border-radius;
-        border: 1px solid $light-gray;
-    }
-    &__buttons{
-        position: absolute;
-        display: flex;
-        justify-content: space-between;
-        width: 21rem;
-        right: 3rem;
-        bottom: 5rem;
-    }
+    margin-top: 5rem;
+    justify-content: space-around;
+  }
+  &__container {
+    flex-basis: 25%;
+  }
+  &__title {
+    font-size: 2rem;
+    font-weight: $font-weight;
+    color: $light-gray;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+  &__label {
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+  &__input {
+    margin-top: 0.5rem;
+    width: 30rem;
+    font-weight: 300;
+    height: 3rem;
+    padding: 1rem;
+    font-size: 1.7rem;
+    border-radius: $border-radius;
+    border: 1px solid $light-gray;
+  }
+  &__buttons {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 21rem;
+    right: 3rem;
+    bottom: 5rem;
+  }
 }

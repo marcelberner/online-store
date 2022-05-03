@@ -1,0 +1,27 @@
+@import "../../../styles/variables.scss";
+
+.price-items{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 2rem;
+    &__item{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-height: 3rem;
+    }
+    &__text{
+        font-size: 1.8rem;
+        font-weight: $font-weight;
+        color: $light-gray;
+    }
+    &::-webkit-scrollbar {
+        width: .5rem;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: $light-gray;
+        border-radius: 30px;
+      }
+}

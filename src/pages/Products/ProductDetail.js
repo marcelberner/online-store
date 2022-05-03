@@ -19,8 +19,7 @@ const ProductDetail = () => {
   },[dataRequest]);
   
   const product = resData && resData.find((product) => product.id === params.productId);
-
-  console.log(product)
+  
   return (
     <>
       {resData && (

@@ -25,7 +25,7 @@ const ProductItem = (props) => {
         </div>
       </Link>
       <WishButton id={props.id} hide={true} size={props.size}/>
-      <CartButton id={props.id} hide={true} size={props.size}/>
+      <CartButton id={props.id} price={props.price} hide={true} size={props.size}/>
     </div>
   );
 };

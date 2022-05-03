@@ -37,7 +37,7 @@ const userData = createSlice({
   },
 });
 
-export const { wishlistAdd, wishlistRemove, setUserData, cartAdd, cartRemove, setCart, setWishlist } =
+export const { wishlistAdd, wishlistRemove, setUserData, cartAdd, cartRemove, setCart, setWishlist, dataClear } =
 userData.actions;
 
 export default userData.reducer;

@@ -13,7 +13,7 @@ const PurchaseBar = (props) => {
         <span className="purchase-bar__price">{props.price} zł</span>
         <div className="purchase-bar__buttons">
           <WishButton id={props.id} size={"large"} />
-          <CartButton id={props.id} size={"large"} />
+          <CartButton id={props.id} price={props.price} size={"large"} />
         </div>
       </div>
       <PurchaseInfo

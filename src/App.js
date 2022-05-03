@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import useData from "./hooks/useData";
-import { setWishlist, setUserData } from "./store/userData";
+import { setWishlist, setUserData, setCart } from "./store/userData";
 
 import ScrollToTop from "./scripts/ScrollToTop";
 import Layout from "./layout/Layout";
@@ -25,6 +25,11 @@ import Orders from "./pages/Account/Orders";
 import Refund from "./pages/Account/Refund";
 import Questions from "./pages/Account/Questions";
 
+import Cart from "./pages/CartPage/Cart";
+import CartItems from "./pages/CartPage/CartItems";
+import Delivery from "./pages/CartPage/Delivery";
+import Sumarry from "./pages/CartPage/Sumarry";
+
 function App() {
   const userId = useSelector((state) => state.userAuth.token);
   const requestStatus = useSelector((state) => state.dataRequest.requestStatus);
@@ -37,7 +42,6 @@ function App() {
     (resData) => {
       resData.forEach((user) => {
         if (user.userId === userId) {
-          console.log(user)
           dispatch(
             setUserData({
               id: user.id,
@@ -47,10 +51,9 @@ function App() {
               address: user.address,
               phone: user.phone
             })
-          );
-          
-          if (user.wishlist === "false") return;
-          else {
+            );
+            
+            if (user.wishlist !== "false"){
             const wishlistArray = [];
   
             for(const key in user.wishlist){
@@ -59,8 +62,23 @@ function App() {
                 productId: user.wishlist[key].productId
               })
             }
-
+            
             dispatch(setWishlist(wishlistArray));
+          }
+          
+          if (user.cart !== "false"){
+            const cartArray = [];
+            
+            for(const key in user.cart){
+              cartArray.push({
+                id: key,
+                productId: user.cart[key].productId,
+                amount: user.cart[key].amount,
+                price: user.cart[key].price,
+              })
+            }
+            
+            dispatch(setCart(cartArray));
           }
         }
       });
@@ -96,6 +114,11 @@ function App() {
               <Route path="zwroty-i-reklamacje" element={<Refund />} />
               <Route path="wyslij-zapytanie" element={<Questions />} />
             </Route>}
+            <Route path="/koszyk" element={<Cart />}>
+              <Route path="" element={<CartItems/>}/>
+              <Route path="dostawa" element={<Delivery/>}/>
+              <Route path="podsumowanie" element={<Sumarry/>}/>
+            </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Main>

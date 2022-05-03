@@ -8,6 +8,8 @@ const SubmitButton = (props) => {
         props.size === "small" && "submit-button--small"
       } ${
         props.size === "large" && "submit-button--large"
+      } ${
+        props.size === "medium" && "submit-button--medium"
       }`}
       type="submit"
       value={props.text}

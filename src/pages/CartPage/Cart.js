@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet, useNavigate } from "react-router-dom";
 
 import SubmitButton from "../../components/Button/SubmitButton";
 import PromoCode from "../../components/Cart/PromoCode/PromoCode";
@@ -9,6 +9,7 @@ import "./Cart.scss";
 
 const Cart = () => {
   const cart = useSelector((state) => state.userData.cart);
+  const navigate = useNavigate();
 
   const location = useLocation();
 
@@ -19,6 +20,14 @@ const Cart = () => {
       parseFloat(cart[i].price.replace(" ", "").replace(",", ".")) *
       cart[i].amount;
   }
+
+  const switchPage = () => {
+    if (location.pathname === "/koszyk") navigate("/koszyk/dostawa");
+    else if (location.pathname === "/koszyk/dostawa")
+      navigate("/koszyk/podsumowanie");
+    else if (location.pathname === "/koszyk/podsumowanie")
+      navigate("/konto/zamowienia-w-realizacji");
+  };
 
   return (
     <section className="cart">
@@ -36,7 +45,23 @@ const Cart = () => {
               <Outlet cart={cart} />
               <div className="cart__sumarry">
                 <div className="cart__button">
-                  <SubmitButton size={"large"} text={"Dostawa i płatność"} />
+                  <SubmitButton
+                    size={"large"}
+                    text={`${
+                      location.pathname === "/koszyk"
+                        ? "Dostawa i płatność"
+                        : ""
+                    }${
+                      location.pathname === "/koszyk/dostawa"
+                        ? "Podsumowanie"
+                        : ""
+                    }${
+                      location.pathname === "/koszyk/podsumowanie"
+                        ? "Płacę i zamawiam"
+                        : ""
+                    }`}
+                    action={switchPage}
+                  />
                 </div>
                 <div className="cart__info">
                   <span className="cart__text">Łączna kwota:</span>

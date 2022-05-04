@@ -1,0 +1,42 @@
+@import "../../../styles/variables.scss";
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  width: 85%;
+  border-radius: $border-radius;
+  box-shadow: $basic-box-shadow;
+  margin-top: 2rem;
+  padding: 2rem;
+  height: 10rem;
+  &:hover {
+    box-shadow: $hover-box-shadow;
+  }
+  &__image {
+    height: 8rem;
+  }
+  &__name{
+      margin-left: 2rem;
+  }
+  &__amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 2rem;
+  }
+  &__icon {
+    color: $main-color;
+    font-size: 3rem;
+    border-radius: 50%;
+    padding: 1rem;
+    &:hover{
+        background-color: $background-color;
+    }
+  }
+  &__number {
+    font-weight: $font-weight;
+    font-size: 2rem;
+    padding: 1rem;
+  }
+}

@@ -9,14 +9,26 @@
   margin-top: 2rem;
   padding: 2rem;
   height: 10rem;
+  &--compact {
+    height: 5rem;
+    padding: 1rem;
+    width: 95%;
+  }
   &:hover {
     box-shadow: $hover-box-shadow;
   }
   &__image {
     height: 8rem;
+    &--compact {
+      height: 6rem;
+    }
   }
-  &__name{
-      margin-left: 2rem;
+  &__name {
+    margin-left: 2rem;
+    -webkit-line-clamp: 2;
+    visibility: visible;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &__amount {
     display: flex;
@@ -24,19 +36,27 @@
     justify-content: center;
     margin-left: auto;
     margin-right: 2rem;
+    &--hide {
+      display: none;
+    }
   }
   &__icon {
     color: $main-color;
     font-size: 3rem;
     border-radius: 50%;
     padding: 1rem;
-    &:hover{
-        background-color: $background-color;
+    &:hover {
+      background-color: $background-color;
     }
   }
   &__number {
     font-weight: $font-weight;
     font-size: 2rem;
     padding: 1rem;
+  }
+  &__remove {
+    &--hide {
+      display: none;
+    }
   }
 }

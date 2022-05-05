@@ -39,9 +39,15 @@
     margin: 2rem;
     border-radius: $border-radius;
     box-shadow: $basic-box-shadow;
+    &--compact{
+      height: min-content;
+      margin-top: auto;
+      padding: 2rem;
+    }
   }
   &__progress {
     flex-basis: 0.4rem;
+    transition: 1s;
     background-color: $main-color;
     &--stage1 {
       width: 33%;
@@ -66,6 +72,9 @@
     padding: 0 2rem;
     padding-top: 2rem;
     border-top: 1px solid $background-color;
+    &--hide{
+      display: none;
+    }
   }
   &__text {
     font-size: 2.5rem;
@@ -73,6 +82,9 @@
   }
   &__promo {
     margin-bottom: auto;
+    &--hide{
+      display: none;
+    }
   }
   &__allert {
     display: block;

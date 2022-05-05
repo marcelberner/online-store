@@ -28,6 +28,7 @@
   &__label {
     font-size: 1.6rem;
     font-weight: 500;
+    margin-left: 2rem;
   }
   &__input {
     margin-top: 0.5rem;
@@ -36,8 +37,12 @@
     height: 3rem;
     padding: 1rem;
     font-size: 1.7rem;
-    border-radius: $border-radius;
+    border-radius: 30px;
     border: 1px solid $light-gray;
+    &:focus{
+      outline: 2px solid $main-color;
+      border: none;
+  }
   }
   &__buttons {
     position: absolute;

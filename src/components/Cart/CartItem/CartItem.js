@@ -42,7 +42,7 @@ const CartItem = (props) => {
       dispatch(changeRequestStatus());
     }
   };
-  
+
   const productCartRemove = async () => {
     const removeProduct = await dataRequest({
       method: "DELETE",
@@ -53,12 +53,22 @@ const CartItem = (props) => {
   };
 
   return (
-    <div className="cart-item">
-      <img src={props.img} alt="product img" className="cart-item__image" />
-      <div>
-        <span className="cart-item__name">{props.name}</span>
+    <div className={`cart-item ${props.compact ? "cart-item--compact" : ""}`}>
+      <img
+        src={props.img}
+        alt="product img"
+        className={`cart-item__image ${
+          props.compact ? "cart-item__image--compact" : ""
+        }`}
+      />
+      <div className="cart-item__name">
+        <span>{props.name}</span>
       </div>
-      <div className="cart-item__amount">
+      <div
+        className={`cart-item__amount ${
+          props.compact ? "cart-item__amount--hide" : ""
+        }`}
+      >
         <i
           className="fa-solid fa-plus cart-item__icon"
           onClick={increseAmount}
@@ -69,7 +79,11 @@ const CartItem = (props) => {
           onClick={decreseAmount}
         ></i>
       </div>
-      <div className="cart-item__remove">
+      <div
+        className={`cart-item__remove ${
+          props.compact ? "cart-item__remove--hide" : ""
+        }`}
+      >
         <i
           className="fa-solid fa-trash-can cart-item__icon"
           onClick={productCartRemove}

@@ -1,5 +1,11 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Outlet, useNavigate } from "react-router-dom";
+
+import { setTotalPrice } from "../../store/orderData";
+
+import useData from "../../hooks/useData";
+
+import { changeRequestStatus } from "../../store/dataRequest";
 
 import SubmitButton from "../../components/Button/SubmitButton";
 import PromoCode from "../../components/Cart/PromoCode/PromoCode";
@@ -9,7 +15,17 @@ import "./Cart.scss";
 
 const Cart = () => {
   const cart = useSelector((state) => state.userData.cart);
+  const token = useSelector((state) => state.userAuth.token);
+  const userData = useSelector((state) => state.userData.userData);
+  const totalPrice = useSelector((state) => state.orderData.totalPrice);
+  const customerData = useSelector((state) => state.orderData.customerData);
+  const paymentMethod = useSelector((state) => state.orderData.paymentMethod);
+  const deliveryMethod = useSelector((state) => state.orderData.deliveryMethod);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { dataRequest } = useData();
 
   const location = useLocation();
 
@@ -21,12 +37,38 @@ const Cart = () => {
       cart[i].amount;
   }
 
+  const sendOrderHandler = async () => {
+    const sendOrderRequest = await dataRequest({
+      method: "POST",
+      database: "orders",
+      body: {
+        userId: token,
+        customerData: customerData,
+        deliveryMethod: deliveryMethod,
+        paymentMethod: paymentMethod,
+        totalPrice: totalPrice,
+        status: "pending",
+        products: cart,
+      },
+    });
+    const clearCart = await dataRequest({
+      method: "DELETE",
+      database: `users/${userData.id}/cart`,
+    });
+    
+    dispatch(changeRequestStatus());
+    navigate("/konto/zamowienia-w-realizacji");
+  };
+
   const switchPage = () => {
-    if (location.pathname === "/koszyk") navigate("/koszyk/dostawa");
-    else if (location.pathname === "/koszyk/dostawa")
+    if (location.pathname === "/koszyk") {
+      dispatch(setTotalPrice(cartTotalPrice));
+      navigate("/koszyk/dostawa");
+    } else if (location.pathname === "/koszyk/dostawa")
       navigate("/koszyk/podsumowanie");
-    else if (location.pathname === "/koszyk/podsumowanie")
-      navigate("/konto/zamowienia-w-realizacji");
+    else if (location.pathname === "/koszyk/podsumowanie") {
+      sendOrderHandler();
+    }
   };
 
   return (
@@ -42,8 +84,14 @@ const Cart = () => {
         {cart.length > 0 ? (
           <>
             <div className="cart__content">
-              <Outlet cart={cart} />
-              <div className="cart__sumarry">
+              <Outlet />
+              <div
+                className={`cart__sumarry ${
+                  location.pathname !== "/koszyk"
+                    ? "cart__sumarry--compact"
+                    : ""
+                }`}
+              >
                 <div className="cart__button">
                   <SubmitButton
                     size={"large"}
@@ -63,14 +111,25 @@ const Cart = () => {
                     action={switchPage}
                   />
                 </div>
-                <div className="cart__info">
+                <div
+                  className={`cart__info ${
+                    location.pathname !== "/koszyk" ? "cart__info--hide" : ""
+                  }`}
+                >
                   <span className="cart__text">Łączna kwota:</span>
                   <span className="cart__text">{`${cartTotalPrice.toFixed(
                     2
                   )} zł`}</span>
                 </div>
-                <PriceItems cart={cart} />
-                <div className="cart__promo">
+                <PriceItems
+                  cart={cart}
+                  hide={location.pathname !== "/koszyk" ? true : false}
+                />
+                <div
+                  className={`cart__promo ${
+                    location.pathname !== "/koszyk" ? "cart__promo--hide" : ""
+                  }`}
+                >
                   <PromoCode />
                 </div>
               </div>

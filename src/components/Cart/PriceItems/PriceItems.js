@@ -2,7 +2,7 @@ import "./PriceItems.scss";
 
 const PriceItems = (props) => {
   return (
-    <div className="price-items">
+    <div className={`price-items ${props.hide ? "price-items--hide" : ""}`}>
       {props.cart.map((product, index) => (
         <div className="price-items__item" key={index}>
           <span className="price-items__text">{`${product.amount} x ${product.price} zł`}</span>

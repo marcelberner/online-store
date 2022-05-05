@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import useData from "../../hooks/useData";
+
+import { setProducts } from "../../store/orderData";
 
 import CartItem from "../../components/Cart/CartItem/CartItem";
 
@@ -10,6 +12,8 @@ import "./CartItems.scss";
 const CartItems = () => {
   const cart = useSelector((state) => state.userData.cart);
   const [cartProducts, setCartProducts] = useState();
+
+  const dispatch = useDispatch();
 
   const { dataRequest } = useData();
 
@@ -25,6 +29,8 @@ const CartItems = () => {
       seekProducts.push(seekProduct);
     }
 
+
+    dispatch(setProducts(seekProducts))
     setCartProducts(seekProducts);
   }, [cart, dataRequest]);
 
@@ -40,7 +46,7 @@ const CartItems = () => {
             key={index}
             img={product.img}
             name={product.name}
-             amount={cart[index] && cart[index].amount}
+            amount={cart[index] && cart[index].amount}
             cart={cart[index]}
           />
         ))}

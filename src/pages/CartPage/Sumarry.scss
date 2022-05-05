@@ -1,0 +1,31 @@
+@import "../../styles/variables.scss";
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-grow: 1;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 28%;
+    margin: 2rem;
+  }
+  &__title {
+    font-size: 2rem;
+    color: $light-gray;
+  }
+  &__totalprice {
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-weight: $font-weight;
+  }
+  &__text {
+    font-size: 2rem;
+    padding: 0.3rem;
+  }
+  &__label {
+    font-weight: $font-weight;
+    margin-top: 1rem;
+  }
+}

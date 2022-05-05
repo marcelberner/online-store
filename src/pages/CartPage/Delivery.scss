@@ -1,0 +1,44 @@
+@import "../../styles/variables.scss";
+
+.delivery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-grow: 1;
+  &__data {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 40%;
+    padding: 2rem;
+  }
+  &__label {
+    font-size: 2rem;
+    font-weight: $font-weight;
+    color: $light-gray;
+    margin-top: 1rem;
+    &--small{
+        font-size: 1.4rem;
+        color: $light-gray;
+        margin-left: 2rem;
+    }
+  }
+  &__input {
+    width: 35rem;
+    font-weight: 300;
+    height: 2.2rem;
+    padding: .8rem;
+    padding-left: 1.5rem;
+    font-size: 1.7rem;
+    margin: 0.8rem;
+    border-radius: 30px;
+    border: 1px solid $light-gray;
+    &:focus{
+        outline: 2px solid $main-color;
+        border: none;
+    }
+  }
+  &__method{
+    display: flex;
+    flex-direction: column;
+  }
+}

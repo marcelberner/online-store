@@ -36,10 +36,10 @@ const AccountPage = () => {
               <span className="account-page__title">Twoje produkty</span>
             </li>
           </Link>
-          <Link to={"/konto/zamowienia-w-realizacji"}>
+          <Link to={"/konto/historia-zamowien"}>
             <li className="account-page__option">
               <span className="account-page__title">
-                Zamówienia w realizacji
+                Historia zamówień
               </span>
             </li>
           </Link>

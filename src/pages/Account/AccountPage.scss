@@ -27,6 +27,9 @@
         cursor: pointer;
         transition: .1s;
         border-bottom: 1px solid $background-color;
+        &--active{
+            border-bottom: 3px solid $main-color;
+        }
         &:hover{
             border-bottom: 3px solid $main-color;
         }

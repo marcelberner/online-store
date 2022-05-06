@@ -1,5 +1,6 @@
 @import "../../styles/variables.scss";
 @import "./HeaderVariables.scss";
+@import "../../styles/mixins.scss";
 
 .navigation {
   display: flex;
@@ -8,12 +9,17 @@
   height: $header-nav-height;
   box-shadow: $basic-box-shadow;
   margin-top: $header-main-height;
-
+  @include media(tablet){
+    height: auto;
+  }
   &__content {
     display: flex;
     height: inherit;
     width: inherit;
     max-width: $content-width-limit;
+    @include media(tablet){
+      flex-direction: column;
+    }
   }
   &__item {
     display: flex;

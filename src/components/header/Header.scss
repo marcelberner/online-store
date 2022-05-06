@@ -1,12 +1,13 @@
 @import "../../styles/variables.scss";
 @import "./HeaderVariables.scss";
+@import "../../styles/mixins.scss";
 
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: $header-height;
+  // height: $header-height;
   background-color: white;
   &--hide{
     display: none;
@@ -17,7 +18,7 @@
     width: inherit;
     height: $header-main-height;
     box-shadow: $basic-box-shadow;
-    overflow: hidden;
+    // overflow: hidden;
     background-color: white;
     z-index: 3;
   }
@@ -31,5 +32,8 @@
     width: inherit;
     max-width: $content-width-limit;
     height: inherit;
+    @include media(tablet-large){
+      justify-content: space-around;
+    }
   }
 }

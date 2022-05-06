@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .bestselers {
   display: flex;
@@ -13,6 +14,14 @@
     margin-left: 2rem;
     line-height: 5rem;
     font-weight: $font-weight;
+    @include media(tablet-large){
+      font-size: 3rem;
+      text-align: center;
+      margin-left: 0;
+    }
+    @include media(smartphone){
+      font-size: 4rem;
+    }
   }
   &__content {
     display: flex;

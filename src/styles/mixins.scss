@@ -1,0 +1,19 @@
+@import "./variables.scss";
+
+@mixin elementShadowBorder() {
+  box-shadow: $basic-box-shadow;
+  border-radius: $border-radius;
+}
+
+@mixin pageParams {
+}
+
+@mixin media($breakpoint) {
+  $size: map-get($breakpoints,$breakpoint);
+
+  @if ($size) {
+    @media #{$size} {
+      @content;
+    }
+  }
+}

@@ -53,7 +53,7 @@ function App() {
             {userId && <Route path="/konto" element={<AccountPage />}>
               <Route path="" element={<UserDetail />} />
               <Route path="twoje-produkty" element={<OwnProducts />} />
-              <Route path="zamowienia-w-realizacji" element={<Orders />} />
+              <Route path="historia-zamowien" element={<Orders />} />
               <Route path="wyslij-zapytanie" element={<Questions />} />
             </Route>}
             <Route path="/koszyk" element={<Cart />}>

@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .recomended-list {
   display: flex;
@@ -6,10 +7,22 @@
   flex-basis: 70%;
   border-top: $section-border;
   border-bottom: $section-border;
+  @include media(tablet-large){
+    margin-top: 2rem;
+    flex-basis: 100%;
+  }
   &__header {
     line-height: 7rem;
     font-weight: $font-weight;
     margin-left: 2rem;
+    @include media(tablet-large){
+      font-size: 3rem;
+      text-align: center;
+      margin-left: 0;
+    }
+    @include media(smartphone){
+      font-size: 4rem;
+    }
   }
   &__content {
     display: flex;

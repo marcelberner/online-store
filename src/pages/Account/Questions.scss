@@ -8,8 +8,7 @@
   &__form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 40rem;
+    width: 65rem;
     height: 40rem;
     padding: 5rem;
     box-shadow: $basic-box-shadow;
@@ -18,20 +17,24 @@
   &__label {
     font-size: 2rem;
   }
-  &__input{
-      resize: none;
-      margin: 1rem 0;
-      width: 28rem;
-      font-weight: 300;
-      height: 2.2rem;
-      padding: .8rem;
-      padding-left: 1.5rem;
-      font-size: 1.7rem;
-      margin: 0.8rem;
-      border-radius: $border-radius;
-      border: 1px solid $light-gray;
-      &--textarea{
-          height: 24rem;
-      }
+  &__input {
+    resize: none;
+    margin: 1rem 0;
+    width: 28rem;
+    font-weight: 300;
+    height: 2.2rem;
+    padding: 1rem;
+    padding-left: 1.5rem;
+    font-size: 1.7rem;
+    border-radius: $border-radius;
+    border: 1px solid $light-gray;
+    &--textarea {
+      width: 60rem;
+      height: 30rem;
+    }
+    &:focus {
+      outline: 2px solid $main-color;
+      border: none;
+    }
   }
 }

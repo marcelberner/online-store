@@ -48,7 +48,7 @@ const Orders = () => {
   return (
     <section className="orders">
       <div className="orders__container">
-        {orders &&
+        {orders && orders.length > 0 ? (
           orders.map((order, index) => (
             <div className="orders__item" key={index}>
               <div className="orders__column">
@@ -81,7 +81,10 @@ const Orders = () => {
                 <span>{order.date}</span>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <h3 className="orders__allert">Twoja historia zamówień jest pusta</h3>
+        )}
       </div>
     </section>
   );

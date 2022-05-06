@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .slider{
     display: flex;
@@ -7,4 +8,10 @@
     height: 65rem;
     margin-top: 3rem;
     overflow: hidden;
+    @include media(smartphone-large){
+        height: 45rem;
+    }
+    @include media(smartphone){
+        height: 40rem;
+    }
 }

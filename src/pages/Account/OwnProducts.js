@@ -16,18 +16,17 @@ const OwnProducts = () => {
       database: `users/${userData.id}/products`,
     });
 
-    console.log(response)
-
     setProducts(response);
-  }, [dataRequest, userData.id]);
+  }, [dataRequest, userData]);
 
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
+
   return (
     <section className="own-products">
       <div className="own-products__container">
-        {products.length > 0 ? (
+        {products && products.length > 0 ? (
           <div></div>
         ) : (
           <h3 className="own-products__allert">

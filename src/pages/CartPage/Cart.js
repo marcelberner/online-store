@@ -40,7 +40,7 @@ const Cart = () => {
 
   const sendOrderHandler = async () => {
     const date = new Date();
-    
+
     const currentDate = `${date.getFullYear()}-${
       date.getMonth() + 1 < 10
         ? "0" + (date.getMonth() + 1)
@@ -72,7 +72,7 @@ const Cart = () => {
     }
 
     dispatch(changeRequestStatus());
-    navigate("/konto/zamowienia-w-realizacji");
+    navigate("/konto/historia-zamowien");
   };
 
   const switchPage = () => {

@@ -14,18 +14,19 @@ const ProductList = () => {
 
   const { resData, dataRequest } = useData();
 
-  useEffect(() => {
-    dataRequest({ method: "GET", database: "products" });
-  }, [dataRequest]);
-
+  
   const product =
   resData &&
   resData.filter(
-      (product) =>
-        product.category.category === params.productCategory ||
-        product.category.subcategory === params.productCategory
+    (product) =>
+    product.category.category === params.productCategory ||
+    product.category.subcategory === params.productCategory
     );
-
+    
+    useEffect(() => {
+      dataRequest({ method: "GET", database: "products" });
+    }, [dataRequest]);
+    
   return (
     <div className="product-list-page">
       {/* <Filter /> */}

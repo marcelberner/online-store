@@ -1,8 +1,18 @@
-import React from "react";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./QuickSearch.scss";
 
 const QuickSearch = () => {
+  const navigate = useNavigate();
+  const seekProduct = useRef();
+
+  const searchProduct = (event) => { 
+    event.preventDefault();
+    const currentValue = seekProduct.current.value;
+    navigate(`/products/szykaj?search=${currentValue}`)
+   }
+
   return (
     <div className="search__container">
       <form className="search__form">
@@ -11,8 +21,9 @@ const QuickSearch = () => {
           id="quickSearch"
           placeholder="Wyszukaj produkt..."
           className="search__input"
+          ref={seekProduct}
         />
-        <button className="search__button">
+        <button className="search__button" onClick={searchProduct}>
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>

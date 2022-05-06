@@ -22,10 +22,10 @@
     font-size: 1.7rem;
     border-radius: $border-radius;
     border: 1px solid $light-gray;
-    &:focus{
+    &:focus {
       outline: 2px solid $main-color;
       border: none;
-  }
+    }
     &--checkbox {
       height: 2rem;
       width: 2rem;

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import PurchaseInfo from "./PurchaseInfo";
 import WishButton from "../../Button/WishButton";
@@ -7,12 +8,14 @@ import CartButton from "../../Button/CartButton";
 import "./PurchaseBar.scss";
 
 const PurchaseBar = (props) => {
+  const isAuth = useSelector(state => state.userAuth.token);
+
   return (
     <div className="purchase-bar">
       <div className="purchase-bar__panel">
         <span className="purchase-bar__price">{props.price} zł</span>
         <div className="purchase-bar__buttons">
-          <WishButton id={props.id} size={"large"} />
+          {isAuth && <WishButton id={props.id} size={"large"} />}
           <CartButton id={props.id} price={props.price} size={"large"} />
         </div>
       </div>

@@ -43,11 +43,6 @@ const AccountPage = () => {
               </span>
             </li>
           </Link>
-          <Link to={"/konto/zwroty-i-reklamacje"}>
-            <li className="account-page__option">
-              <span className="account-page__title">Zwroty i reklamacje</span>
-            </li>
-          </Link>
           <Link to={"/listy-zakupowe"}>
             <li className="account-page__option">
               <span className="account-page__title">Listy zakupowe</span>

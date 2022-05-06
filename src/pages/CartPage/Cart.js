@@ -6,6 +6,7 @@ import { setTotalPrice } from "../../store/orderData";
 import useData from "../../hooks/useData";
 
 import { changeRequestStatus } from "../../store/dataRequest";
+import { cartClear } from "../../store/userData";
 
 import SubmitButton from "../../components/Button/SubmitButton";
 import PromoCode from "../../components/Cart/PromoCode/PromoCode";
@@ -14,13 +15,13 @@ import PriceItems from "../../components/Cart/PriceItems/PriceItems";
 import "./Cart.scss";
 
 const Cart = () => {
-  const cart = useSelector((state) => state.userData.cart);
-  const token = useSelector((state) => state.userAuth.token);
-  const userData = useSelector((state) => state.userData.userData);
-  const totalPrice = useSelector((state) => state.orderData.totalPrice);
-  const customerData = useSelector((state) => state.orderData.customerData);
-  const paymentMethod = useSelector((state) => state.orderData.paymentMethod);
   const deliveryMethod = useSelector((state) => state.orderData.deliveryMethod);
+  const paymentMethod = useSelector((state) => state.orderData.paymentMethod);
+  const customerData = useSelector((state) => state.orderData.customerData);
+  const totalPrice = useSelector((state) => state.orderData.totalPrice);
+  const userData = useSelector((state) => state.userData.userData);
+  const token = useSelector((state) => state.userAuth.token);
+  const cart = useSelector((state) => state.userData.cart);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,6 +39,14 @@ const Cart = () => {
   }
 
   const sendOrderHandler = async () => {
+    const date = new Date();
+    
+    const currentDate = `${date.getFullYear()}-${
+      date.getMonth() + 1 < 10
+        ? "0" + (date.getMonth() + 1)
+        : date.getMonth() + 1
+    }-${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}`;
+
     const sendOrderRequest = await dataRequest({
       method: "POST",
       database: "orders",
@@ -48,14 +57,20 @@ const Cart = () => {
         paymentMethod: paymentMethod,
         totalPrice: totalPrice,
         status: "pending",
+        date: currentDate,
         products: cart,
       },
     });
-    const clearCart = await dataRequest({
-      method: "DELETE",
-      database: `users/${userData.id}/cart`,
-    });
-    
+
+    if (token) {
+      const clearCart = await dataRequest({
+        method: "DELETE",
+        database: `users/${userData.id}/cart`,
+      });
+    } else {
+      dispatch(cartClear());
+    }
+
     dispatch(changeRequestStatus());
     navigate("/konto/zamowienia-w-realizacji");
   };

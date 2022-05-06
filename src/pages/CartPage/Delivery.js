@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import MethodItem from "./MethodItem";
 
-import {setDeliveryMethod, setCustomerData, setPaymentMethod} from "../../store/orderData";
+import {
+  setDeliveryMethod,
+  setCustomerData,
+  setPaymentMethod,
+} from "../../store/orderData";
 
 import "./Delivery.scss";
 
@@ -50,49 +54,55 @@ const Delivery = () => {
         <label className="delivery__label--small">imię:</label>
         <input
           type={"text"}
-          defaultValue={userData.name}
+          defaultValue={userData && userData.name && userData.name}
           ref={name}
           className="delivery__input"
         />
         <label className="delivery__label--small">nazwisko:</label>
         <input
           type={"text"}
-          defaultValue={userData.surname}
+          defaultValue={userData && userData.surname && userData.surname}
           ref={surname}
           className="delivery__input"
         />
         <label className="delivery__label--small">ulica i numer:</label>
         <input
           type={"text"}
-          defaultValue={userData.address.street}
+          defaultValue={
+            userData && userData.address.street && userData.address.street
+          }
           ref={street}
           className="delivery__input"
         />
         <label className="delivery__label--small">miejscowość:</label>
         <input
           type={"text"}
-          defaultValue={userData.address.city}
+          defaultValue={
+            userData && userData.address.city && userData.address.city
+          }
           ref={city}
           className="delivery__input"
         />
         <label className="delivery__label--small">kod pocztowy:</label>
         <input
           type={"text"}
-          defaultValue={userData.address.zipcode}
+          defaultValue={
+            userData && userData.address.zipcode && userData.address.zipcode
+          }
           ref={zipcode}
           className="delivery__input"
         />
         <label className="delivery__label--small">email:</label>
         <input
           type={"text"}
-          defaultValue={userData.email}
+          defaultValue={userData && userData.email && userData.email}
           ref={email}
           className="delivery__input"
         />
         <label className="delivery__label--small">numer telefonu:</label>
         <input
           type={"text"}
-          defaultValue={userData.phone}
+          defaultValue={userData && userData.phone && userData.phone}
           ref={phone}
           className="delivery__input"
         />

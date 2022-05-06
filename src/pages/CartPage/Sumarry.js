@@ -4,7 +4,7 @@ import CartItem from "../../components/Cart/CartItem/CartItem";
 
 import "./Sumarry.scss";
 
-const Sumarry = (props) => {
+const Sumarry = () => {
   const totalPrice = useSelector((state) => state.orderData.totalPrice);
   const customerData = useSelector((state) => state.orderData.customerData);
   const paymentMethod = useSelector((state) => state.orderData.paymentMethod);
@@ -12,7 +12,6 @@ const Sumarry = (props) => {
   const orderProducts = useSelector((state) => state.orderData.products);
   const cart = useSelector((state) => state.userData.cart);
 
-  console.log(orderProducts);
   return (
     <div className="summary">
       <div className="summary__container">

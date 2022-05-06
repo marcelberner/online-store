@@ -3,32 +3,41 @@ import { useSelector, useDispatch } from "react-redux";
 import useData from "../../../hooks/useData";
 
 import { changeRequestStatus } from "../../../store/dataRequest";
+import { cartRemove, cartDelete, cartAdd } from "../../../store/userData";
 
 import "./CartItem.scss";
 
 const CartItem = (props) => {
   const userData = useSelector((state) => state.userData.userData);
+  const isAuth = useSelector((state) => state.userAuth.token);
   const dispatch = useDispatch();
 
   const { dataRequest } = useData();
 
   const increseAmount = async () => {
-    const increseAmount = await dataRequest({
-      method: "PATCH",
-      database: `users/${userData.id}/cart/${props.cart.id}`,
-      body: {
-        productId: props.id,
-        amount: props.amount + 1,
-        price: props.price,
-      },
-    });
+    if(isAuth){
+      const increseAmount = await dataRequest({
+        method: "PATCH",
+        database: `users/${userData.id}/cart/${props.cart.id}`,
+        body: {
+          productId: props.id,
+          amount: props.amount + 1,
+          price: props.price,
+        },
+      });
+    }
+    else dispatch(cartAdd({
+      productId: props.cart.productId,
+      amount: props.cart.amount,
+      price: props.cart.price,
+    }))
 
     dispatch(changeRequestStatus());
   };
 
   const decreseAmount = async () => {
-    if (props.amount === 1) productCartRemove();
-    else {
+    if (isAuth) {
+      if (props.amount === 1) productCartRemove();
       const decreseAmount = await dataRequest({
         method: "PATCH",
         database: `users/${userData.id}/cart/${props.cart.id}`,
@@ -38,16 +47,32 @@ const CartItem = (props) => {
           price: props.price,
         },
       });
+    } else
+      dispatch(
+        cartRemove({
+          productId: props.cart.productId,
+          amount: props.cart.amount,
+          price: props.cart.price,
+        })
+      );
 
-      dispatch(changeRequestStatus());
-    }
+    dispatch(changeRequestStatus());
   };
 
   const productCartRemove = async () => {
-    const removeProduct = await dataRequest({
-      method: "DELETE",
-      database: `users/${userData.id}/cart/${props.cart.id}`,
-    });
+    if (isAuth) {
+      const removeProduct = await dataRequest({
+        method: "DELETE",
+        database: `users/${userData.id}/cart/${props.cart.id}`,
+      });
+    } else
+      dispatch(
+        cartDelete({
+          productId: props.cart.productId,
+          amount: props.cart.amount,
+          price: props.cart.price,
+        })
+      );
 
     dispatch(changeRequestStatus());
   };

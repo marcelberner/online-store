@@ -55,12 +55,19 @@ const useData = () => {
             wishlist: data[key].wishlist,
           });
         } 
-        else if (body.database === `users/${key}`) {
+        else if (body.database === "orders") {
           loadedData.push({
             id: key,
-            productId: data[key].productId,
+            customerData: data[key].customerData,
+            deliveryMethod: data[key].deliveryMethod,
+            paymentMethod: data[key].paymentMethod,
+            products: data[key].products,
+            userId: data[key].userId,
+            status: data[key].status,
+            totalPrice: data[key].totalPrice,
+            date: data[key].date,
           });
-        }
+        } 
       }
 
       setResData(loadedData);

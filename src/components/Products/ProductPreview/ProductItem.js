@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 
@@ -10,6 +11,8 @@ import ProductReputation from "../ProductReputation/ProductReputation";
 import "./ProductItem.scss";
 
 const ProductItem = (props) => {
+  const isAuth = useSelector(state => state.userAuth.token);
+
   return (
     <div className="product-container">
       <Link to={`/product/${props.id}`}>
@@ -24,7 +27,7 @@ const ProductItem = (props) => {
           <div className={`product__element product__price ${props.size === 'medium' && 'product__price--medium product__element--medium'}`}>{props.price} zł</div>
         </div>
       </Link>
-      <WishButton id={props.id} hide={true} size={props.size}/>
+      {isAuth && <WishButton id={props.id} hide={true} size={props.size}/>}
       <CartButton id={props.id} price={props.price} hide={true} size={props.size}/>
     </div>
   );

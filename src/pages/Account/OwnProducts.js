@@ -1,6 +1,42 @@
+import { useState, useEffect, useCallback } from "react";
+import { useSelector } from "react-redux";
+
+import useData from "../../hooks/useData";
+
+import "./OwnProducts.scss";
+
 const OwnProducts = () => {
-    return <section>OwnProducts</section>
-  };
-  
-  export default OwnProducts;
-  
+  const userData = useSelector((state) => state.userData.userData);
+  const [products, setProducts] = useState();
+  const { dataRequest } = useData();
+
+  const sendRequest = useCallback(async () => {
+    const response = await dataRequest({
+      method: "GET",
+      database: `users/${userData.id}/products`,
+    });
+
+    console.log(response)
+
+    setProducts(response);
+  }, [dataRequest, userData.id]);
+
+  useEffect(() => {
+    sendRequest();
+  }, [sendRequest]);
+  return (
+    <section className="own-products">
+      <div className="own-products__container">
+        {products.length > 0 ? (
+          <div></div>
+        ) : (
+          <h3 className="own-products__allert">
+            Nie posiadasz jeszcze żadnych produktów
+          </h3>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default OwnProducts;

@@ -29,10 +29,9 @@ const CartItems = () => {
       seekProducts.push(seekProduct);
     }
 
-
     dispatch(setProducts(seekProducts))
     setCartProducts(seekProducts);
-  }, [cart, dataRequest]);
+  }, [cart,dispatch, dataRequest]);
 
   useEffect(() => {
     getProductData();

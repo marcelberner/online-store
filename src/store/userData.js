@@ -18,10 +18,36 @@ const userData = createSlice({
       state.wishlist = action.payload;
     },
     cartAdd: (state, action) => {
-      state.cart = [...state.cart, action.payload];
+      let seekProduct = state.cart.find(
+        (product) => product.productId === action.payload.productId
+      );
+
+      if (seekProduct) {
+        seekProduct.amount++;
+      } else {
+        state.cart = [...state.cart, action.payload];
+      }
     },
     cartRemove: (state, action) => {
-      state.cart = state.cart.filter((e) => e !== action.payload);
+      let seekProduct = state.cart.find(
+        (product) => product.productId === action.payload.productId
+      );
+
+      seekProduct.amount--;
+
+      if (seekProduct.amount === 0) {
+        state.cart = state.cart.filter(
+          (product) => product.productId !== action.payload.productId
+        );
+      }
+    },
+    cartDelete: (state, action) => {
+      state.cart = state.cart.filter(
+        (product) => product.productId !== action.payload.productId
+      );
+    },
+    cartClear: (state) => {
+      state.cart = [];
     },
     wishlistAdd: (state, action) => {
       state.wishlist = [...state.wishlist, action.payload];
@@ -33,11 +59,21 @@ const userData = createSlice({
       state.userData = null;
       state.wishlistProducts = [];
       state.cart = [];
-    }
+    },
   },
 });
 
-export const { wishlistAdd, wishlistRemove, setUserData, cartAdd, cartRemove, setCart, setWishlist, dataClear } =
-userData.actions;
+export const {
+  wishlistAdd,
+  wishlistRemove,
+  setUserData,
+  cartAdd,
+  cartRemove,
+  cartDelete,
+  cartClear,
+  setCart,
+  setWishlist,
+  dataClear,
+} = userData.actions;
 
 export default userData.reducer;

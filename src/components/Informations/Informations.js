@@ -13,7 +13,7 @@ const Informations = (props) => {
             key={Math.random()}
             img={news.img}
             header={news.header}
-            mediumSize={props.mediumSize}
+            mediumSize={props.mediumSize ? props.mediumSize : ""}
           />
         ))}
       </div>

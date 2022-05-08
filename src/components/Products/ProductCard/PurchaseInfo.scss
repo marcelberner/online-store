@@ -1,4 +1,5 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .purchase-info {
     display: flex;
@@ -9,6 +10,9 @@
       color: $main-color;
       font-size: 2.3rem;
       padding-right: 2rem;
+      @include media(tablet-large){
+        font-size: 3rem;
+      }
     }
     &__text {
       display: flex;
@@ -16,5 +20,8 @@
       color: $light-gray;
       font-size: 1.5rem;
       padding-right: 2rem;
+      @include media(tablet-large){
+        font-size: 2rem;
+      }
     }
   }

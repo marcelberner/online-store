@@ -1,4 +1,5 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .price-items{
     display: flex;
@@ -18,6 +19,9 @@
         font-size: 1.8rem;
         font-weight: $font-weight;
         color: $light-gray;
+        @include media(tablet-large){
+          font-size: 2.3rem;
+        }
     }
     &::-webkit-scrollbar {
         width: .5rem;

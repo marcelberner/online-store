@@ -1,4 +1,5 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .recomendation{
     position: relative;
@@ -13,6 +14,10 @@
     background-color: #fef7ec;
     border-radius: $border-radius;
     box-shadow: $basic-box-shadow;
+    @include media(tablet){
+        font-size: 1.8rem;
+        width: 50rem;
+    }
     &__header{
         display: flex;
         align-items: center;
@@ -27,5 +32,9 @@
         padding: 1rem;
         font-weight: $font-weight;
         border-radius: $border-radius;
+        @include media(tablet){
+            font-size: 1.8rem;
+            height: 2rem;
+        }
     }
 }

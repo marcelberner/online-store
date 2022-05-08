@@ -1,24 +1,25 @@
+@import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 
-.controls{
-    &__container{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-grow: 1;
-        margin-left: 1rem;
-        @include media(tablet-large){
-            position: absolute;
-            top: 100vh;
-            width: 100vw;
-            background-color: white;
-            height: 150%;
-            transform: translate(0, -100%);
-        }
-        & a{
-            display: flex;
-            justify-content: center;
-            flex-grow: 1;
-        }
+.controls {
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: 1rem;
+    @include media(tablet-large) {
+      position: absolute;
+      top: 100vh;
+      width: 100vw;
+      background-color: white;
+      height: 150%;
+      transform: translate(0, -100%);
     }
+    & a {
+      display: flex;
+      justify-content: center;
+      flex-grow: 1;
+    }
+  }
 }

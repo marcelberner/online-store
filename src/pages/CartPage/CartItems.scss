@@ -1,11 +1,14 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .cart-items {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   align-items: center;
-  overflow-y: auto;
+  @include media(tablet-large){
+    flex-grow: 0;
+  }
   &::-webkit-scrollbar {
     width: 1rem;
   }

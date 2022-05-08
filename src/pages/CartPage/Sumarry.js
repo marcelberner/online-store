@@ -27,7 +27,7 @@ const Sumarry = () => {
             />
           ))}
           <div className="summary__totalprice">
-            <span>Do zapłaty: {totalPrice} zł</span>
+            <span>Do zapłaty: {totalPrice.toFixed(2)} zł</span>
           </div>
       </div>
       <div className="summary__container">

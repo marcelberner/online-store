@@ -36,7 +36,6 @@
   }
   &__item:hover .list__item--hide {
     display: block;
-    // height: 100%;
     opacity: 1;
     overflow: visible;
     color: black;
@@ -48,10 +47,16 @@
     width: 100%;
     text-align: center;
     line-height: $header-nav-height;
+    @include media(tablet-large){
+      font-size: 1.6rem;
+    }
+    @include media(tablet){
+      font-size: 2.2rem;
+      border-bottom: 2px solid $background-color;
+    }
   }
   &__item--hide {
     display: none;
-    // height: 0px;
     opacity: 0;
     transition: .5s;
     border-bottom: $thin-border;

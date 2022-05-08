@@ -1,9 +1,25 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .product-details {
     display: flex;
     flex-direction: column;
     flex-basis: 35%;
+    @include media(tablet-large){
+      padding: 2rem;
+    }
+    &__container{
+      display:flex;
+      flex-direction: column;
+      @include media(tablet-large){
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      @include media(smartphone-large){
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
     &__id {
       color: $light-gray;
     }

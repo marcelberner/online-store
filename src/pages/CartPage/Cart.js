@@ -81,8 +81,8 @@ const Cart = () => {
       navigate("/koszyk/dostawa");
     } else if (location.pathname === "/koszyk/dostawa")
       navigate("/koszyk/podsumowanie");
-    else if (location.pathname === "/koszyk/podsumowanie") {
-      sendOrderHandler();
+      else if (location.pathname === "/koszyk/podsumowanie") {
+        sendOrderHandler();
     }
   };
 
@@ -96,6 +96,19 @@ const Cart = () => {
             location.pathname === "/koszyk/podsumowanie" ? "Podsumowanie" : ""
           }`}</h1>
         </div>
+        <div
+          className={`cart__progress ${
+            location.pathname === "/koszyk" ? "cart__progress--stage1" : ""
+          }${
+            location.pathname === "/koszyk/dostawa"
+              ? "cart__progress--stage2"
+              : ""
+          }${
+            location.pathname === "/koszyk/podsumowanie"
+              ? "cart__progress--stage3"
+              : ""
+          }`}
+        ></div>
         {cart.length > 0 ? (
           <>
             <div className="cart__content">
@@ -149,19 +162,6 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <div
-              className={`cart__progress ${
-                location.pathname === "/koszyk" ? "cart__progress--stage1" : ""
-              }${
-                location.pathname === "/koszyk/dostawa"
-                  ? "cart__progress--stage2"
-                  : ""
-              }${
-                location.pathname === "/koszyk/podsumowanie"
-                  ? "cart__progress--stage3"
-                  : ""
-              }`}
-            ></div>
           </>
         ) : (
           <h3 className="cart__allert">Twój koszyk jest pusty</h3>

@@ -14,8 +14,10 @@ const ProductDetails = (props) => {
         <ProductReputation rep={props.rep}/>
         <span className="product-details__id">ID produktu: {props.id}</span>
       </div>
-      <SpecyficationItems spec={props.spec}/>
-      {props.recomendation && <Recomendation text={props.recomendation}/>}
+      <div className="product-details__container">
+        <SpecyficationItems spec={props.spec}/>
+        {props.recomendation && <Recomendation text={props.recomendation}/>}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .product-slider {
   flex-basis: 40%;
@@ -8,4 +9,8 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  @include media(tablet-large){
+    min-height: 50rem;
+    padding: 2rem;
+  }
 }

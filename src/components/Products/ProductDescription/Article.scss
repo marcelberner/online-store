@@ -1,23 +1,24 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
-.article{
-    &__item{
-        margin: 2rem;
-    }
-    &__title{
-        font-weight: $font-weight;
-        font-size: 3rem;
-        margin-top: 5rem;
-        text-align: center;
-    }
-    &__text{
-        font-size: 2.2rem;
-        line-height: 4rem;
-    }
-    &__img{
-        display: block;
-        width: 100%;
-        margin-top: 8rem;
-        border-radius: $border-radius;
-    }
+.article {
+  &__item {
+    margin: 2rem 0;
+  }
+  &__title {
+    font-weight: $font-weight;
+    font-size: 3rem;
+    margin-top: 5rem;
+    text-align: center;
+  }
+  &__text {
+    font-size: 2.2rem;
+    line-height: 4rem;
+  }
+  &__img {
+    display: block;
+    width: 100%;
+    margin-top: 8rem;
+    border-radius: $border-radius;
+  }
 }

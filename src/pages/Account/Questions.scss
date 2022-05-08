@@ -1,26 +1,25 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .questions {
   display: flex;
   flex-grow: 1;
-  align-items: center;
   justify-content: center;
   &__form {
     display: flex;
     flex-direction: column;
-    width: 65rem;
+    align-items: center;
+    width: 70%;
     height: 40rem;
     padding: 5rem;
+    margin-top: 5rem;
     box-shadow: $basic-box-shadow;
     border-radius: $border-radius;
-  }
-  &__label {
-    font-size: 2rem;
   }
   &__input {
     resize: none;
     margin: 1rem 0;
-    width: 28rem;
+    width: 50%;
     font-weight: 300;
     height: 2.2rem;
     padding: 1rem;
@@ -28,9 +27,15 @@
     font-size: 1.7rem;
     border-radius: $border-radius;
     border: 1px solid $light-gray;
+    @include media(tablet-large) {
+      width: 70%;
+    }
     &--textarea {
-      width: 60rem;
+      width: 70%;
       height: 30rem;
+      @include media(tablet-large) {
+        width: 90%;
+      }
     }
     &:focus {
       outline: 2px solid $main-color;

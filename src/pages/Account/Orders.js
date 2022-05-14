@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import useData from "../../hooks/useData";
 
+import NoFoundHeader from "../../components/UI/Allerts/NoFoundHeader";
+
 import "./Orders.scss";
 
 const Orders = () => {
@@ -83,7 +85,7 @@ const Orders = () => {
             </div>
           ))
         ) : (
-          <h3 className="orders__allert">Twoja historia zamówień jest pusta</h3>
+          <NoFoundHeader text={"Twoja historia zamówień jest pusta"}/>
         )}
       </div>
     </section>

@@ -12,7 +12,13 @@ const Header = () => {
   const location = useLocation();
 
   return (
-    <header className={`header ${(location.pathname === "/logowanie" || location.pathname === "/rejestracja") && "header--hide"}`}>
+    <header
+      className={`header ${
+        (location.pathname === "/logowanie" ||
+          location.pathname === "/rejestracja") &&
+        "header--hide"
+      }`}
+    >
       <div className="header__container header__container--fixed">
         <div className="header__content">
           <Logo />

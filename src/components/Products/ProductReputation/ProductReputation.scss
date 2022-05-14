@@ -1,9 +1,13 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .product-reputation {
   font-size: 1.8rem;
   &--medium {
     font-size: 1.5rem;
+    @include media(tablet-large){
+      font-size: 2rem;
+    }
   }
   &__stars {
     color: #f7b000;

@@ -18,14 +18,14 @@ const Window = (props) => {
         <i className="fa-solid fa-arrow-right-long"></i>
       </button>
       <div className="window__content">
-        {props.SLIDES.map((slide) => {
+        {props.SLIDES.map((slide, index) => {
           let className = "window__slide";
           if (slide.id - 1 === props.currentPosition)
             className = "window__slide window__slide--active";
 
           return (
             <div
-              key={Math.random()}
+              key={index}
               style={{ backgroundImage: `url(${slide.img})` }}
               alt={"slide"}
               className={className}

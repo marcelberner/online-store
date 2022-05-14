@@ -23,6 +23,18 @@
     width: 30rem;
     height: 40rem;
     padding: 2rem;
+    @include media(tablet-large){
+      width: 40rem;
+      height: 50rem;
+    }
+    @include media(smartphone-large){
+      width: 50rem;
+      height: 60rem;
+    }
+    @include media(smartphone){
+      width: 55rem;
+      height: 65rem;
+    }
   }
   &-container{
     position: relative;
@@ -71,6 +83,12 @@
       margin: 0;
       margin-bottom: .5rem;
       text-align: left;
+      @include media(tablet-large){
+        font-size: 2rem;
+      }
+      @include media(smartphone){
+       font-size: 3rem;
+      }
     }
   }
   &__price {
@@ -86,6 +104,12 @@
     &--medium{
       margin-top: 2rem;
       font-size: 2rem;
+      @include media(tablet-large){
+       font-size: 2.8rem;
+      }
+      @include media(smartphone){
+        font-size: 3rem;
+      }
     }
   }
 }

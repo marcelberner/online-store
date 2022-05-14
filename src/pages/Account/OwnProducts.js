@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import useData from "../../hooks/useData";
 
+import NoFoundHeader from "../../components/UI/Allerts/NoFoundHeader";
+
 import "./OwnProducts.scss";
 
 const OwnProducts = () => {
@@ -29,9 +31,7 @@ const OwnProducts = () => {
         {products && products.length > 0 ? (
           <div></div>
         ) : (
-          <h3 className="own-products__allert">
-            Nie posiadasz jeszcze żadnych produktów
-          </h3>
+          <NoFoundHeader text={"Nie posiadasz jeszcze żadnych produktów"}/>
         )}
       </div>
     </section>

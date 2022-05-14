@@ -7,7 +7,6 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  // height: $header-height;
   background-color: white;
   &--hide{
     display: none;
@@ -18,7 +17,6 @@
     width: inherit;
     height: $header-main-height;
     box-shadow: $basic-box-shadow;
-    // overflow: hidden;
     background-color: white;
     z-index: 3;
   }

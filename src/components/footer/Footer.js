@@ -14,21 +14,21 @@ const Footer = () => {
           <div className="footer__title">Zamówienia</div>
           <Link to="/dostawa" className="footer__link">Dostawa</Link>
           <Link to="/zwroty-i-reklamacje" className="footer__link">Zwroty i reklamacje</Link>
-          <Link to="/status-zamówienia" className="footer__link">Status zamówienia</Link>
+          <Link to="/status-zamowienia" className="footer__link">Status zamówienia</Link>
           <Link to="/raty" className="footer__link">Raty</Link>
         </div>
         <div className="footer__section">
           <div className="footer__title">Pomocne linki</div>
           <Link to="/poradniki" className="footer__link">Poradniki</Link>
-          <Link to="/aktualności" className="footer__link">Aktualności</Link>
-          <Link to="/wyprzedaż" className="footer__link">Wyprzedaż</Link>
+          <Link to="/aktualnosci" className="footer__link">Aktualności</Link>
+          <Link to="/wyprzedaz" className="footer__link">Wyprzedaż</Link>
           <Link to="/karty-podarunkowe" className="footer__link">Karty podarunkowe</Link>
         </div>
         <div className="footer__section">
           <div className="footer__title">ONLINE STORE</div>
           <Link to="/o-nas" className="footer__link">O nas</Link>
           <Link to="/dane-firmy" className="footer__link">Dane firmy</Link>
-          <Link to="/polityka-prywatności-i-cookies" className="footer__link">Polityka prywatności i cookies</Link>
+          <Link to="/polityka-prywatnosci-i-cookies" className="footer__link">Polityka prywatności i cookies</Link>
           <Link to="/regulamin-sklepu" className="footer__link">Regulamin sklepu</Link>
         </div>
         <div className="footer__section">

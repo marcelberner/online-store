@@ -11,15 +11,6 @@ import "./Slider.scss";
 const Slider = () => {
   const [currentPosition, setCurrentPosition] = useState(0);
 
-  useEffect(() => {
-    const sliderInterval = setInterval(() => {
-      if (currentPosition === SLIDES.length - 1) setCurrentPosition(0);
-      else setCurrentPosition(currentPosition + 1);
-    }, 10000);
-
-    return () => clearInterval(sliderInterval);
-  }, [currentPosition]);
-
   const selectSlide = (e) => {
     setCurrentPosition(e.target.dataset.id - 1);
   };
@@ -28,11 +19,20 @@ const Slider = () => {
     if (currentPosition === SLIDES.length - 1) setCurrentPosition(0);
     else setCurrentPosition(currentPosition + 1);
   };
-
+  
   const slideMoveBackward = () => {
     if (currentPosition === 0) setCurrentPosition(SLIDES.length - 1);
     else setCurrentPosition(currentPosition - 1);
   };
+
+  useEffect(() => {
+    const sliderInterval = setInterval(() => {
+      if (currentPosition === SLIDES.length - 1) setCurrentPosition(0);
+      else setCurrentPosition(currentPosition + 1);
+    }, 10000);
+
+    return () => clearInterval(sliderInterval);
+  }, [currentPosition]);
 
   return (
     <section className="slider">

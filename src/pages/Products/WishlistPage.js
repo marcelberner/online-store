@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import ProductItem from "../../components/Products/ProductPreview/ProductItem";
 import useData from "../../hooks/useData";
 
+import NoFoundHeader from "../../components/UI/Allerts/NoFoundHeader";
+
 import "./WishlistPage.scss";
 
 const WishlistPage = () => {
@@ -53,18 +55,20 @@ const WishlistPage = () => {
               )
           )
       ) : (
-        <h3 className="wishlist__info">
-          Nie posiadasz żadnych produktów na liście
-        </h3>
+        <NoFoundHeader text={"Nie posiadasz żadnych produktów na liście"} />
       );
     else if (!isLogged)
       return (
-        <h3 className="wishlist__info">
-          <Link to="/logowanie">
-            <span className="wishlist__info--link">Zaloguj się</span>
-          </Link>
-          , aby wyświetlić zawartość listy
-        </h3>
+        <NoFoundHeader
+          text={
+            <>
+              <Link to="/logowanie">
+                <span className="nofound-header--link">Zaloguj się</span>
+              </Link>
+              , aby wyświetlić zawartość listy
+            </>
+          }
+        />
       );
   };
 

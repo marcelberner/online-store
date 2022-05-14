@@ -10,75 +10,98 @@
   color: white;
   background-color: $green;
   cursor: pointer;
-  &__text{
+  &__text {
     font-size: 1.6rem;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       font-size: 2.1rem;
     }
   }
-  &--hidden{
+  &--hidden {
     right: 1rem;
     bottom: 1rem;
     position: absolute;
     opacity: 0;
     background-color: transparent;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       opacity: 1;
     }
   }
-  &--hidden:hover{
+  &--hidden:hover {
     background-color: $green;
     color: white;
     border: 1px solid $light-gray;
   }
-  &--small{
+  &--small {
     padding: 1.2rem;
     border-radius: 50%;
     color: $green;
     width: 3rem;
     height: 3rem;
     font-size: 1.5rem;
-    @include media(desktop-small){
+    @include media(desktop-small) {
       width: 3.5rem;
       height: 3.5rem;
     }
-    @include media(tablet-large){
+    @include media(tablet-large) {
       width: 4rem;
       height: 4rem;
       font-size: 1.7rem;
     }
-    @include media(smartphone-large){
+    @include media(smartphone-large) {
       width: 5rem;
       height: 5rem;
       font-size: 2rem;
     }
-    @include media(smartphone){
+    @include media(smartphone) {
       width: 6rem;
       height: 6rem;
       font-size: 3rem;
     }
   }
-  &--medium{
+  &--medium {
+    position: absolute;
+    right: 3rem;
+    bottom: 3rem;
     padding: 1.2rem;
     border-radius: 50%;
     color: $green;
     width: 5rem;
     height: 5rem;
     font-size: 2rem;
+    @include media(tablet-large) {
+      width: 5.5rem;
+      height: 5.5rem;
+      font-size: 2.2rem;
+    }
+    @include media(tablet) {
+      width: 6rem;
+      height: 6rem;
+      font-size: 2.4rem;
+    }
+    @include media(smartphone-large) {
+      width: 7rem;
+      height: 7rem;
+      font-size: 2.6rem;
+    }
+    @include media(smartphone) {
+      width: 8rem;
+      height: 8rem;
+      font-size: 3rem;
+    }
   }
-  &--large{
+  &--large {
     padding: 2rem;
     font-size: 1.9rem;
     width: 20rem;
     height: 4rem;
     border-radius: 30px;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       width: 28rem;
       height: 6rem;
       font-size: 2.7rem;
     }
   }
-  &--large:hover{
+  &--large:hover {
     background-color: green;
   }
 }

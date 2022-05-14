@@ -11,6 +11,7 @@ import { cartClear } from "../../store/userData";
 import SubmitButton from "../../components/Button/SubmitButton";
 import PromoCode from "../../components/Cart/PromoCode/PromoCode";
 import PriceItems from "../../components/Cart/PriceItems/PriceItems";
+import NoFoundHeader from "../../components/UI/Allerts/NoFoundHeader";
 
 import "./Cart.scss";
 
@@ -164,7 +165,7 @@ const Cart = () => {
             </div>
           </>
         ) : (
-          <h3 className="cart__allert">Twój koszyk jest pusty</h3>
+          <NoFoundHeader text={"Twój koszyk jest pusty"}/>
         )}
       </div>
     </section>

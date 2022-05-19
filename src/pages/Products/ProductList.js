@@ -1,10 +1,11 @@
 import { React, useEffect, useCallback, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import useData from "../../hooks/useData";
 
 import Sort from "../../components/Filter/Sort";
+import SelectPage from "../../components/SelectPage/SelectPage";
 import ProductItem from "../../components/Products/ProductPreview/ProductItem";
 import NoFoundHeader from "../../components/UI/Allerts/NoFoundHeader";
 
@@ -14,36 +15,67 @@ const ProductList = () => {
   const requestStatus = useSelector((state) => state.dataRequest.requestStatus);
 
   const params = useParams();
+  const navigate = useNavigate();
   const [products, setProducts] = useState();
+  const [productsLength, setProductsLength] = useState();
   const loctaion = useLocation();
   const { dataRequest } = useData();
+
+  const queryParams = new URLSearchParams(loctaion.search);
+  const searchQuery = queryParams.get("q")
+    ? queryParams.get("q").toLowerCase()
+    : false;
+  const pageQuery = queryParams.get("page")
+    ? parseInt(queryParams.get("page"))
+    : 1;
+
+  const swapForwardHandler = () => {
+    navigate(
+      `/products/${params.productCategory}?page=${pageQuery + 1}${
+        searchQuery ? "&q=" + searchQuery : ""
+      }`
+    );
+  };
+
+  const swapBackwardHandler = () => {
+    navigate(
+      `/products/${params.productCategory}?page=${pageQuery - 1}${
+        searchQuery ? "&q=" + searchQuery : ""
+      }`
+    );
+  };
 
   const loadProducts = useCallback(async () => {
     const resData = await dataRequest({ method: "GET", database: "products" });
 
-    if (params.productCategory === "search") {
-      const queryParams = new URLSearchParams(loctaion.search);
-      const searchQuery = queryParams.get("q").toLowerCase();
+    let products = null;
 
-      const filteredProducts = resData.filter(
+    if (params.productCategory === "search") {
+      products = resData.filter(
         (product) =>
           product.name.toLowerCase().includes(searchQuery) ||
           product.category.category.toLowerCase().includes(searchQuery) ||
           (product.category.subcategory &&
             product.category.subcategory.toLowerCase().includes(searchQuery))
       );
-
-      setProducts(filteredProducts);
-    } else {
-      const product = resData.filter(
+    } 
+    else {
+      products = resData.filter(
         (product) =>
           product.category.category === params.productCategory ||
           product.category.subcategory === params.productCategory
       );
-
-      setProducts(product);
     }
-  }, [dataRequest, params.productCategory, loctaion.search]);
+
+    const productSlice = products.slice(
+      0 + (pageQuery - 1) * 12,
+      pageQuery * 12
+    );
+
+    setProductsLength(products.length);
+    setProducts(productSlice);
+
+  }, [dataRequest, params.productCategory, pageQuery, searchQuery]);
 
   useEffect(() => {
     loadProducts();
@@ -71,6 +103,12 @@ const ProductList = () => {
         ) : (
           <NoFoundHeader text={"Nie znaleziono produktu"} />
         )}
+        <SelectPage
+          currentPage={pageQuery}
+          productsLength={productsLength}
+          swapForward={swapForwardHandler}
+          swapBackward={swapBackwardHandler}
+        />
       </div>
     </div>
   );

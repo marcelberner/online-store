@@ -20,19 +20,19 @@
     height: 40rem;
   }
   &--medium{
-    width: 30rem;
+    width: 29rem;
     height: 40rem;
     padding: 2rem;
     @include media(tablet-large){
-      width: 40rem;
+      width: 39rem;
       height: 50rem;
     }
     @include media(smartphone-large){
-      width: 50rem;
+      width: 49rem;
       height: 60rem;
     }
     @include media(smartphone){
-      width: 55rem;
+      width: 54rem;
       height: 65rem;
     }
   }

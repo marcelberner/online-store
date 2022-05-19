@@ -24,15 +24,15 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <Slider />
-      <Recomended products={resData}/>
+      <Recomended products={resData && resData.slice(0,8)}/>
       <Informations
         title={"Odkryj Online Store"}
         content={INFORMATIONS}
         mediumSize={true}
       />
-      {resData && <Bestsellers title={"Bestsellery"} products={resData} />}
+      {resData && <Bestsellers title={"Bestsellery"} products={resData && resData.slice(0,12)} />}
       <Informations title={"Aktualności"} content={NEWS} />
-      {resData && <LastWatched title={"Ostatnio oglądane"} products={resData} />}
+      {resData && <LastWatched title={"Ostatnio oglądane"} products={resData && resData.slice(0,12)} />}
       <Informations title={"Poradniki"} content={TUTORIALS} />
     </div>
   );

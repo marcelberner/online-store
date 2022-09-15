@@ -9,7 +9,7 @@
 }
 
 @mixin media($breakpoint) {
-  $size: map-get($breakpoints,$breakpoint);
+  $size: map-get($breakpoints, $breakpoint);
 
   @if ($size) {
     @media #{$size} {

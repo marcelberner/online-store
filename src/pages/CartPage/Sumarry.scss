@@ -3,10 +3,9 @@
 
 .summary {
   display: flex;
-  // flex-wrap: wrap;
   justify-content: space-around;
   flex-grow: 1;
-  @include media(smartphone-large){
+  @include media(smartphone-large) {
     flex-direction: column;
   }
   &__container {

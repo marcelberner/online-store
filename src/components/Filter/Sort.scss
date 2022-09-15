@@ -85,13 +85,13 @@
 }
 
 .angle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translate(0, -50%);
-    color: $light-gray;
-    font-size: 1.6rem;
-    @include media(tablet-large) {
-      font-size: 2rem;
-    }
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: $light-gray;
+  font-size: 1.6rem;
+  @include media(tablet-large) {
+    font-size: 2rem;
+  }
 }

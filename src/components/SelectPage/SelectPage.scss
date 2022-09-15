@@ -1,36 +1,36 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 
-.select-page{
-    display: flex;
-    width: 100%;
-    height: 10rem;
-    justify-content: center;
-    align-items: center;
-    margin-top: auto;
-    &__button{
-        border-radius: 50%;
-        border: none;
-        background-color: $background-color;
-        width: 4rem;
-        height: 4rem;
-        font-size: 1.8rem;
-        margin: 0 2rem;
-        cursor: pointer;
-        @include media(tablet-large){
-            width: 6rem;
-            height: 6rem;
-            font-size: 2rem;
-        }
-        &--hide{
-            opacity: 0;
-            cursor: auto;
-        }
+.select-page {
+  display: flex;
+  width: 100%;
+  height: 10rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  &__button {
+    border-radius: 50%;
+    border: none;
+    background-color: $background-color;
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.8rem;
+    margin: 0 2rem;
+    cursor: pointer;
+    @include media(tablet-large) {
+      width: 6rem;
+      height: 6rem;
+      font-size: 2rem;
     }
-    &__current{
-        font-size: 2rem;
-        @include media(tablet-large){
-            font-size: 3rem;
-        }
+    &--hide {
+      opacity: 0;
+      cursor: auto;
     }
+  }
+  &__current {
+    font-size: 2rem;
+    @include media(tablet-large) {
+      font-size: 3rem;
+    }
+  }
 }

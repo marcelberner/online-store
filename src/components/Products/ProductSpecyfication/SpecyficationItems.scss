@@ -7,13 +7,13 @@
   margin-top: 2rem;
   border-top: $section-border;
   border-bottom: $section-border;
-  &--medium{
+  &--medium {
     font-size: 1.35rem;
     margin-top: 0;
     padding: 0;
     border-top: none;
     border-bottom: none;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       font-size: 2rem;
     }
   }
@@ -21,22 +21,22 @@
     width: 70%;
     justify-content: space-between;
     font-size: 2rem;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       width: 90%;
     }
   }
   &__item {
     display: flex;
     line-height: 3rem;
-    &--medium{
+    &--medium {
       line-height: 2rem;
-      @include media(tablet-large){
+      @include media(tablet-large) {
         line-height: 3rem;
       }
     }
     &--large {
       width: 100%;
-      @include media(tablet-large){
+      @include media(tablet-large) {
         font-size: 2.2rem;
       }
     }

@@ -4,13 +4,13 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import useInitial from "./hooks/useInitial";
 
-import ScrollToTop from "./scripts/ScrollToTop.jsx";
+import ScrollToTop from "./components/UI/ScrollToTop.jsx";
 import Layout from "./layout/Layout";
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import Footer from "./components/footer/Footer";
 import LoadSpinner from "./components/UI/LoadSpinner/LoadSpinner";
-import ScrollButton from "./components/UI/ScrollButton/ScrollButton";
+import ScrollButton from "./components/Button/ScrollButton";
 
 const HomePage = React.lazy(() => import("./pages/HomePage/HomePage"));
 const LoginPage = React.lazy(() => import("./pages/AuthPages/LoginPage"));

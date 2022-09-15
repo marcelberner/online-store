@@ -12,7 +12,7 @@
     flex-grow: 1;
     margin-top: 5rem;
     justify-content: space-around;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       flex-direction: column;
       flex-wrap: nowrap;
       align-items: center;
@@ -21,7 +21,7 @@
   }
   &__container {
     flex-basis: 30%;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       width: 60%;
     }
   }
@@ -49,10 +49,10 @@
     font-size: 1.7rem;
     border-radius: 30px;
     border: 1px solid $light-gray;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       width: 100%;
     }
-    &:focus{
+    &:focus {
       outline: 2px solid $main-color;
       border: none;
     }

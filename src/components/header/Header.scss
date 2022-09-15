@@ -8,7 +8,7 @@
   align-items: center;
   width: 100%;
   background-color: white;
-  &--hide{
+  &--hide {
     display: none;
   }
   &__container {
@@ -30,7 +30,7 @@
     width: inherit;
     max-width: $content-width-limit;
     height: inherit;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       justify-content: space-around;
     }
   }

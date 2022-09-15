@@ -6,17 +6,16 @@
   align-self: flex-end;
   justify-content: center;
   width: 100%;
-  // height: 40rem;
   background-color: white;
   box-shadow: $basic-box-shadow;
   margin-top: 10rem;
-  @include media(tablet){
-    margin-bottom: 13rem;
+  @include media(tablet) {
+    padding-bottom: 13rem;
   }
-  @include media(smartphone){
-    margin-bottom: 16rem;
+  @include media(smartphone) {
+    padding-bottom: 16rem;
   }
-  &--hide{
+  &--hide {
     display: none;
   }
   &__content {
@@ -24,7 +23,7 @@
     justify-content: center;
     width: 95%;
     max-width: 1500px;
-    @include media(tablet){
+    @include media(tablet) {
       flex-wrap: wrap;
       justify-content: space-around;
     }
@@ -35,29 +34,29 @@
     width: 25%;
     padding: 2rem;
     flex-direction: column;
-    @include media(tablet){
+    @include media(tablet) {
       width: 35%;
     }
-    @include media(smartphone){
-      width: 51%;
+    @include media(smartphone) {
+      width: 40%;
     }
   }
   &__title {
     padding-bottom: 2rem;
     font-weight: $font-weight;
-    @include media(tablet){
+    @include media(tablet) {
       font-size: 2.3rem;
     }
-    @include media(smartphone){
+    @include media(smartphone) {
       font-size: 2.7rem;
     }
   }
   &__link {
     line-height: 4rem;
-    @include media(tablet){
+    @include media(tablet) {
       font-size: 2.2rem;
     }
-    @include media(smartphone){
+    @include media(smartphone) {
       font-size: 2.5rem;
     }
     cursor: pointer;

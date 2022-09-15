@@ -9,7 +9,7 @@
   height: $header-nav-height;
   box-shadow: $basic-box-shadow;
   margin-top: $header-main-height;
-  @include media(tablet){
+  @include media(tablet) {
     height: auto;
   }
   &__content {
@@ -17,7 +17,7 @@
     height: inherit;
     width: inherit;
     max-width: $content-width-limit;
-    @include media(tablet){
+    @include media(tablet) {
       flex-direction: column;
     }
   }
@@ -47,10 +47,10 @@
     width: 100%;
     text-align: center;
     line-height: $header-nav-height;
-    @include media(tablet-large){
+    @include media(tablet-large) {
       font-size: 1.6rem;
     }
-    @include media(tablet){
+    @include media(tablet) {
       font-size: 2.2rem;
       border-bottom: 2px solid $background-color;
     }
@@ -58,7 +58,7 @@
   &__item--hide {
     display: none;
     opacity: 0;
-    transition: .5s;
+    transition: 0.5s;
     border-bottom: $thin-border;
     border-left: $thin-border;
     border-right: $thin-border;

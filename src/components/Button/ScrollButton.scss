@@ -1,0 +1,31 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.scroll-button {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 5rem;
+  bottom: 10rem;
+  width: 5rem;
+  height: 5rem;
+  transition: 0.3s;
+  border-radius: $border-radius;
+  background-color: transparent;
+  border: 2px solid $main-color;
+  z-index: 1;
+  @include media(tablet-large) {
+    bottom: 15rem;
+  }
+  &:hover {
+    background-color: $main-color;
+  }
+  &:hover &__icon {
+    color: white;
+  }
+  &__icon {
+    font-size: 3rem;
+    color: $main-color;
+  }
+}

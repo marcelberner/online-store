@@ -8,25 +8,25 @@
 
 html {
   font-size: 10px;
-  @include media(desktop-large){
+  @include media(desktop-large) {
     font-size: 10px;
   }
-  @include media(desktop-medium){
+  @include media(desktop-medium) {
     font-size: 9px;
   }
-  @include media(desktop-small){
+  @include media(desktop-small) {
     font-size: 8px;
   }
-  @include media(tablet-large){
+  @include media(tablet-large) {
     font-size: 8px;
   }
-  @include media(tablet){
+  @include media(tablet) {
     font-size: 7px;
   }
-  @include media(smartphone-large){
+  @include media(smartphone-large) {
     font-size: 7px;
   }
-  @include media(smartphone){
+  @include media(smartphone) {
     font-size: 6px;
   }
 }
@@ -58,4 +58,3 @@ a {
   width: max-content !important;
   height: max-content !important;
 }
-

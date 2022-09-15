@@ -1,40 +1,40 @@
 @import "../../../styles/variables.scss";
 @import "../../../styles/mixins.scss";
 
-.recomendation{
-    position: relative;
+.recomendation {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  font-size: 1.5rem;
+  width: 40rem;
+  padding: 2rem;
+  margin-top: 5rem;
+  background-color: #fef7ec;
+  border-radius: $border-radius;
+  box-shadow: $basic-box-shadow;
+  @include media(tablet) {
+    font-size: 1.8rem;
+    width: 50rem;
+  }
+  &__header {
     display: flex;
     align-items: center;
     justify-content: center;
-    align-self: center;
+    left: 0;
+    top: 0;
+    transform: translate(0, -50%);
     font-size: 1.5rem;
-    width: 40rem;
-    padding: 2rem;
-    margin-top: 5rem;
-    background-color: #fef7ec;
+    height: 1rem;
+    position: absolute;
+    background-color: #f8d08c;
+    padding: 1rem;
+    font-weight: $font-weight;
     border-radius: $border-radius;
-    box-shadow: $basic-box-shadow;
-    @include media(tablet){
-        font-size: 1.8rem;
-        width: 50rem;
+    @include media(tablet) {
+      font-size: 1.8rem;
+      height: 2rem;
     }
-    &__header{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        left: 0;
-        top: 0;
-        transform: translate(0,-50%);
-        font-size: 1.5rem;
-        height: 1rem;
-        position: absolute;
-        background-color: #f8d08c;
-        padding: 1rem;
-        font-weight: $font-weight;
-        border-radius: $border-radius;
-        @include media(tablet){
-            font-size: 1.8rem;
-            height: 2rem;
-        }
-    }
+  }
 }

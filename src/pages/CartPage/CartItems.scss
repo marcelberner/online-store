@@ -6,13 +6,13 @@
   flex-direction: column;
   flex-grow: 1;
   align-items: center;
-  @include media(tablet-large){
+  @include media(tablet-large) {
     flex-grow: 0;
   }
   &::-webkit-scrollbar {
     width: 1rem;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: $light-gray;
     border-radius: 30px;

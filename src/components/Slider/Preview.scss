@@ -6,11 +6,10 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  height: 25%;
   overflow-x: auto;
   &__content {
-    min-width: 35rem;
-    height: 85%;
+    width: 40rem;
+    height: 13rem;
     border-radius: $border-radius;
     box-shadow: $basic-box-shadow;
     border: 1px solid $background-color;

@@ -17,11 +17,25 @@ $content-width-limit: 1800px;
 $section-margin-top: 5rem;
 
 $breakpoints: (
-    smartphone : (max-width : 460px),
-    smartphone-large : (max-width : 640px),
-    tablet : (max-width : 800px),
-    tablet-large : (max-width : 1024px),
-    desktop-small : (max-width : 1280px),
-    desktop-medium : (max-width : 1600px),
-    desktop-large : (max-width : 1900px),
-)
+  smartphone: (
+    max-width: 460px,
+  ),
+  smartphone-large: (
+    max-width: 640px,
+  ),
+  tablet: (
+    max-width: 800px,
+  ),
+  tablet-large: (
+    max-width: 1024px,
+  ),
+  desktop-small: (
+    max-width: 1280px,
+  ),
+  desktop-medium: (
+    max-width: 1600px,
+  ),
+  desktop-large: (
+    max-width: 1900px,
+  ),
+);

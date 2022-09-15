@@ -11,10 +11,8 @@
   margin-top: 5rem;
   border-radius: $border-radius;
   box-shadow: $basic-box-shadow;
-  @include media(tablet-large){
+  @include media(tablet-large) {
     flex-direction: column;
     height: auto;
   }
 }
-
-

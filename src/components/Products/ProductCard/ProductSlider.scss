@@ -9,7 +9,7 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  @include media(tablet-large){
+  @include media(tablet-large) {
     min-height: 50rem;
     padding: 2rem;
   }

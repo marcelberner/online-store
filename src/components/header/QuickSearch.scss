@@ -10,8 +10,8 @@ $input-border: 1px solid rgb(221, 221, 221);
     align-items: center;
     width: 40%;
     min-width: 25rem;
-    @include media(tablet-large){
-      width: 65%
+    @include media(tablet-large) {
+      width: 65%;
     }
   }
   &__form {
@@ -32,8 +32,8 @@ $input-border: 1px solid rgb(221, 221, 221);
   &__input:focus {
     outline: none;
   }
-  &__input::placeholder{
-      color: rgb(201, 201, 201);
+  &__input::placeholder {
+    color: rgb(201, 201, 201);
   }
   &__button {
     width: 15%;

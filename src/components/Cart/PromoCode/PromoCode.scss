@@ -9,14 +9,14 @@
     display: flex;
     align-items: center;
   }
-  &__title{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2rem 0;
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
   }
-  &__text{
-      font-weight: $font-weight;
+  &__text {
+    font-weight: $font-weight;
   }
   &__input {
     margin-right: 0.5rem;

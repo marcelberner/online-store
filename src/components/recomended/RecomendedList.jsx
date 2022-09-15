@@ -1,13 +1,12 @@
-import React from "react";
-
 import ProductItem from "../Products/ProductPreview/ProductItem";
+import SectionHeader from "../UI/header/SectionHeader";
 
 import "./RecomendedList.scss";
 
 const RecomendedList = (props) => {
   return (
     <section className="recomended-list">
-      <h2 className="recomended-list__header">Polecamy</h2>
+      <SectionHeader text={"Polecamy"} />
       <div className="recomended-list__content">
         {props.products.map((product) => (
           <ProductItem

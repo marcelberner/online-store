@@ -1,14 +1,14 @@
-import React from "react";
-
 import ProductItem from "../Products/ProductPreview/ProductItem";
+import SectionHeader from "../UI/header/SectionHeader";
 
-import "./LastWatched.scss";
+import "./Bestsellers.scss";
 
-const LastWatched = (props) => {
+const Bestselers = (props) => {
+
   return (
-    <section className="last-watched">
-      <h2 className="last-watched__header">{props.title}</h2>
-      <div className="last-watched__content">
+    <section className="bestselers">
+      <SectionHeader text={props.title} />
+      <div className="bestselers__content">
         {props.products.map((product) => (
           <ProductItem
             key={product.id}
@@ -24,4 +24,4 @@ const LastWatched = (props) => {
   );
 };
 
-export default LastWatched;
+export default Bestselers;

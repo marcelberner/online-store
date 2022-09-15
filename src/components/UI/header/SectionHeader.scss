@@ -1,0 +1,18 @@
+@import "../../../styles/mixins.scss";
+@import "../../../styles/variables.scss";
+
+.section-header {
+  margin-left: 2rem;
+  line-height: 5rem;
+  font-weight: $font-weight;
+  padding-bottom: 1rem;
+  @include media(tablet-large) {
+    padding-bottom: 2rem;
+    font-size: 3.3rem;
+    text-align: center;
+    margin-left: 0;
+  }
+  @include media(smartphone) {
+    font-size: 4rem;
+  }
+}

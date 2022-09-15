@@ -10,22 +10,10 @@
   border-radius: $border-radius;
   box-shadow: $basic-box-shadow;
   background-color: white;
-  &__header {
-    margin-left: 2rem;
-    line-height: 5rem;
-    font-weight: $font-weight;
-    @include media(tablet-large){
-      font-size: 3rem;
-      text-align: center;
-      margin-left: 0;
-    }
-    @include media(smartphone){
-      font-size: 4rem;
-    }
-  }
   &__content {
     display: flex;
     width: 100%;
+    height: auto;
     align-items: center;
     border-top: $section-border;
     border-bottom: $section-border;

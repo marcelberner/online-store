@@ -12,12 +12,8 @@
     height: 25rem;
   }
   @include media(smartphone-large){
-    width: 35rem;
-    height: 35rem;
-  }
-  @include media(smartphone){
-    width: 40rem;
-    height: 40rem;
+    width: 45rem;
+    height: 45rem;
   }
   &--medium{
     width: 29rem;

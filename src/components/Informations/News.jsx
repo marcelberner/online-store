@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./News.scss";
 
 const News = (props) => {

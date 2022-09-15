@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import useInitial from "./hooks/useInitial";
 
-import ScrollToTop from "./scripts/ScrollToTop";
+import ScrollToTop from "./scripts/ScrollToTop.jsx";
 import Layout from "./layout/Layout";
 import Header from "./components/header/Header";
 import Main from "./components/main/Main";

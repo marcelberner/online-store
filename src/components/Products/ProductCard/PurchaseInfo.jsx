@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./PurchaseInfo.scss";
 
 const PurchaseInfo = (props) => {

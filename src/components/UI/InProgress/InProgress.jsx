@@ -1,9 +1,11 @@
+import ProgressIMG from "../../../assets/in-progress.png";
+
 import "./InProgress.scss";
 
 const InProgress = () => {
   return (
     <div className="inprogress">
-      <img src="../images/in-progress.png" alt="in progress" className="inprogress__image"/>
+      <img src={ProgressIMG} alt="in progress" className="inprogress__image"/>
     </div>
   );
 };

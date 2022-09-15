@@ -1,5 +1,3 @@
-import React from "react";
-
 import SpecyficationItems from "../ProductSpecyfication/SpecyficationItems";
 import Recomendation from "./Recomendation";
 import ProductReputation from "../ProductReputation/ProductReputation";

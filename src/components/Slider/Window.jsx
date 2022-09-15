@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./Window.scss";
 
 const Window = (props) => {

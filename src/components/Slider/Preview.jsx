@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./Preview.scss";
 
 const Preview = (props) => {

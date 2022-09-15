@@ -1,5 +1,3 @@
-import React from "react";
-
 import Hotshot from "./HotShot";
 import RecomendedList from "./RecomendedList";
 

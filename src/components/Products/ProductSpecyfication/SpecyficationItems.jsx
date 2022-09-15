@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./SpecyficationItems.scss";
 
 const SpecyficationItems = (props) => {

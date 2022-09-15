@@ -11,7 +11,7 @@ const UserDetail = () => {
     <>
       {userData && (
         <div className="user-details">
-          <div className="user-details__header" style={{ backgroundImage: `url("../images/profile-bg.jpg")` }}>
+          <div className="user-details__header">
             {userData.name ? (
               <span className="user-details__title">{`Cześć, ${userData.name}`}</span>
             ) : (

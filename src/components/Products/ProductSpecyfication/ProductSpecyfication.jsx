@@ -1,5 +1,3 @@
-import React from "react";
-
 import SpecyficationItems from "./SpecyficationItems";
 
 import "./ProductSpecyfication.scss";

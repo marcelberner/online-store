@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 
 import Logo from "../../components/header/Logo";
 import AuthSelect from "../../components/Form/AuthForm/AuthSelect";
@@ -18,10 +18,7 @@ const LoginPage = () => {
   };
 
   return (
-    <section
-      className="login-page"
-      style={{ backgroundImage: `url(../images/login-bg.png)` }}
-    >
+    <section className="login-page">
       <div className="login-page__container">
         <div className="login-page__header">
           <Logo />

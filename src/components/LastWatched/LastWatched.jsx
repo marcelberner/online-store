@@ -10,7 +10,6 @@ const LastWatched = (props) => {
   return (
     <section className="last-watched">
       <SectionHeader text={props.title} />
-      {/* <div className="last-watched__content"> */}
       <Swiper
           freeMode={true}
           watchSlidesProgress={true}
@@ -31,7 +30,6 @@ const LastWatched = (props) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* </div> */}
     </section>
   );
 };

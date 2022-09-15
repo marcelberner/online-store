@@ -1,4 +1,4 @@
-import { React, useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 

@@ -1,36 +1,43 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Thumbs, Autoplay } from "swiper";
+
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
 import "./Window.scss";
 
 const Window = (props) => {
   return (
     <div className="window">
-      <button
-        className="window__button window__button--backward"
-        onClick={props.slideMoveBackward}
-      >
-        <i className="fa-solid fa-arrow-left-long"></i>
-      </button>
-      <button
-        className="window__button window__button--forward"
-        onClick={props.slideMoveForward}
-      >
-        <i className="fa-solid fa-arrow-right-long"></i>
-      </button>
-      <div className="window__content">
-        {props.SLIDES.map((slide, index) => {
-          let className = "window__slide";
-          if (slide.id - 1 === props.currentPosition)
-            className = "window__slide window__slide--active";
-
-          return (
-            <div
-              key={index}
-              style={{ backgroundImage: `url(${slide.img})` }}
-              alt={"slide"}
-              className={className}
-            ></div>
-          );
-        })}
-      </div>
+        <Swiper
+          style={{
+            "--swiper-navigation-color": "red",
+          }}
+          navigation={true}
+          thumbs={{ swiper: props.currentPosition }}
+          watchSlidesProgress={true}
+          modules={[Thumbs, Navigation, Autoplay]}
+          className="mySwiper window__content"
+          slidesPerView={1}
+          autoplay={{
+            delay: 10000,
+            disableOnInteraction: false,
+          }}
+        >
+          {props.SLIDES.map((slide, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <img
+                  src={slide.img}
+                  className="window__img"
+                  alt={"slide"}
+                ></img>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
     </div>
   );
 };

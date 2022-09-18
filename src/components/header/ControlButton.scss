@@ -8,6 +8,9 @@
     justify-content: center;
     flex-grow: 1;
     cursor: pointer;
+    @include media(tablet-large) {
+      height: 10rem;
+    }
   }
   &__button:hover &__button-text {
     text-decoration: underline;
@@ -20,13 +23,14 @@
     transition: 0.3s;
     color: $main-color;
     @include media(tablet-large) {
+      font-size: 4.5rem;
     }
   }
   &__button-text {
     font-size: 1.6rem;
     margin-left: 1rem;
     @include media(tablet-large) {
-      font-size: 2rem;
+      display: none;
     }
   }
 }

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 
 import QuickSearch from "./QuickSearch";
-import Navigation from "./Navigation";
+import Navigation from "./Navigation/Navigation";
 import UserControls from "./UserControls";
 import Logo from "./Logo";
 
@@ -18,13 +18,13 @@ const Header = () => {
         "header--hide"
       }`}
     >
-      <div className="header__container header__container--fixed">
+      {/* <div className="header__container"> */}
         <div className="header__content">
           <Logo />
           <QuickSearch />
           <UserControls />
         </div>
-      </div>
+      {/* </div> */}
       <Navigation />
     </header>
   );

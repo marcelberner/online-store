@@ -1,35 +1,25 @@
 @import "../../styles/variables.scss";
-@import "./HeaderVariables.scss";
 @import "../../styles/mixins.scss";
 
 .header {
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: white;
+  height: max-content;
+  z-index: 10;
   &--hide {
     display: none;
-  }
-  &__container {
-    display: flex;
-    justify-content: center;
-    width: inherit;
-    height: $header-main-height;
-    box-shadow: $basic-box-shadow;
-    background-color: white;
-    z-index: 3;
-  }
-  &__container--fixed {
-    position: fixed;
   }
   &__content {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: inherit;
-    max-width: $content-width-limit;
-    height: inherit;
+    width: 100%;
+    box-shadow: $basic-box-shadow;
+    z-index: 11;
+    background-color: white;
     @include media(tablet-large) {
       justify-content: space-around;
     }

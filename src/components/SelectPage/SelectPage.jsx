@@ -4,24 +4,22 @@ const SelectPage = (props) => {
   return (
     <div className="select-page">
       <button
-        className={`select-page__button ${
+        className={`select-page__button select-page__button-left ${
           props.currentPage === 1 ? "select-page__button--hide" : ""
         }`}
-        onClick={props.currentPage !== 1 && props.swapBackward}
+        onClick={props.swapBackward}
       >
         <i className="fa-solid fa-angle-left"></i>
       </button>
 
       <span className="select-page__current">{props.currentPage}</span>
       <button
-        className={`select-page__button ${
+        className={`select-page__button select-page__button--right ${
           props.currentPage * 12 > props.productsLength
             ? "select-page__button--hide"
             : ""
         }`}
-        onClick={
-          props.currentPage * 12 <= props.productsLength && props.swapForward
-        }
+        onClick={props.swapForward}
       >
         <i className="fa-solid fa-angle-right"></i>
       </button>

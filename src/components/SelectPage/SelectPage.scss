@@ -2,20 +2,21 @@
 @import "../../styles/mixins.scss";
 
 .select-page {
-  display: flex;
-  width: 100%;
-  height: 10rem;
+  display: grid;
+  grid-template-areas: "button-left page button-right";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  margin: 0 auto;
   justify-content: center;
   align-items: center;
-  margin-top: auto;
+  padding-bottom: 3rem;
   &__button {
     border-radius: 50%;
     border: none;
-    background-color: $background-color;
     width: 4rem;
     height: 4rem;
     font-size: 1.8rem;
-    margin: 0 2rem;
+    background-color: $background-color;
     cursor: pointer;
     @include media(tablet-large) {
       width: 6rem;
@@ -23,12 +24,19 @@
       font-size: 2rem;
     }
     &--hide {
-      opacity: 0;
-      cursor: auto;
+      display: none;
     }
   }
+  &__button--left {
+    grid-area: button-left;
+  }
+  &__button--right {
+    grid-area: button-right;
+  }
   &__current {
+    grid-area: page;
     font-size: 2rem;
+    text-align: center;
     @include media(tablet-large) {
       font-size: 3rem;
     }

@@ -8,6 +8,7 @@ import Sort from "../../components/Filter/Sort";
 import SelectPage from "../../components/SelectPage/SelectPage";
 import ProductItem from "../../components/Products/ProductPreview/ProductItem";
 import NoFoundHeader from "../../components/UI/Allerts/NoFoundHeader";
+import LoadSpinner from "../../components/UI/LoadSpinner/LoadSpinner";
 
 import "./ProductList.scss";
 
@@ -19,7 +20,7 @@ const ProductList = () => {
   const [products, setProducts] = useState();
   const [productsLength, setProductsLength] = useState();
   const loctaion = useLocation();
-  const { dataRequest } = useData();
+  const { dataRequest, isLoading } = useData();
 
   const queryParams = new URLSearchParams(loctaion.search);
   const searchQuery = queryParams.get("q")
@@ -58,8 +59,7 @@ const ProductList = () => {
           (product.category.subcategory &&
             product.category.subcategory.toLowerCase().includes(searchQuery))
       );
-    } 
-    else {
+    } else {
       products = resData.filter(
         (product) =>
           product.category.category === params.productCategory ||
@@ -74,7 +74,6 @@ const ProductList = () => {
 
     setProductsLength(products.length);
     setProducts(productSlice);
-
   }, [dataRequest, params.productCategory, pageQuery, searchQuery]);
 
   useEffect(() => {
@@ -85,7 +84,8 @@ const ProductList = () => {
     <div className="product-list-page">
       <div className="product-list">
         <Sort />
-        {products && products.length > 0 ? (
+        {isLoading && <LoadSpinner />}
+        {!isLoading && products && products.length > 0 && (
           <div className="products-container">
             {products.map((product) => (
               <ProductItem
@@ -99,16 +99,17 @@ const ProductList = () => {
                 size={"medium"}
               />
             ))}
+            <SelectPage
+              currentPage={pageQuery}
+              productsLength={productsLength}
+              swapForward={swapForwardHandler}
+              swapBackward={swapBackwardHandler}
+            />
           </div>
-        ) : (
+        )}
+        {!isLoading && products && products.length === 0 && (
           <NoFoundHeader text={"Nie znaleziono produktu"} />
         )}
-        <SelectPage
-          currentPage={pageQuery}
-          productsLength={productsLength}
-          swapForward={swapForwardHandler}
-          swapBackward={swapBackwardHandler}
-        />
       </div>
     </div>
   );

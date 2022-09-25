@@ -1,8 +1,10 @@
 import React,{ useEffect, Suspense } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import useInitial from "./hooks/useInitial";
+
+import { setResolution } from "./store/window";
 
 import ScrollToTop from "./components/UI/ScrollToTop.jsx";
 import Layout from "./layout/Layout";
@@ -36,11 +38,20 @@ function App() {
   const customerData = useSelector((state) => state.orderData.customerData);
   const requestStatus = useSelector((state) => state.dataRequest.requestStatus);
 
+  const dispatch = useDispatch();
+
   const initialDataImport = useInitial();
 
   useEffect(() => {
     initialDataImport();
   }, [initialDataImport, requestStatus]);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      dispatch(setResolution(window.innerWidth))
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <Layout>

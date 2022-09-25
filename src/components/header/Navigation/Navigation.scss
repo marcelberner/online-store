@@ -2,18 +2,20 @@
 @import "../../../styles/mixins.scss";
 
 .navigation {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   width: 100%;
   height: 6rem;
-  top: 0;
+  bottom: 1rem;
   transition: .2s;
   box-shadow: $basic-box-shadow;
   @include media(tablet) {
     flex-direction: column;
+    height: max-content;
   }
-  &--hide {
-    top: -10rem;
-  }
+  // &--hide {
+  //   top: auto;
+  //   bottom: 100% !important;
+  // }
 }

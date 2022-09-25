@@ -11,6 +11,12 @@
     @include media(tablet-large) {
       height: 10rem;
     }
+    &--menu {
+      display: none;
+      @include media(tablet) {
+        display: flex;
+      }
+    }
   }
   &__button:hover &__button-text {
     text-decoration: underline;

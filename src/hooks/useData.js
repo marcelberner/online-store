@@ -71,6 +71,7 @@ const useData = () => {
       }
 
       setResData(loadedData);
+      setIsLoading(false);
       return loadedData;
     }
     catch (error) {
@@ -78,7 +79,6 @@ const useData = () => {
       setError(error.messsage);
     }
 
-    setIsLoading(false);
   }, []);
 
   return { resData, error, dataRequest, isLoading };

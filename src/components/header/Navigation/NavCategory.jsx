@@ -8,7 +8,7 @@ const NavCategory = (props) => {
       className={`navigation__category ${
         props.showState ? "navigation__category--show" : ""
       }`}
-      onClick={props.backdropHide}
+      onClick={() => {props.backdropHide(); props.navHide()}}
       onMouseEnter={props.backdropShow}
       onMouseLeave={props.backdropHide}
     >

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import NavCategory from "./NavCategory";
 import Backdrop from "../../UI/Backdrop/Backdrop";
@@ -152,36 +153,48 @@ const categories = [
 
 let lastPosition = 0;
 
-const Navigation = () => {
-  const [backdropState, setBackdropState] = useState(false);
-  const [navState, setNavState] = useState(true);
+const Navigation = (props) => {
+  const resolution = useSelector((state) => state.window.resolution);
 
-  let timeout;
+  const [backdropState, setBackdropState] = useState(false);
+  const [navTimeout, setNavTimeout] = useState();
 
   const backdropShowHandler = () => {
+    if (resolution <= 800) return;
+    let timeout;
+
     timeout = setTimeout(() => {
       setBackdropState(true);
     }, 200);
+
+    setNavTimeout(timeout);
   };
 
   const backdropHideHandler = () => {
-    clearTimeout(timeout);
+    clearTimeout(navTimeout);
     setBackdropState(false);
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY < lastPosition) setNavState(true);
-      else setNavState(false);
+    if (resolution <= 800) props.navHide();
+    else props.navShow();
 
-      lastPosition = window.scrollY;
+    window.addEventListener("scroll", () => {
+      if (resolution > 800) {
+        if (window.scrollY < lastPosition) props.navShow();
+        else props.navHide();
+
+        lastPosition = window.scrollY;
+      }
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       {backdropState && <Backdrop backdropClear={backdropHideHandler} />}
-      <nav className={`navigation ${!navState ? "navigation--hide" : ""}`}>
+      <nav ref={props.navRef} className={`navigation`}>
         {categories.map((category, index) => (
           <NavCategory
             key={index}
@@ -189,6 +202,7 @@ const Navigation = () => {
             showState={backdropState}
             backdropShow={backdropShowHandler}
             backdropHide={backdropHideHandler}
+            navHide={props.navHide}
           />
         ))}
       </nav>

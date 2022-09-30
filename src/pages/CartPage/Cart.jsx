@@ -82,8 +82,8 @@ const Cart = () => {
       navigate("/koszyk/dostawa");
     } else if (location.pathname === "/koszyk/dostawa")
       navigate("/koszyk/podsumowanie");
-      else if (location.pathname === "/koszyk/podsumowanie") {
-        sendOrderHandler();
+    else if (location.pathname === "/koszyk/podsumowanie") {
+      sendOrderHandler();
     }
   };
 
@@ -124,6 +124,10 @@ const Cart = () => {
                 <div className="cart__button">
                   <SubmitButton
                     size={"large"}
+                    center={
+                      location.pathname === "/koszyk/dostawa" ||
+                      location.pathname === "/koszyk/podsumowanie"
+                    }
                     text={`${
                       location.pathname === "/koszyk"
                         ? "Dostawa i płatność"
@@ -165,7 +169,7 @@ const Cart = () => {
             </div>
           </>
         ) : (
-          <NoFoundHeader text={"Twój koszyk jest pusty"}/>
+          <NoFoundHeader text={"Twój koszyk jest pusty"} />
         )}
       </div>
     </section>

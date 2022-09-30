@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ReactDOM from "react-dom";
 
@@ -10,44 +9,59 @@ import Logo from "./Logo";
 
 import "./Header.scss";
 
+let lastPosition = 0;
+
 const Header = () => {
   const resolution = useSelector((state) => state.window.resolution);
 
-  const location = useLocation();
+  const [navigationState, setNavigationState] = useState(resolution <= 800 ? false : true)
+
   const navRef = useRef();
 
-  const navShowHandler = () => {
+  const navShow = () => {
     navRef.current.style.top = "100%";
+    setNavigationState(true);
+  };
+  
+  const navHide = () => {
+    navRef.current.style.top = `-${navRef.current.clientHeight}px`;
+    setNavigationState(false);
   };
 
-  const navHideHandler = () => {
-    navRef.current.style.top = `-${navRef.current.clientHeight}px`;
-  };
+  useEffect(() => {
+    if (resolution <= 800) navHide();
+    else navShow();
+
+    window.addEventListener("scroll", () => {
+      if (resolution > 800) {
+        if (window.scrollY < lastPosition) navShow();
+        else navHide();
+
+        lastPosition = window.scrollY;
+      }
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <header
-      className={`header ${
-        (location.pathname === "/logowanie" ||
-          location.pathname === "/rejestracja") &&
-        "header--hide"
-      }`}
-    >
+    <header className="header">
       <div className="header__content">
         <Logo />
         <QuickSearch />
         {resolution > 1024 ? (
-          <UserControls navShow={navShowHandler} navHide={navHideHandler} />
+          <UserControls navShow={navShow} navHide={navHide} navState={navigationState}/>
         ) : (
           ReactDOM.createPortal(
-            <UserControls navShow={navShowHandler} navHide={navHideHandler} />,
+            <UserControls navShow={navShow} navHide={navHide} navState={navigationState}/>,
             document.getElementById("controls-root")
           )
         )}
       </div>
       <Navigation
         navRef={navRef}
-        navShow={navShowHandler}
-        navHide={navHideHandler}
+        navShow={navShow}
+        navHide={navHide}
       />
     </header>
   );

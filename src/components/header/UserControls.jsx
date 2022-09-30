@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -9,10 +8,9 @@ import "./UserControls.scss";
 
 const UserControls = (props) => {
   const state = useSelector((state) => state.userAuth.token);
+  const resolution = useSelector((state) => state.window.resolution);
   const userData = useSelector((state) => state.userData.userData);
   const cart = useSelector((state) => state.userData.cart);
-
-  const [navIsVisible, setNavIsVisible] = useState(false);
 
   let cartTotalPrice = 0;
 
@@ -22,16 +20,14 @@ const UserControls = (props) => {
       cart[i].amount;
   }
 
-  const navStateHandler = () => {
-    setNavIsVisible((prev) => !prev);
-
-    if (!navIsVisible) props.navShow();
-    else props.navHide();
-  };
+  const navToggle = () => {
+    if(props.navState) props.navHide();
+    else props.navShow();
+  }
 
   return (
     <>
-      {navIsVisible && <Backdrop backdropClear={navStateHandler} />}
+      {props.navState && resolution <= 800 && <Backdrop backdropClear={props.navHide} />}
       <div className="controls__container">
         <Link to="/kontakt">
           <ControlButton
@@ -65,9 +61,9 @@ const UserControls = (props) => {
         </Link>
         <div
           className="control__button control__button--menu"
-          onClick={navStateHandler}
+          onClick={navToggle}
         >
-          {navIsVisible ? (
+          {props.navState ? (
             <i className="fa-solid fa-xmark control__button-icon"></i>
           ) : (
             <i className="fa-solid fa-bars control__button-icon"></i>

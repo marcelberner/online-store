@@ -12,7 +12,7 @@ const PurchaseBar = (props) => {
   return (
     <div className="purchase-bar">
       <div className="purchase-bar__panel">
-        <span className="purchase-bar__price">{props.price} zł</span>
+        <span className="purchase-bar__price">{parseFloat(props.price.split(" ").join("")).toFixed(2) + " zł"}</span>
         <div className="purchase-bar__buttons">
           {isAuth && <WishButton id={props.id} size={"large"} />}
           <CartButton id={props.id} price={props.price} size={"large"} />

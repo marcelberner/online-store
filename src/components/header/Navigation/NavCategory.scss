@@ -7,26 +7,27 @@
   width: 100%;
   z-index: 7;
   transition: 0.2s;
+  height: max-content;
   cursor: pointer;
-  & * > :first-child {
+  & * {
     height: 0;
     opacity: 0;
   }
-  &--show:hover > * > :first-child {
+  &--show * {
     animation: categoryShow 0.2s forwards;
   }
-  & > :first-child > :first-child {
+  & :first-child {
     border-right: 1px solid $background-color;
     height: 6rem;
     opacity: 1;
   }
-  &--show:hover > :first-child {
+  &--show :first-child {
     border-bottom: 3px solid $main-color;
   }
-  & > :last-child > :last-child {
+  & :last-child {
     border-radius: 0 0 5px 5px;
   }
-  &--show:hover > :nth-child(1n + 2) > :first-child {
+  &--show :nth-child(1n + 2) {
     border-bottom: 2px solid white;
     background-color: rgb(240, 240, 240);
   }

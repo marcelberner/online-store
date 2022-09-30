@@ -86,26 +86,28 @@ const ProductList = () => {
         <Sort />
         {isLoading && <LoadSpinner />}
         {!isLoading && products && products.length > 0 && (
-          <div className="products-container">
-            {products.map((product) => (
-              <ProductItem
-                key={product.id}
-                id={product.id}
-                img={product.img}
-                name={product.name}
-                price={product.price}
-                spec={product.specyfication}
-                rep={product.reputation}
-                size={"medium"}
-              />
-            ))}
+          <>
+            <div className="products-container">
+              {products.map((product) => (
+                <ProductItem
+                  key={product.id}
+                  id={product.id}
+                  img={product.img}
+                  name={product.name}
+                  price={product.price}
+                  spec={product.specyfication}
+                  rep={product.reputation}
+                  size={"medium"}
+                />
+              ))}
+            </div>
             <SelectPage
               currentPage={pageQuery}
               productsLength={productsLength}
               swapForward={swapForwardHandler}
               swapBackward={swapBackwardHandler}
             />
-          </div>
+          </>
         )}
         {!isLoading && products && products.length === 0 && (
           <NoFoundHeader text={"Nie znaleziono produktu"} />

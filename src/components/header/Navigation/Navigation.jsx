@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import NavCategory from "./NavCategory";
@@ -151,57 +151,41 @@ const categories = [
   ],
 ];
 
-let lastPosition = 0;
-
 const Navigation = (props) => {
   const resolution = useSelector((state) => state.window.resolution);
 
-  const [backdropState, setBackdropState] = useState(false);
-  const [navTimeout, setNavTimeout] = useState();
+  const [categoryState, setCategoryState] = useState(false);
+  const [categoryTimeout, setCategoryTimeout] = useState();
 
-  const backdropShowHandler = () => {
-    if (resolution <= 800) return;
-    let timeout;
+  const categoryShowHandler = (catRef) => {
+    if (resolution > 800) {
+      let timeout;
 
-    timeout = setTimeout(() => {
-      setBackdropState(true);
-    }, 200);
+      timeout = setTimeout(() => {
+        setCategoryState(catRef);
+      }, 200);
 
-    setNavTimeout(timeout);
+      setCategoryTimeout(timeout);
+    }
   };
 
-  const backdropHideHandler = () => {
-    clearTimeout(navTimeout);
-    setBackdropState(false);
+  const categoryHideHandler = () => {
+    if (resolution > 800) clearTimeout(categoryTimeout);
+    setCategoryState(false);
   };
-
-  useEffect(() => {
-    if (resolution <= 800) props.navHide();
-    else props.navShow();
-
-    window.addEventListener("scroll", () => {
-      if (resolution > 800) {
-        if (window.scrollY < lastPosition) props.navShow();
-        else props.navHide();
-
-        lastPosition = window.scrollY;
-      }
-    });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>
-      {backdropState && <Backdrop backdropClear={backdropHideHandler} />}
-      <nav ref={props.navRef} className={`navigation`}>
-        {categories.map((category, index) => (
+      {categoryState && resolution > 800 && <Backdrop backdropClear={categoryHideHandler} />}
+      <nav ref={props.navRef} className="navigation">
+        {categories.map((categories, index) => (
           <NavCategory
             key={index}
-            links={category}
-            showState={backdropState}
-            backdropShow={backdropShowHandler}
-            backdropHide={backdropHideHandler}
+            categories={categories}
+            categoryState={categoryState}
+            setShowState={setCategoryState}
+            categoryShow={categoryShowHandler}
+            categoryHide={categoryHideHandler}
             navHide={props.navHide}
           />
         ))}

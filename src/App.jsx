@@ -1,6 +1,6 @@
 import React,{ useEffect, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import useInitial from "./hooks/useInitial";
 
@@ -42,6 +42,8 @@ function App() {
 
   const initialDataImport = useInitial();
 
+  const location = useLocation();
+
   useEffect(() => {
     initialDataImport();
   }, [initialDataImport, requestStatus]);
@@ -56,7 +58,7 @@ function App() {
   return (
     <Layout>
       <ScrollToTop>
-        <Header />
+        {(location.pathname !== "/logowanie" && location.pathname !== "/rejestracja") && <Header />}
         <Main>
           <ScrollButton/>
           <Suspense fallback={<LoadSpinner />}>

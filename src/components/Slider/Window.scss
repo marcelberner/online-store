@@ -4,13 +4,12 @@
 .window {
   position: relative;
   display: flex;
-  box-shadow: $basic-box-shadow;
   border-radius: $border-radius;
-  border: 1px solid $background-color;
+  border: 2px solid rgb(230, 230, 230);
   overflow: hidden;
+  box-shadow: $basic-box-shadow;
   &__content {
     display: flex;
-    flex-wrap: nowrap;
     position: relative;
     width: 100%;
     user-select: none;

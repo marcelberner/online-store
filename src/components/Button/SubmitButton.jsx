@@ -5,12 +5,10 @@ const SubmitButton = (props) => {
     <input
       onClick={props.action}
       className={`submit-button ${
-        props.size === "small" && "submit-button--small"
-      } ${
-        props.size === "large" && "submit-button--large"
-      } ${
-        props.size === "medium" && "submit-button--medium"
-      }`}
+        props.center ? "submit-button--center" : ""
+      } ${props.size === "small" ? "submit-button--small" : ""}${
+        props.size === "large" ? "submit-button--large" : ""
+      } ${props.size === "medium" ? "submit-button--medium" : ""}`}
       type="submit"
       value={props.text}
     />

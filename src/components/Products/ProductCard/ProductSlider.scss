@@ -2,15 +2,21 @@
 @import "../../../styles/mixins.scss";
 
 .product-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-basis: 40%;
-  height: 100%;
+  padding: 2rem;
   box-shadow: $basic-box-shadow;
   border-radius: $border-radius;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+  aspect-ratio: 1/1;
   @include media(tablet-large) {
     min-height: 50rem;
     padding: 2rem;
+  }
+  &__img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
   }
 }

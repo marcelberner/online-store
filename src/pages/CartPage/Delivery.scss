@@ -6,10 +6,6 @@
   flex-wrap: wrap;
   justify-content: space-around;
   flex-grow: 1;
-  @include media(tablet) {
-    flex-grow: 0;
-    flex-basis: 60%;
-  }
   &__data {
     display: flex;
     flex-direction: column;
@@ -17,7 +13,7 @@
     padding: 2rem;
     height: min-content;
     @include media(tablet) {
-      flex-basis: 60%;
+      flex-basis: 90%;
     }
   }
   &__label {
@@ -40,8 +36,8 @@
   &__input {
     width: 90%;
     font-weight: 300;
-    height: 2.2rem;
-    padding: 0.8rem;
+    height: 3rem;
+    padding: 1rem;
     padding-left: 1.5rem;
     font-size: 1.7rem;
     margin: 0.8rem;

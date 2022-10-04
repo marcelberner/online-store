@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import useData from "../../hooks/useData";
@@ -8,22 +8,31 @@ import ProductDescription from "../../components/Products/ProductDescription/Pro
 import ProductSpecyfication from "../../components/Products/ProductSpecyfication/ProductSpecyfication";
 
 import "./ProductDetail.scss";
+import LoadSpinner from "../../components/UI/LoadSpinner/LoadSpinner";
 
 const ProductDetail = () => {
+  const [product, setProduct] = useState(null);
+
   const params = useParams();
 
-  const { resData, dataRequest } = useData();
+  const { dataRequest } = useData();
+
+  const getProduct = async () => {
+    const reqponse = await dataRequest({ method: "GET", database: "products" });
+    const product = reqponse.find((product) => product.id === params.productId);
+
+    setProduct(product);
+  };
 
   useEffect(() => {
-    dataRequest({ method: "GET", database: "products" });
-  },[dataRequest]);
-  
-  const product = resData && resData.find((product) => product.id === params.productId);
-  
+    getProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <>
-      {resData && (
-        <div className="product-detail-page">
+    <div className="product-detail-page">
+      {product ? (
+        <>
           <ProductCard
             id={product.id}
             images={product.img}
@@ -32,12 +41,21 @@ const ProductDetail = () => {
             spec={product.specyfication}
             rep={product.reputation}
             recomendation={product.recomendation}
+            product={product}
           />
-          <ProductDescription description={product.description} />
-          <ProductSpecyfication spec={product.specyfication} />
-        </div>
+          <ProductDescription
+            description={product.description}
+            product={product}
+          />
+          <ProductSpecyfication
+            spec={product.specyfication}
+            product={product}
+          />
+        </>
+      ) : (
+        <LoadSpinner />
       )}
-    </>
+    </div>
   );
 };
 

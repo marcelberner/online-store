@@ -1,4 +1,5 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .navigation__category {
   display: flex;
@@ -12,14 +13,24 @@
   & * {
     height: 0;
     opacity: 0;
+    @include media(tablet) {
+      opacity: 1;
+      visibility: hidden;
+    }
   }
   &--show * {
     animation: categoryShow 0.2s forwards;
+    @include media(tablet) {
+      visibility: visible;
+    }
   }
   & :first-child {
     border-right: 1px solid $background-color;
     height: 6rem;
     opacity: 1;
+    @include media(tablet) {
+      visibility: visible;
+    }
   }
   &--show :first-child {
     border-bottom: 3px solid $main-color;

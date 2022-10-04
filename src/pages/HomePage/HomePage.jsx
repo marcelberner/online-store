@@ -30,9 +30,9 @@ const HomePage = () => {
         content={INFORMATIONS}
         mediumSize={true}
       />
-      {resData && <Bestsellers title={"Bestsellery"} products={resData && resData.slice(0,12)} />}
+      <Bestsellers title={"Bestsellery"} products={resData && resData.slice(0,12)} />
       <Informations title={"Aktualności"} content={NEWS} />
-      {resData && <LastWatched title={"Ostatnio oglądane"} products={resData && resData.slice(0,12)} />}
+      <LastWatched title={"Ostatnio oglądane"} products={resData && resData.slice(0,12)} />
       <Informations title={"Poradniki"} content={TUTORIALS} />
     </div>
   );

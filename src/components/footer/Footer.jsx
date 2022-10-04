@@ -1,12 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./Footer.scss";
 
 const Footer = () => {
-  const location = useLocation();
-
   return (
-    <footer className={`footer ${(location.pathname === "/logowanie" || location.pathname === "/rejestracja") && "footer--hide"}`}>
+    <footer className="footer">
       <div className="footer__content">
         <div className="footer__section">
           <div className="footer__title">Zamówienia</div>

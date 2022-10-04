@@ -2,6 +2,7 @@
 @import "../../../styles/mixins.scss";
 
 .product-card {
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;

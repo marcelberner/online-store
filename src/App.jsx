@@ -75,6 +75,7 @@ function App() {
               <Route path="/karty-podarunkowe" element={<InProgress />} />
               <Route path="/o-nas" element={<InProgress />} />
               <Route path="/dane-firmy" element={<InProgress />} />
+              <Route path="/news" element={<InProgress />} />
               <Route path="/polityka-prywatnosci-i-cookies" element={<InProgress />} />
               <Route path="/regulamin-sklepu" element={<InProgress />} />
               <Route path="/products/:productCategory" element={<ProductList />} />
@@ -96,7 +97,7 @@ function App() {
             </Routes>
           </Suspense>
         </Main>
-        <Footer />
+        {(location.pathname !== "/logowanie" && location.pathname !== "/rejestracja") && <Footer />}
       </ScrollToTop>
     </Layout>
   );

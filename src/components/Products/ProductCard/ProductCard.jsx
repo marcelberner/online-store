@@ -5,8 +5,6 @@ import ProductDetails from "./ProductDetails";
 import "./ProductCard.scss";
 
 const ProductCard = (props) => {
-
-
   return (
     <section className="product-card">
       <ProductSlider images={props.images} />

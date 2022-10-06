@@ -1,6 +1,5 @@
 import { useEffect, useCallback, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import useData from "../../hooks/useData";
 
@@ -13,8 +12,6 @@ import LoadSpinner from "../../components/UI/LoadSpinner/LoadSpinner";
 import "./ProductList.scss";
 
 const ProductList = () => {
-  const requestStatus = useSelector((state) => state.dataRequest.requestStatus);
-
   const params = useParams();
   const navigate = useNavigate();
   const [products, setProducts] = useState();
@@ -78,7 +75,7 @@ const ProductList = () => {
 
   useEffect(() => {
     loadProducts();
-  }, [loadProducts, dataRequest, requestStatus]);
+  }, [loadProducts, dataRequest]);
 
   return (
     <div className="product-list-page">
@@ -89,16 +86,19 @@ const ProductList = () => {
           <>
             <div className="products-container">
               {products.map((product) => (
-                <ProductItem
-                  key={product.id}
-                  id={product.id}
-                  img={product.img}
-                  name={product.name}
-                  price={product.price}
-                  spec={product.specyfication}
-                  rep={product.reputation}
-                  size={"medium"}
-                />
+                <div className="product-item">
+                  <ProductItem
+                    key={product.id}
+                    id={product.id}
+                    img={product.img}
+                    name={product.name}
+                    price={product.price}
+                    spec={product.specyfication}
+                    rep={product.reputation}
+                    limit={4}
+                    size={"medium"}
+                  />
+                </div>
               ))}
             </div>
             <SelectPage

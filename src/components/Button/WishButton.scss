@@ -22,9 +22,11 @@
     }
   }
   &--small {
-    font-size: 1.5rem;
+    padding: 1.2rem;
+    border-radius: 50%;
     width: 3rem;
     height: 3rem;
+    font-size: 1.5rem;
     @include media(desktop-small) {
       width: 3.5rem;
       height: 3.5rem;
@@ -46,18 +48,45 @@
     }
   }
   &--medium {
-    font-size: 2rem;
+    position: absolute;
+    right: 3rem;
+    bottom: 3rem;
+    padding: 1.2rem;
+    border-radius: 50%;
     width: 5rem;
     height: 5rem;
+    font-size: 2rem;
+    @include media(tablet-large) {
+      width: 5.5rem;
+      height: 5.5rem;
+      font-size: 2.2rem;
+    }
+    @include media(tablet) {
+      width: 6rem;
+      height: 6rem;
+      font-size: 2.4rem;
+    }
+    @include media(smartphone-large) {
+      width: 7rem;
+      height: 7rem;
+      font-size: 2.6rem;
+    }
+    @include media(smartphone) {
+      width: 8rem;
+      height: 8rem;
+      font-size: 3rem;
+    }
   }
   &--large {
-    font-size: 1.8rem;
+    padding: 2rem;
+    font-size: 1.9rem;
     width: 4rem;
     height: 4rem;
+    border-radius: 50%;
     @include media(tablet-large) {
       width: 6rem;
       height: 6rem;
-      font-size: 3rem;
+      font-size: 2.7rem;
     }
   }
   &:hover {

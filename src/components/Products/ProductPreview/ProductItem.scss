@@ -58,12 +58,12 @@
     }
   }
   &__image {
-    flex-basis: 65%;
+    height: 65%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     &--medium {
-      flex-basis: 50%;
+      height: 50%;
     }
   }
   &__title {
@@ -98,7 +98,6 @@
       font-size: 2.5rem;
     }
     &--medium {
-      margin-top: 2rem;
       font-size: 2rem;
       @include media(tablet-large) {
         font-size: 2.8rem;

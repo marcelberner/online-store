@@ -32,6 +32,7 @@ const Questions = () => {
 
   return (
     <section className="questions">
+      <h1 className="questions__header">Skontaktuj się z nami</h1>
       <form className="questions__form">
         <input
           type={"text"}

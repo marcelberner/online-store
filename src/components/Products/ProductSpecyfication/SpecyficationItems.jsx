@@ -2,9 +2,12 @@ import "./SpecyficationItems.scss";
 
 const SpecyficationItems = (props) => {
   const specs = [];
+  let lap = 0;
 
   for (const key in props.spec) {
+    if (props.limit && lap === props.limit) break;
     specs.push({ name: key, value: props.spec[key] });
+    lap++;
   }
 
   return (

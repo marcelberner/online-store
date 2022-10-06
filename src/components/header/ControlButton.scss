@@ -25,6 +25,7 @@
     color: $main-color-hover;
   }
   &__button-icon {
+    position: relative;
     font-size: 2.5rem;
     transition: 0.3s;
     color: $main-color;
@@ -37,6 +38,29 @@
     margin-left: 1rem;
     @include media(tablet-large) {
       display: none;
+    }
+  }
+  &__button-info {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    top: 0;
+    transform: translate(50%, -50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.2rem;
+    border-radius: 50%;
+    background-color: orange;
+    border: 1px solid white;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    @include media(tablet-large) {
+      width: 3rem;
+      height: 3rem;
+      font-size: 2rem;
     }
   }
 }

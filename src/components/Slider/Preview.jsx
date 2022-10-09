@@ -11,7 +11,7 @@ const Preview = (props) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Thumbs, Navigation, Autoplay]}
-        className="mySwiper last-watched__content"
+        className="mySwiper"
         slidesPerView={"auto"}
       >
         {props.SLIDES.map((slide, index) => {

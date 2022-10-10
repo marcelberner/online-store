@@ -2,16 +2,21 @@ import { useState } from "react";
 
 import "./Sort.scss";
 
-const Sort = () => {
+const Sort = (props) => {
   const [sortState, setSortState] = useState(false);
-  const [sort, setSort] = useState("najpopularniejsze");
+  const [sort, setSort] = useState("domyslne");
 
   const sortOpenHandler = () => {
     setSortState((prevState) => !prevState);
   };
 
   const sortSelectHandler = (event) => {
-    setSort(event.target.dataset.option);
+    if(!sortState) return;
+    
+    const selectOption = event.target.dataset.option;
+
+    setSort(selectOption);
+    props.sortProduct(selectOption)
   };
 
   return (
@@ -29,30 +34,48 @@ const Sort = () => {
         <span className="select__label">Sortowanie</span>
         <span
           className={`option ${!sortState ? "option--hidden" : ""} ${
-            sort === "najpopularniejsze" ? "option--selected" : ""
+            sort === "domyslne" ? "option--selected" : ""
           }`}
-          data-option="najpopularniejsze"
+          data-option="domyslne"
           onClick={sortSelectHandler}
         >
-          Od najpopularniejszych
+          Sortowanie domyślne
         </span>
         <span
           className={`option ${!sortState ? "option--hidden" : ""} ${
-            sort === "najtansze" ? "option--selected" : ""
+            sort === "cena_asc" ? "option--selected" : ""
           }`}
-          data-option="najtansze"
+          data-option="cena_asc"
           onClick={sortSelectHandler}
         >
           Cena: od najtańszych
         </span>
         <span
           className={`option ${!sortState ? "option--hidden" : ""} ${
-            sort === "najdrozszen" ? "option--selected" : ""
+            sort === "cena_dsc" ? "option--selected" : ""
           }`}
-          data-option="najdrozszen"
+          data-option="cena_dsc"
           onClick={sortSelectHandler}
         >
           Cena: od najdroższych
+        </span>
+        <span
+          className={`option ${!sortState ? "option--hidden" : ""} ${
+            sort === "ocena_asc" ? "option--selected" : ""
+          }`}
+          data-option="ocena_asc"
+          onClick={sortSelectHandler}
+        >
+          Ocena: od najniższych
+        </span>
+        <span
+          className={`option ${!sortState ? "option--hidden" : ""} ${
+            sort === "ocena_dsc" ? "option--selected" : ""
+          }`}
+          data-option="ocena_dsc"
+          onClick={sortSelectHandler}
+        >
+          Ocena: od najwyższych
         </span>
       </div>
     </div>

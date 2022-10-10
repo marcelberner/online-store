@@ -25,7 +25,6 @@ const AccountPage = React.lazy(() => import("./pages/Account/AccountPage"));
 const UserDetail = React.lazy(() => import("./pages/Account/UserDetail"));
 const OwnProducts = React.lazy(() => import("./pages/Account/OwnProducts"));
 const Orders = React.lazy(() => import("./pages/Account/Orders"));
-const Questions = React.lazy(() => import("./pages/Account/Questions"));
 
 const Cart = React.lazy(() => import("./pages/CartPage/Cart"));
 const CartItems = React.lazy(() => import("./pages/CartPage/CartItems"));
@@ -86,7 +85,6 @@ function App() {
                 <Route path="" element={<UserDetail />} />
                 <Route path="twoje-produkty" element={<OwnProducts />} />
                 <Route path="historia-zamowien" element={<Orders />} />
-                <Route path="wyslij-zapytanie" element={<Questions />} />
               </Route>}
               <Route path="/koszyk" element={<Cart />}>
                 <Route path="" element={<CartItems/>}/>

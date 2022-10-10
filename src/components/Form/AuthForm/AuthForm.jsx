@@ -19,12 +19,12 @@ const AuthForm = (props) => {
 
     const currentEmail = email.current.value;
     const currentPassword = password.current.value;
-    const currentCnfPassword =
-      props.currentForm === "signup"
+    const currentCnfPassword =props.currentForm === "signup"
         ? cnfPassword.current.value
         : currentPassword;
-    const currentCheckbox =
-      props.currentForm === "signup" ? checkbox.current.value : true;
+    const currentCheckbox = props.currentForm === "signup" 
+        ? checkbox.current.value 
+        : true;
 
     authRequest({
       currentForm: props.currentForm,

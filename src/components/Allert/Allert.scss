@@ -1,0 +1,37 @@
+.allert {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--font-color);
+  border-radius: var(--border-radius);
+  animation: allert-appear 5s forwards;
+  opacity: 0;
+  font-weight: 600;
+  font-size: 2rem;
+  padding: 1rem 1.5rem;
+  bottom: 5%;
+  right: -10%;
+  z-index: 10;
+  &--succes {
+    background-color: rgba(4, 155, 4, 0.8);
+  }
+  &--fail {
+    background-color: rgba(255, 0, 0, 0.8);
+  }
+}
+
+@keyframes allert-appear {
+  10% {
+    right: 5%;
+    opacity: 1;
+  }
+  90% {
+    right: 5%;
+    opacity: 1;
+  }
+  100% {
+    right: -10%;
+    opacity: 0;
+  }
+}

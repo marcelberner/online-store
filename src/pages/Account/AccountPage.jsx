@@ -48,16 +48,9 @@ const AccountPage = () => {
               <span className="account-page__title">Listy zakupowe</span>
             </li>
           </Link>
-          <Link to={"/konto/wyslij-zapytanie"}>
-            <li className="account-page__option">
-              <span className="account-page__title">Wyślij zapytanie</span>
-            </li>
-          </Link>
-
           <li className="account-page__option account-page__option--separate" onClick={logoutHandler}>
             <span className="account-page__title">Wyloguj się</span>
           </li>
-
           <li className="account-page__option account-page__option--warn">
             <span className="account-page__title">Usuń konto</span>
           </li>

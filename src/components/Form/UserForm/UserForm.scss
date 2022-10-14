@@ -56,6 +56,11 @@
       outline: 2px solid $main-color;
       border: none;
     }
+    &--invalid {
+      border: 2px solid red !important;
+      color: red;
+      animation: invalid 0.2s forwards;
+    }
   }
   &__buttons {
     position: absolute;

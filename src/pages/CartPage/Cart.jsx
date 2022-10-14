@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Outlet, useNavigate } from "react-router-dom";
 
@@ -30,6 +31,8 @@ const Cart = () => {
   const { dataRequest } = useData();
 
   const location = useLocation();
+
+  const formRef = useRef(null);
 
   let cartTotalPrice = 0;
 
@@ -68,7 +71,8 @@ const Cart = () => {
         method: "DELETE",
         database: `users/${userData.id}/cart`,
       });
-    } else {
+    } 
+    else {
       dispatch(cartClear());
     }
 
@@ -80,8 +84,13 @@ const Cart = () => {
     if (location.pathname === "/koszyk") {
       dispatch(setTotalPrice(cartTotalPrice));
       navigate("/koszyk/dostawa");
-    } else if (location.pathname === "/koszyk/dostawa")
-      navigate("/koszyk/podsumowanie");
+    } 
+    else if (location.pathname === "/koszyk/dostawa") {
+      const isFormValid = formRef.current();
+
+      if(isFormValid) navigate("/koszyk/podsumowanie");
+      else return;
+    }
     else if (location.pathname === "/koszyk/podsumowanie") {
       sendOrderHandler();
     }
@@ -113,7 +122,7 @@ const Cart = () => {
         {cart.length > 0 ? (
           <>
             <div className="cart__content">
-              <Outlet />
+              <Outlet context={formRef}/>
               <div
                 className={`cart__sumarry ${
                   location.pathname !== "/koszyk"

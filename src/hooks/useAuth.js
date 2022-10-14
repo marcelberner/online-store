@@ -16,11 +16,6 @@ const useAuth = () => {
 
   const authRequest = async (data) => {
     try {
-      if (data.password !== data.cnfPassword)
-        throw new Error("Wpisz poprawnie hasło");
-
-      if (!data.checkbox) throw new Error("Zaznacz wymagane pole");
-
       const loginURL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU";
       const signupURL = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU";
 
@@ -45,10 +40,8 @@ const useAuth = () => {
 
       const resData = await response.json();
 
-      navigate("/");
-
       localStorage.setItem("token", resData.localId);
-
+      
       if (data.currentForm === "signup") {
         dataRequest({
           method: "POST",
@@ -69,12 +62,17 @@ const useAuth = () => {
           },
         });
       }
+      
+      setTimeout(() => {
+        dispatch(login(resData.localId));
+        navigate("/");
+      }, 2000);
 
-      dispatch(login(resData.localId));
+      return true;
     } 
     catch (error) {
-      console.log(error.message);
       setError(error.message);
+      return false;
     }
   };
 

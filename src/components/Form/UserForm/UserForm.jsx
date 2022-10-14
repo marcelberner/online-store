@@ -2,16 +2,24 @@ import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import useData from "../../../hooks/useData";
+import useValidate from "../../../hooks/useValidate";
+import useAllert from "../../../hooks/useAllert";
+
 import { changeRequestStatus } from "../../../store/dataRequest";
 
 import SubmitButton from "../../Button/SubmitButton";
+import Allert from "../../Allert/Allert";
 
 import "./UserForm.scss";
 
 const UserForm = (props) => {
   const [isChanged, setIsChanged] = useState(false);
-  const dispatch = useDispatch();
+
   const { dataRequest } = useData();
+
+  const { allert, allertType, allertText } = useAllert();
+
+  const dispatch = useDispatch();
 
   const name = useRef();
   const surname = useRef();
@@ -19,8 +27,36 @@ const UserForm = (props) => {
   const street = useRef();
   const code = useRef();
   const city = useRef();
-  const email = useRef();
-  const password = useRef();
+
+  const [isNameValid, validateName, clearName] = useValidate({
+    inputRef: name,
+    isWord: true,
+  });
+
+  const [isSurnameValid, validateSurname, clearSurname] = useValidate({
+    inputRef: surname,
+    isWord: true,
+  });
+
+  const [isPhoneValid, validatePhone, clearPhone] = useValidate({
+    inputRef: phone,
+    isPhone: true,
+  });
+
+  const [isStreetValid, validateStreet, clearStreet] = useValidate({
+    inputRef: street,
+    isStreet: true,
+  });
+
+  const [isCodeValid, validateCode, clearCode] = useValidate({
+    inputRef: code,
+    isZipcode: true,
+  });
+
+  const [isCityValid, validateCity, clearCity] = useValidate({
+    inputRef: city,
+    isWord: true,
+  });
 
   const changeHandler = () => {
     setIsChanged(true);
@@ -28,7 +64,6 @@ const UserForm = (props) => {
 
   const cancleChangeHandler = () => {
     setIsChanged(false);
-    console.log(props.userData);
     name.current.value = props.userData.name ? props.userData.name : "";
     surname.current.value = props.userData.surname
       ? props.userData.surname
@@ -43,29 +78,53 @@ const UserForm = (props) => {
     city.current.value = props.userData.address.city
       ? props.userData.address.city
       : "";
-    email.current.value = props.userData.email ? props.userData.email : "";
+
+      clearCity();
+      clearCode();
+      clearName();
+      clearPhone();
+      clearStreet();
+      clearSurname();
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    dataRequest({
-      method: "PATCH",
-      database: `users/${props.userData.id}`,
-      body: {
-        address: {
-          city: city.current.value,
-          zipcode: code.current.value,
-          street: street.current.value,
+    const validName = validateName();
+    const validSurname = validateSurname();
+    const validPhone = validatePhone();
+    const validCode = validateCode();
+    const validStreet = validateStreet();
+    const validCity = validateCity();
+
+    if (
+      validName &&
+      validSurname &&
+      validPhone &&
+      validCode &&
+      validStreet &&
+      validCity
+    ) {
+      const responnse = dataRequest({
+        method: "PATCH",
+        database: `users/${props.userData.id}`,
+        body: {
+          address: {
+            city: city.current.value,
+            zipcode: code.current.value,
+            street: street.current.value,
+          },
+          name: name.current.value,
+          surname: surname.current.value,
+          phone: phone.current.value,
         },
-        name: name.current.value,
-        surname: surname.current.value,
-        phone: phone.current.value,
-      },
-    });
-    
-    setIsChanged(false);
-    dispatch(changeRequestStatus());
+      });
+
+      setIsChanged(false);
+      dispatch(changeRequestStatus());
+      if(responnse) allert({ type: "succes", text: "Pomyślnie dokonano zmian" });
+    }
+    else allert({ type: "fail", text: "Popraw błędne pola" });
   };
 
   return (
@@ -80,8 +139,11 @@ const UserForm = (props) => {
           <div className="user-form__item">
             <label className="user-form__label">imię:</label>
             <input
+              onChange={clearName}
               type={"text"}
-              className="user-form__input"
+              className={`user-form__input ${
+                !isNameValid ? "user-form__input--invalid" : ""
+              }`}
               defaultValue={props.userData.name}
               ref={name}
             ></input>
@@ -89,8 +151,11 @@ const UserForm = (props) => {
           <div className="user-form__item">
             <label className="user-form__label">nazwisko:</label>
             <input
+              onChange={clearSurname}
               type={"text"}
-              className="user-form__input"
+              className={`user-form__input ${
+                !isSurnameValid ? "user-form__input--invalid" : ""
+              }`}
               defaultValue={props.userData.surname}
               ref={surname}
             ></input>
@@ -98,8 +163,11 @@ const UserForm = (props) => {
           <div className="user-form__item">
             <label className="user-form__label">telefon:</label>
             <input
+              onChange={clearPhone}
               type={"text"}
-              className="user-form__input"
+              className={`user-form__input ${
+                !isPhoneValid ? "user-form__input--invalid" : ""
+              }`}
               defaultValue={props.userData.phone}
               ref={phone}
             ></input>
@@ -115,8 +183,11 @@ const UserForm = (props) => {
               ulica i numer mieszkania:
             </label>
             <input
+              onChange={clearStreet}
               type={"text"}
-              className="user-form__input"
+              className={`user-form__input ${
+                !isStreetValid ? "user-form__input--invalid" : ""
+              }`}
               defaultValue={props.userData.address.street}
               ref={street}
             ></input>
@@ -124,8 +195,11 @@ const UserForm = (props) => {
           <div className="user-form__item">
             <label className="user-form__label">kod pocztowy:</label>
             <input
+              onChange={clearCode}
               type={"text"}
-              className="user-form__input"
+              className={`user-form__input ${
+                !isCodeValid ? "user-form__input--invalid" : ""
+              }`}
               defaultValue={props.userData.address.zipcode}
               ref={code}
             ></input>
@@ -133,8 +207,11 @@ const UserForm = (props) => {
           <div className="user-form__item">
             <label className="user-form__label">miejscowość:</label>
             <input
+              onChange={clearCity}
               type={"text"}
-              className="user-form__input"
+              className={`user-form__input ${
+                !isCityValid ? "user-form__input--invalid" : ""
+              }`}
               defaultValue={
                 props.userData.address.city && props.userData.address.city
               }
@@ -152,18 +229,12 @@ const UserForm = (props) => {
               type={"text"}
               className="user-form__input"
               defaultValue={props.userData.email}
-              ref={email}
               disabled
             ></input>
           </div>
           <div className="user-form__item">
             <label className="user-form__label">hasło:</label>
-            <input
-              type={"text"}
-              className="user-form__input"
-              ref={password}
-              disabled
-            ></input>
+            <input type={"text"} className="user-form__input" disabled></input>
           </div>
           <div className="user-form__item"></div>
           <div className="user-form__item"></div>
@@ -178,6 +249,9 @@ const UserForm = (props) => {
             />
           )}
         </div>
+        {allertType && allertText && (
+          <Allert type={allertType} text={allertText} />
+        )}
       </form>
     </div>
   );

@@ -1,10 +1,12 @@
+@import "../../styles/variables.scss";
+
 .allert {
   position: fixed;
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--font-color);
-  border-radius: var(--border-radius);
+  color: white;
+  border-radius: $border-radius;
   animation: allert-appear 5s forwards;
   opacity: 0;
   font-weight: 600;
@@ -14,10 +16,12 @@
   right: -10%;
   z-index: 10;
   &--succes {
-    background-color: rgba(4, 155, 4, 0.8);
+    background-color: rgba(4, 155, 4, 0.664);
+    border: 3px solid rgb(0, 107, 0);
   }
   &--fail {
-    background-color: rgba(255, 0, 0, 0.8);
+    background-color: rgba(255, 0, 0, 0.712);
+    border: 3px solid rgb(143, 0, 0);
   }
 }
 

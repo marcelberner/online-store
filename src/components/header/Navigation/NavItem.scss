@@ -10,8 +10,7 @@
   justify-content: center;
   background-color: white;
   &:hover {
-    background-color: rgb(250, 250, 250);
-    color: $main-color;
+    color: $main-color !important;
   }
   @include media(tablet-large) {
     font-size: 1.6rem;

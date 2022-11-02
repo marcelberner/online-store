@@ -4,7 +4,7 @@
 .product-details {
   display: flex;
   flex-direction: column;
-  flex-basis: 35%;
+  flex-grow: 1;
   padding: 2rem;
   &__container {
     display: flex;

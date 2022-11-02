@@ -69,22 +69,22 @@ const UserForm = (props) => {
       ? props.userData.surname
       : "";
     phone.current.value = props.userData.phone ? props.userData.phone : "";
-    street.current.value = props.userData.address.street
+    street.current.value = props.userData.address && props.userData.address.street
       ? props.userData.address.street
       : "";
-    code.current.value = props.userData.address.zipcode
+    code.current.value = props.userData.address && props.userData.address.zipcode
       ? props.userData.address.zipcode
       : "";
-    city.current.value = props.userData.address.city
+    city.current.value = props.userData.address && props.userData.address.city
       ? props.userData.address.city
       : "";
 
-      clearCity();
-      clearCode();
-      clearName();
-      clearPhone();
-      clearStreet();
-      clearSurname();
+    clearCity();
+    clearCode();
+    clearName();
+    clearPhone();
+    clearStreet();
+    clearSurname();
   };
 
   const submitHandler = (event) => {
@@ -107,7 +107,7 @@ const UserForm = (props) => {
     ) {
       const responnse = dataRequest({
         method: "PATCH",
-        database: `users/${props.userData.id}`,
+        database: `users/${props.userData.id}/update`,
         body: {
           address: {
             city: city.current.value,
@@ -122,9 +122,9 @@ const UserForm = (props) => {
 
       setIsChanged(false);
       dispatch(changeRequestStatus());
-      if(responnse) allert({ type: "succes", text: "Pomyślnie dokonano zmian" });
-    }
-    else allert({ type: "fail", text: "Popraw błędne pola" });
+      if (responnse)
+        allert({ type: "succes", text: "Pomyślnie dokonano zmian" });
+    } else allert({ type: "fail", text: "Popraw błędne pola" });
   };
 
   return (
@@ -188,7 +188,7 @@ const UserForm = (props) => {
               className={`user-form__input ${
                 !isStreetValid ? "user-form__input--invalid" : ""
               }`}
-              defaultValue={props.userData.address.street}
+              defaultValue={props.userData.address && props.userData.address.street}
               ref={street}
             ></input>
           </div>
@@ -200,7 +200,7 @@ const UserForm = (props) => {
               className={`user-form__input ${
                 !isCodeValid ? "user-form__input--invalid" : ""
               }`}
-              defaultValue={props.userData.address.zipcode}
+              defaultValue={props.userData.address && props.userData.address.zipcode}
               ref={code}
             ></input>
           </div>
@@ -212,9 +212,7 @@ const UserForm = (props) => {
               className={`user-form__input ${
                 !isCityValid ? "user-form__input--invalid" : ""
               }`}
-              defaultValue={
-                props.userData.address.city && props.userData.address.city
-              }
+              defaultValue={props.userData.address && props.userData.address.city}
               ref={city}
             ></input>
           </div>

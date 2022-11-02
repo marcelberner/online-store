@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -11,17 +12,19 @@ const UserControls = (props) => {
   const resolution = useSelector((state) => state.window.resolution);
   const userData = useSelector((state) => state.userData.userData);
   const cart = useSelector((state) => state.userData.cart);
-
+  
+  const [totalPrice, setTotalPrice] = useState(0)
+  
   let cartTotalPrice = 0;
   let cartTotalAmount = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    cartTotalPrice +=
-      parseFloat(cart[i].price.replace(" ", "").replace(",", ".")) *
-      cart[i].amount;
+    cartTotalPrice += cart[i].price * cart[i].amount;
 
     cartTotalAmount += cart[i].amount;
+    console.log(cartTotalPrice);
   }
+
 
   const navToggle = () => {
     if (props.navState) props.navHide();

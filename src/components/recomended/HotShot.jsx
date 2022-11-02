@@ -7,9 +7,7 @@ const Hotshot = (props) => {
   const [randomProduct, setRandomProduct] = useState(null);
 
   const rollProduct = useCallback(() => {
-    setRandomProduct(
-      props.products[Math.floor(Math.random() * props.products.length)]
-    );
+    setRandomProduct(props.products[Math.floor(Math.random() * props.products.length)]);
   }, [props.products]);
 
   useEffect(() => {

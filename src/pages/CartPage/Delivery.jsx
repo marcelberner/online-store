@@ -140,7 +140,7 @@ const Delivery = () => {
         <input
           onChange={clearStreet}
           type={"text"}
-          defaultValue={userData && userData.address.street}
+          defaultValue={userData.address && userData.address.street}
           ref={street}
           className={`delivery__input ${
             !isStreetValid ? "delivery__input--invalid" : ""
@@ -150,7 +150,7 @@ const Delivery = () => {
         <input
           onChange={clearCity}
           type={"text"}
-          defaultValue={userData && userData.address.city}
+          defaultValue={userData.address && userData.address.city}
           ref={city}
           className={`delivery__input ${
             !isCityValid ? "delivery__input--invalid" : ""
@@ -160,7 +160,7 @@ const Delivery = () => {
         <input
           onChange={clearCode}
           type={"text"}
-          defaultValue={userData && userData.address.zipcode}
+          defaultValue={userData.address && userData.address.zipcode}
           ref={zipcode}
           className={`delivery__input ${
             !isCodeValid ? "delivery__input--invalid" : ""

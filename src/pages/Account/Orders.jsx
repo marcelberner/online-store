@@ -8,40 +8,44 @@ import NoFoundHeader from "../../components/UI/Allerts/NoFoundHeader";
 import "./Orders.scss";
 
 const Orders = () => {
-  const token = useSelector((state) => state.userAuth.token);
+  // const token = useSelector((state) => state.userAuth.token);
+  const userId = useSelector((state) => state.userAuth.userId);
   const [orders, setOrders] = useState();
-  const [products, setProducts] = useState();
+  // const [products, setProducts] = useState();
   const { dataRequest } = useData();
 
   const getOrders = useCallback(async () => {
-    const findOrder = await dataRequest({ method: "GET", database: "orders" });
-    const findProducts = await dataRequest({
-      method: "GET",
-      database: "products",
-    });
+    const findOrder = await dataRequest({ method: "GET", database: `orders/${userId}` });
+    setOrders(findOrder);
+    // const findProducts = await dataRequest({
+    //   method: "GET",
+    //   database: "products",
+    // });
 
-    const correctOrders = findOrder.filter((order) => order.userId === token);
+    // const correctOrders = findOrder.filter((order) => order.userId === token);
 
-    setOrders(correctOrders);
+    // setOrders(correctOrders);
 
-    const orderProducts = [];
+    // const orderProducts = [];
 
-    correctOrders.forEach((order) => {
-      const productName = [];
+    // correctOrders.forEach((order) => {
+    //   const productName = [];
 
-      for (let i = 0; i < order.products.length; i++) {
-        const product = findProducts.find(
-          (product) => product.id === order.products[i].productId
-        );
+    //   for (let i = 0; i < order.products.length; i++) {
+    //     const product = findProducts.find(
+    //       (product) => product.id === order.products[i].productId
+    //     );
 
-        productName.push(product.name);
-      }
+    //     productName.push(product.name);
+    //   }
 
-      orderProducts.push(productName);
-    });
+    //   orderProducts.push(productName);
+    // });
 
-    setProducts(orderProducts);
-  }, [dataRequest, token]);
+    // setProducts(orderProducts);
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     getOrders();
@@ -66,8 +70,8 @@ const Orders = () => {
               <div className="orders__column">
                 <span className="orders__label">Zakupione produkty: </span>
                 <div className="orders__products">
-                  {products &&
-                    products[index].map((product, index) => (
+                  {orders.products &&
+                    orders.products[index].map((product, index) => (
                       <span className="orders__product" key={index}>
                         {product}
                       </span>

@@ -4,7 +4,7 @@ const ProductReputation = (props) => {
     const totalRep = [];
 
     if(props.rep){
-        const productRep = props.rep.split(".");
+        const productRep = props.rep.toString().split(".");
         
         if (parseInt(productRep[0]) >= 1) {
             for (let i = 0; i < parseInt(productRep[0]); i++) {
@@ -16,11 +16,11 @@ const ProductReputation = (props) => {
     
   return (
     <div className={`product-reputation ${props.size === 'medium' && "product-reputation--medium"}`}>
-        {totalRep.map((rep) => {
+        {totalRep.map((rep, index) => {
         if (rep.star === "full")
-            return (<i className="fa-solid fa-star product-reputation__stars" key={Math.random()}></i>);
+            return (<i className="fa-solid fa-star product-reputation__stars" key={index}></i>);
         else if (rep.star === "half")
-            return (<i className="fa-solid fa-star-half product-reputation__stars" key={Math.random()}></i>);
+            return (<i className="fa-solid fa-star-half product-reputation__stars" key={index}></i>);
         else return "";
         })}
         <span className="product-reputation__text">{`(${props.rep})`}</span>

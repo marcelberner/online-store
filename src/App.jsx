@@ -32,7 +32,7 @@ const Delivery = React.lazy(() => import("./pages/CartPage/Delivery"));
 const Sumarry = React.lazy(() => import("./pages/CartPage/Sumarry"));
 
 function App() {
-  const userId = useSelector((state) => state.userAuth.token);
+  const userId = useSelector((state) => state.userAuth.userId);
   const orderProducts = useSelector((state) => state.orderData.products);
   const customerData = useSelector((state) => state.orderData.customerData);
   const requestStatus = useSelector((state) => state.dataRequest.requestStatus);
@@ -44,8 +44,9 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    initialDataImport();
-  }, [initialDataImport, requestStatus]);
+    if(userId) initialDataImport();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [requestStatus]);
 
   useEffect(() => {
     window.addEventListener("resize", () => {

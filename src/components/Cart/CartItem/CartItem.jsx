@@ -2,79 +2,73 @@ import { useSelector, useDispatch } from "react-redux";
 
 import useData from "../../../hooks/useData";
 
-import { changeRequestStatus } from "../../../store/dataRequest";
 import { cartRemove, cartDelete, cartAdd } from "../../../store/userData";
 
 import "./CartItem.scss";
 
 const CartItem = (props) => {
-  const userData = useSelector((state) => state.userData.userData);
-  const isAuth = useSelector((state) => state.userAuth.token);
+  const userId = useSelector((state) => state.userAuth.userId);
   const dispatch = useDispatch();
 
   const { dataRequest } = useData();
 
   const increseAmount = async () => {
-    if(isAuth){
-      const increseAmount = await dataRequest({
-        method: "PATCH",
-        database: `users/${userData.id}/cart/${props.cart.id}`,
+    dispatch(
+      cartAdd({
+        productId: props.cart.productId,
+        amount: props.cart.amount,
+        price: props.cart.price,
+      })
+    );
+    if (userId) {
+      await dataRequest({
+        method: "POST",
+        database: `users/${userId}/cart/add`,
         body: {
-          productId: props.id,
-          amount: props.amount + 1,
-          price: props.price,
+          productId: props.cart.productId,
+          amount: props.cart.amount,
+          price: props.cart.price,
         },
       });
     }
-    else dispatch(cartAdd({
-      productId: props.cart.productId,
-      amount: props.cart.amount,
-      price: props.cart.price,
-    }))
-
-    dispatch(changeRequestStatus());
   };
 
   const decreseAmount = async () => {
-    if (isAuth) {
-      if (props.amount === 1) productCartRemove();
-      const decreseAmount = await dataRequest({
-        method: "PATCH",
-        database: `users/${userData.id}/cart/${props.cart.id}`,
+    dispatch(
+      cartRemove({
+        productId: props.cart.productId,
+        amount: props.cart.amount,
+        price: props.cart.price,
+      })
+    );
+    if (userId) {
+      await dataRequest({
+        method: "POST",
+        database: `users/${userId}/cart/remove`,
         body: {
-          productId: props.id,
-          amount: props.amount - 1,
-          price: props.price,
-        },
-      });
-    } else
-      dispatch(
-        cartRemove({
           productId: props.cart.productId,
           amount: props.cart.amount,
           price: props.cart.price,
-        })
-      );
-
-    dispatch(changeRequestStatus());
+        },
+      });
+    }
   };
 
   const productCartRemove = async () => {
-    if (isAuth) {
-      const removeProduct = await dataRequest({
+    dispatch(
+      cartDelete({
+        productId: props.cart.productId,
+        amount: props.cart.amount,
+        price: props.cart.price,
+      })
+    );
+    if (userId) {
+      await dataRequest({
         method: "DELETE",
-        database: `users/${userData.id}/cart/${props.cart.id}`,
+        database: `users/${userId}/cart/delete`,
+        body: {productId: props.cart.productId},
       });
-    } else
-      dispatch(
-        cartDelete({
-          productId: props.cart.productId,
-          amount: props.cart.amount,
-          price: props.cart.price,
-        })
-      );
-
-    dispatch(changeRequestStatus());
+    }
   };
 
   return (

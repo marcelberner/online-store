@@ -5,13 +5,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-basis: 40%;
+  max-height: 50rem;
   padding: 2rem;
   box-shadow: $basic-box-shadow;
   border-radius: $border-radius;
   aspect-ratio: 1/1;
   @include media(tablet-large) {
-    min-height: 50rem;
+    margin: 0 auto;
     padding: 2rem;
   }
   &__img {

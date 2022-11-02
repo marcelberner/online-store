@@ -12,18 +12,18 @@ const OwnProducts = () => {
   const [products, setProducts] = useState();
   const { dataRequest } = useData();
 
-  const sendRequest = useCallback(async () => {
-    const response = await dataRequest({
-      method: "GET",
-      database: `users/${userData.id}/products`,
-    });
+  // const sendRequest = useCallback(async () => {
+  //   const response = await dataRequest({
+  //     method: "GET",
+  //     database: `users/${userData.id}/products`,
+  //   });
 
-    setProducts(response);
-  }, [dataRequest, userData]);
+  //   setProducts(response);
+  // }, [dataRequest, userData]);
 
-  useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
+  // useEffect(() => {
+  //   sendRequest();
+  // }, [sendRequest]);
 
   return (
     <section className="own-products">

@@ -7,55 +7,30 @@ import useData from "./useData";
 
 const useInitial = () => {
   const { dataRequest } = useData();
-  const userId = useSelector((state) => state.userAuth.token);
+  const userId = useSelector((state) => state.userAuth.userId);
 
   const dispatch = useDispatch();
 
   const initialDataImport = useCallback(async () => {
-    const resData = await dataRequest({ method: "GET", database: "users" });
-
-    resData.forEach((user) => {
-      if (user.userId === userId) {
-        dispatch(
-          setUserData({
-            id: user.id,
-            name: user.name,
-            surname: user.surname,
-            email: user.email,
-            address: user.address,
-            phone: user.phone,
-          })
-        );
-
-        if (user.wishlist !== "false") {
-          const wishlistArray = [];
-
-          for (const key in user.wishlist) {
-            wishlistArray.push({
-              id: key,
-              productId: user.wishlist[key].productId,
-            });
-          }
-
-          dispatch(setWishlist(wishlistArray));
-        }
-
-        if (user.cart !== "false") {
-          const cartArray = [];
-
-          for (const key in user.cart) {
-            cartArray.push({
-              id: key,
-              productId: user.cart[key].productId,
-              amount: user.cart[key].amount,
-              price: user.cart[key].price,
-            });
-          }
-
-          dispatch(setCart(cartArray));
-        }
-      }
+    const resData = await dataRequest({
+      method: "GET",
+      database: `users/${userId}`,
     });
+
+    dispatch(
+      setUserData({
+        id: resData.id,
+        name: resData.name,
+        surname: resData.surname,
+        email: resData.email,
+        address: resData.address,
+        phone: resData.phone,
+      })
+    );
+
+    dispatch(setWishlist(resData.wishlist));
+    dispatch(setCart(resData.cart));
+
   }, [dataRequest, dispatch, userId]);
 
   return initialDataImport;

@@ -41,6 +41,7 @@ const useData = () => {
       setError(error.messsage);
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { resData, error, dataRequest, isLoading };

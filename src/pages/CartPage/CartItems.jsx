@@ -31,7 +31,6 @@ const CartItems = () => {
 
     dispatch(setProducts(seekProducts));
     setCartProducts(seekProducts);
-    console.log(cart, seekProducts);
   }, [cart, dispatch, dataRequest]);
 
   useEffect(() => {

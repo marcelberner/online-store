@@ -36,6 +36,7 @@ const useAuth = () => {
 
       const resData = await response.json();
 
+
       localStorage.setItem("token", resData.token);
       localStorage.setItem("userId", resData.userId);
       

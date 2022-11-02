@@ -36,7 +36,7 @@ const AuthForm = (props) => {
     isEqualTo: password,
   });
 
-  const userAuthHandler = (event) => {
+  const userAuthHandler = async (event) => {
     event.preventDefault();
 
     const currentEmail = email.current.value;
@@ -60,7 +60,7 @@ const AuthForm = (props) => {
         return;
       }
 
-      const authResponse = authRequest({
+      const authResponse = await authRequest({
         currentForm: props.currentForm,
         email: currentEmail,
         password: currentPassword,
@@ -70,6 +70,7 @@ const AuthForm = (props) => {
 
       if(authResponse && props.currentForm === "signup") allert({ type: "succes", text: "Pomyślnie utworzono konto" });
       else if(authResponse) allert({ type: "succes", text: "Pomyślnie zalogowano" });
+      else allert({ type: "fail", text: "Nie udało się zarejestrować" });
     }
     else allert({ type: "fail", text: "Popraw błędne pola" });
   };

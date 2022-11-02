@@ -1,24 +1,19 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
-import { changeRequestStatus } from "../../store/dataRequest";
 
 import "./QuickSearch.scss";
 
 const QuickSearch = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const seekProduct = useRef();
 
   const searchProduct = (event) => {
     event.preventDefault();
     const currentValue = seekProduct.current.value;
 
-    if(currentValue === "") return;
+    if (currentValue === "") return;
 
     navigate(`/products/search?q=${currentValue}`);
-    dispatch(changeRequestStatus());
   };
 
   return (

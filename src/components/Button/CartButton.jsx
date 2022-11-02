@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import { cartAdd } from "../../store/userData";
-import { changeRequestStatus } from "../../store/dataRequest";
 
 import useData from "../../hooks/useData";
 
@@ -26,7 +25,6 @@ const CartButton = (props) => {
           price: props.price,
         },
       });
-      dispatch(changeRequestStatus());
     }
   };
 

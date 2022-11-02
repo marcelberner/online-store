@@ -13,23 +13,23 @@ const Informations = (props) => {
   return (
     <section className="informations">
       <SectionHeader text={props.title} />
-        <Swiper
-          freeMode={true}
-          watchSlidesProgress={true}
-          modules={[FreeMode, Thumbs]}
-          className="mySwiper informations__content"
-          slidesPerView={"auto"}
-        >
-          {props.content.map((news, index) => (
-            <SwiperSlide className="slide" key={index}>
-              <News
-                img={news.img}
-                header={news.header}
-                mediumSize={props.mediumSize ? props.mediumSize : ""}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <Swiper
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Thumbs]}
+        className="mySwiper informations__content"
+        slidesPerView={"auto"}
+      >
+        {props.content.map((news, index) => (
+          <SwiperSlide className="slide" key={index}>
+            <News
+              img={news.img}
+              header={news.header}
+              mediumSize={props.mediumSize ? props.mediumSize : ""}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   );
 };

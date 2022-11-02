@@ -1,29 +1,43 @@
 import "./ProductReputation.scss";
 
 const ProductReputation = (props) => {
-    const totalRep = [];
+  const totalRep = [];
 
-    if(props.rep){
-        const productRep = props.rep.toString().split(".");
-        
-        if (parseInt(productRep[0]) >= 1) {
-            for (let i = 0; i < parseInt(productRep[0]); i++) {
-            totalRep.push({ star: "full" });
-            }
-        }
-        if (parseInt(productRep[1]) >= 5) totalRep.push({ star: "half" });
+  if (props.rep) {
+    const productRep = props.rep.toString().split(".");
+
+    if (parseInt(productRep[0]) >= 1) {
+      for (let i = 0; i < parseInt(productRep[0]); i++) {
+        totalRep.push({ star: "full" });
+      }
     }
-    
+    if (parseInt(productRep[1]) >= 5) totalRep.push({ star: "half" });
+  }
+
   return (
-    <div className={`product-reputation ${props.size === 'medium' && "product-reputation--medium"}`}>
-        {totalRep.map((rep, index) => {
+    <div
+      className={`product-reputation ${
+        props.size === "medium" && "product-reputation--medium"
+      }`}
+    >
+      {totalRep.map((rep, index) => {
         if (rep.star === "full")
-            return (<i className="fa-solid fa-star product-reputation__stars" key={index}></i>);
+          return (
+            <i
+              className="fa-solid fa-star product-reputation__stars"
+              key={index}
+            ></i>
+          );
         else if (rep.star === "half")
-            return (<i className="fa-solid fa-star-half product-reputation__stars" key={index}></i>);
+          return (
+            <i
+              className="fa-solid fa-star-half product-reputation__stars"
+              key={index}
+            ></i>
+          );
         else return "";
-        })}
-        <span className="product-reputation__text">{`(${props.rep})`}</span>
+      })}
+      <span className="product-reputation__text">{`(${props.rep})`}</span>
     </div>
   );
 };

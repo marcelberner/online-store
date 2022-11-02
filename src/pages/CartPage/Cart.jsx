@@ -18,7 +18,6 @@ import "./Cart.scss";
 const Cart = () => {
   const deliveryMethod = useSelector((state) => state.orderData.deliveryMethod);
   const paymentMethod = useSelector((state) => state.orderData.paymentMethod);
-  const customerData = useSelector((state) => state.orderData.customerData);
   const totalPrice = useSelector((state) => state.orderData.totalPrice);
   const userId = useSelector((state) => state.userAuth.userId);
   const cart = useSelector((state) => state.userData.cart);
@@ -43,10 +42,10 @@ const Cart = () => {
       method: "POST",
       database: "orders/order",
       body: {
-        customerData: customerData,
         deliveryMethod: deliveryMethod,
         paymentMethod: paymentMethod,
         totalPrice: totalPrice,
+        userId: userId,
         products: cart,
       },
     });

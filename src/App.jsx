@@ -35,7 +35,6 @@ function App() {
   const userId = useSelector((state) => state.userAuth.userId);
   const orderProducts = useSelector((state) => state.orderData.products);
   const customerData = useSelector((state) => state.orderData.customerData);
-  const requestStatus = useSelector((state) => state.dataRequest.requestStatus);
 
   const dispatch = useDispatch();
 
@@ -46,7 +45,7 @@ function App() {
   useEffect(() => {
     if(userId) initialDataImport();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [requestStatus]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("resize", () => {

@@ -20,7 +20,7 @@ const WishButton = (props) => {
   const wishlistAddHandler = async () => {
     if (!wishlistProduct) {
       dispatch(wishlistAdd({ productId: props.id }));
-      
+
       await dataRequest({
         method: "POST",
         database: `users/${userId}/wishlist/add`,
@@ -28,8 +28,7 @@ const WishButton = (props) => {
           productId: props.id,
         },
       });
-    } 
-    else {
+    } else {
       dispatch(wishlistRemove({ productId: props.id }));
 
       await dataRequest({

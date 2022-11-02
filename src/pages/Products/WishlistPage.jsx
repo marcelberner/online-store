@@ -22,20 +22,22 @@ const WishlistPage = () => {
 
     // eslint-disable-next-line array-callback-return
     const seekProducts = products.filter((product) => {
-      const productIsFound = wishlistItems.find((element) => element.productId === product.id);
+      const productIsFound = wishlistItems.find(
+        (element) => element.productId === product.id
+      );
       if (productIsFound) return product;
-      });
-      
-      setWishProducts(seekProducts);
+    });
+
+    setWishProducts(seekProducts);
   }, [dataRequest, wishlistItems]);
 
   useEffect(() => {
     findWishProducts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wishlistItems]);
 
   const showWishlist = () => {
-    if (isLogged)
+    if (isLogged) {
       return wishlistItems.length >= 1 ? (
         wishProducts &&
           wishProducts.map(
@@ -54,6 +56,7 @@ const WishlistPage = () => {
       ) : (
         <NoFoundHeader text={"Nie posiadasz żadnych produktów na liście"} />
       );
+    } 
     else if (!isLogged)
       return (
         <NoFoundHeader

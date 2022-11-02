@@ -66,7 +66,7 @@ const CartItem = (props) => {
       await dataRequest({
         method: "DELETE",
         database: `users/${userId}/cart/delete`,
-        body: {productId: props.cart.productId},
+        body: { productId: props.cart.productId },
       });
     }
   };

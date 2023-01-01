@@ -12,7 +12,7 @@ const useData = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`https://onlinestore-backend.herokuapp.com/api/${body.database}`,
+      const response = await fetch(`https://online-store-backend.onrender.com/api/${body.database}`,
         {
           method: body.method,
           headers: {

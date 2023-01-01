@@ -13,8 +13,8 @@ const useAuth = () => {
 
   const authRequest = async (data) => {
     try {
-      const loginURL = "https://onlinestore-backend.herokuapp.com/api/users/login";
-      const signupURL = "https://onlinestore-backend.herokuapp.com/api/users/signup";
+      const loginURL = "https://online-store-backend.onrender.com/api/users/login";
+      const signupURL = "https://online-store-backend.onrender.com/api/users/signup";
 
       const response = await fetch(
         `${data.currentForm === "login" ? loginURL : ""}${

@@ -16,9 +16,7 @@ const UserControls = (props) => {
   let cartTotalAmount = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    cartTotalPrice +=
-      parseFloat(cart[i].price.replace(" ", "").replace(",", ".")) *
-      cart[i].amount;
+    cartTotalPrice += cart[i].price * cart[i].amount;
 
     cartTotalAmount += cart[i].amount;
   }

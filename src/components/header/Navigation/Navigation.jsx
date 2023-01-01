@@ -176,7 +176,9 @@ const Navigation = (props) => {
 
   return (
     <>
-      {categoryState && resolution > 800 && <Backdrop backdropClear={categoryHideHandler} />}
+      {categoryState && resolution > 800 && (
+        <Backdrop backdropClear={categoryHideHandler} />
+      )}
       <nav ref={props.navRef} className="navigation">
         {categories.map((categories, index) => (
           <NavCategory

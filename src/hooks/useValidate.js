@@ -36,7 +36,8 @@ const useValidate = (props) => {
   };
 
   const isPhone = (value) => {
-    const validInput = /^([+][0-9]{2})?[-]?([0-9]{3})[-]?([0-9]{3})[-]?([0-9]{3})$/.test(value);
+    const validInput =
+      /^([+][0-9]{2})?[-]?([0-9]{3})[-]?([0-9]{3})[-]?([0-9]{3})$/.test(value);
 
     if (!validInput) isPhoneValid = false;
   };

@@ -6,7 +6,7 @@ const AuthSelect = (props) => {
       <div
         onClick={props.switchLoginForm}
         className={`auth-select__option ${
-            props.currentForm === "login" && "auth-select__option--selected"
+          props.currentForm === "login" && "auth-select__option--selected"
         }`}
       >
         <span>Zaloguj się</span>
@@ -14,7 +14,7 @@ const AuthSelect = (props) => {
       <div
         onClick={props.switchSignupForm}
         className={`auth-select__option ${
-            props.currentForm === "signup" && "auth-select__option--selected"
+          props.currentForm === "signup" && "auth-select__option--selected"
         }`}
       >
         <span>Załóż konto</span>

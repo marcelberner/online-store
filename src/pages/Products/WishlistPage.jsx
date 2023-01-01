@@ -11,7 +11,7 @@ import "./WishlistPage.scss";
 
 const WishlistPage = () => {
   const wishlistItems = useSelector((state) => state.userData.wishlist);
-  const isLogged = useSelector((state) => state.userAuth.token);
+  const isLogged = useSelector((state) => state.userAuth.userId);
 
   const [wishProducts, setWishProducts] = useState(null);
 
@@ -20,25 +20,24 @@ const WishlistPage = () => {
   const findWishProducts = useCallback(async () => {
     const products = await dataRequest({ method: "GET", database: "products" });
 
-    setWishProducts(
-      products.filter((product) => {
-        let isCorrect = false;
+    // eslint-disable-next-line array-callback-return
+    const seekProducts = products.filter((product) => {
+      const productIsFound = wishlistItems.find(
+        (element) => element.productId === product.id
+      );
+      if (productIsFound) return product;
+    });
 
-        wishlistItems.forEach((element) => {
-          if (element.productId === product.id) isCorrect = true;
-        });
-
-        if (isCorrect) return product;
-      })
-    );
+    setWishProducts(seekProducts);
   }, [dataRequest, wishlistItems]);
 
   useEffect(() => {
     findWishProducts();
-  }, [findWishProducts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wishlistItems]);
 
   const showWishlist = () => {
-    if (isLogged)
+    if (isLogged) {
       return wishlistItems.length >= 1 ? (
         wishProducts &&
           wishProducts.map(
@@ -57,6 +56,7 @@ const WishlistPage = () => {
       ) : (
         <NoFoundHeader text={"Nie posiadasz żadnych produktów na liście"} />
       );
+    } 
     else if (!isLogged)
       return (
         <NoFoundHeader

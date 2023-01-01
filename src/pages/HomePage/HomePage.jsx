@@ -19,7 +19,8 @@ const HomePage = () => {
 
   useEffect(() => {
     dataRequest({ method: "GET", database: "products" });
-  },[dataRequest]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   return (
     <div className="home-page">

@@ -7,12 +7,14 @@ import CartButton from "../../Button/CartButton";
 import "./PurchaseBar.scss";
 
 const PurchaseBar = (props) => {
-  const isAuth = useSelector(state => state.userAuth.token);
+  const isAuth = useSelector((state) => state.userAuth.token);
 
   return (
     <div className="purchase-bar">
       <div className="purchase-bar__panel">
-        <span className="purchase-bar__price">{parseFloat(props.price.split(" ").join("")).toFixed(2) + " zł"}</span>
+        <span className="purchase-bar__price">
+          {props.price.toFixed(2) + " zł"}
+        </span>
         <div className="purchase-bar__buttons">
           {isAuth && <WishButton id={props.id} size={"large"} />}
           <CartButton id={props.id} price={props.price} size={"large"} />
@@ -35,12 +37,7 @@ const PurchaseBar = (props) => {
         icon={<i className="fa-solid fa-store"></i>}
       />
       <PurchaseInfo
-        text={[
-          `Rata tylko ${(
-            parseFloat(props.price.split(" ").join("")) / 32
-          ).toFixed(2)} zł`,
-          "Oblicz ratę",
-        ]}
+        text={[`Rata tylko ${(props.price / 32).toFixed(2)} zł`, "Oblicz ratę"]}
         icon={<i className="fa-solid fa-calendar-days"></i>}
       />
     </div>

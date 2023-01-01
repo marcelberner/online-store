@@ -1,47 +1,44 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { changeRequestStatus } from "../../store/dataRequest";
+import { wishlistAdd, wishlistRemove } from "../../store/userData";
 
 import useData from "../../hooks/useData";
 
 import "./WishButton.scss";
 
 const WishButton = (props) => {
+  const userId = useSelector((state) => state.userAuth.userId);
   const wishlist = useSelector((state) => state.userData.wishlist);
-  const userData = useSelector((state) => state.userData.userData);
   const dispatch = useDispatch();
 
   const { dataRequest } = useData();
 
-  let isWishlist = null;
-  let productKey = null;
-
-  for (let i = 0; i < wishlist.length; i++) {
-    if (wishlist[i].productId === props.id) {
-      isWishlist = true;
-      productKey = wishlist[i].id;
-      break;
-    } else isWishlist = false;
-  }
+  const wishlistProduct = wishlist.find(
+    (product) => product.productId === props.id
+  );
 
   const wishlistAddHandler = async () => {
-    if (isWishlist) {
-      const removeRequest = await dataRequest({
-        method: "DELETE",
-        database: `users/${userData.id}/wishlist/${productKey}`,
-        body: {},
+    if (!wishlistProduct) {
+      dispatch(wishlistAdd({ productId: props.id }));
+
+      await dataRequest({
+        method: "POST",
+        database: `users/${userId}/wishlist/add`,
+        body: {
+          productId: props.id,
+        },
       });
     } else {
-      const addRequest = await dataRequest({
+      dispatch(wishlistRemove({ productId: props.id }));
+
+      await dataRequest({
         method: "POST",
-        database: `users/${userData.id}/wishlist`,
+        database: `users/${userId}/wishlist/remove`,
         body: {
           productId: props.id,
         },
       });
     }
-
-    dispatch(changeRequestStatus());
   };
 
   return (
@@ -53,7 +50,7 @@ const WishButton = (props) => {
         props.size === "small" && "wish-button--small"
       }`}
     >
-      {isWishlist ? (
+      {wishlistProduct ? (
         <i className="fa-solid fa-heart-circle-minus"></i>
       ) : (
         <i className="fa-solid fa-heart-circle-plus"></i>

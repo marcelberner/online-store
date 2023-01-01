@@ -5,7 +5,7 @@ import useData from "../../../hooks/useData";
 import useValidate from "../../../hooks/useValidate";
 import useAllert from "../../../hooks/useAllert";
 
-import { changeRequestStatus } from "../../../store/dataRequest";
+import { setUserData } from "../../../store/userData";
 
 import SubmitButton from "../../Button/SubmitButton";
 import Allert from "../../Allert/Allert";
@@ -69,25 +69,28 @@ const UserForm = (props) => {
       ? props.userData.surname
       : "";
     phone.current.value = props.userData.phone ? props.userData.phone : "";
-    street.current.value = props.userData.address.street
-      ? props.userData.address.street
-      : "";
-    code.current.value = props.userData.address.zipcode
-      ? props.userData.address.zipcode
-      : "";
-    city.current.value = props.userData.address.city
-      ? props.userData.address.city
-      : "";
+    street.current.value =
+      props.userData.address && props.userData.address.street
+        ? props.userData.address.street
+        : "";
+    code.current.value =
+      props.userData.address && props.userData.address.zipcode
+        ? props.userData.address.zipcode
+        : "";
+    city.current.value =
+      props.userData.address && props.userData.address.city
+        ? props.userData.address.city
+        : "";
 
-      clearCity();
-      clearCode();
-      clearName();
-      clearPhone();
-      clearStreet();
-      clearSurname();
+    clearCity();
+    clearCode();
+    clearName();
+    clearPhone();
+    clearStreet();
+    clearSurname();
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     const validName = validateName();
@@ -105,9 +108,21 @@ const UserForm = (props) => {
       validStreet &&
       validCity
     ) {
-      const responnse = dataRequest({
+      dispatch(
+        setUserData({
+          address: {
+            city: city.current.value,
+            zipcode: code.current.value,
+            street: street.current.value,
+          },
+          name: name.current.value,
+          surname: surname.current.value,
+          phone: phone.current.value,
+        })
+      );
+      const responnse = await dataRequest({
         method: "PATCH",
-        database: `users/${props.userData.id}`,
+        database: `users/${props.userData.id}/update`,
         body: {
           address: {
             city: city.current.value,
@@ -121,10 +136,9 @@ const UserForm = (props) => {
       });
 
       setIsChanged(false);
-      dispatch(changeRequestStatus());
-      if(responnse) allert({ type: "succes", text: "Pomyślnie dokonano zmian" });
-    }
-    else allert({ type: "fail", text: "Popraw błędne pola" });
+      if (responnse)
+        allert({ type: "succes", text: "Pomyślnie dokonano zmian" });
+    } else allert({ type: "fail", text: "Popraw błędne pola" });
   };
 
   return (
@@ -188,7 +202,9 @@ const UserForm = (props) => {
               className={`user-form__input ${
                 !isStreetValid ? "user-form__input--invalid" : ""
               }`}
-              defaultValue={props.userData.address.street}
+              defaultValue={
+                props.userData.address && props.userData.address.street
+              }
               ref={street}
             ></input>
           </div>
@@ -200,7 +216,9 @@ const UserForm = (props) => {
               className={`user-form__input ${
                 !isCodeValid ? "user-form__input--invalid" : ""
               }`}
-              defaultValue={props.userData.address.zipcode}
+              defaultValue={
+                props.userData.address && props.userData.address.zipcode
+              }
               ref={code}
             ></input>
           </div>
@@ -213,7 +231,7 @@ const UserForm = (props) => {
                 !isCityValid ? "user-form__input--invalid" : ""
               }`}
               defaultValue={
-                props.userData.address.city && props.userData.address.city
+                props.userData.address && props.userData.address.city
               }
               ref={city}
             ></input>

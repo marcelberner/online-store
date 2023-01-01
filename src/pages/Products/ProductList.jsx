@@ -80,26 +80,10 @@ const ProductList = () => {
 
     if (sortQuery)
       products = products.sort((a, b) => {
-        if (sortQuery === "cena_asc")
-          return (
-            parseFloat(a.price.replace(" ", "")) -
-            parseFloat(b.price.replace(" ", ""))
-          );
-        else if (sortQuery === "cena_dsc")
-          return (
-            parseFloat(b.price.replace(" ", "")) -
-            parseFloat(a.price.replace(" ", ""))
-          );
-        else if (sortQuery === "ocena_asc")
-          return (
-            parseFloat(a.reputation.replace(".", "")) -
-            parseFloat(b.reputation.replace(".", ""))
-          );
-        else if (sortQuery === "ocena_dsc")
-          return (
-            parseFloat(b.reputation.replace(".", "")) -
-            parseFloat(a.reputation.replace(".", ""))
-          );
+        if (sortQuery === "cena_asc") return a.price - b.price;
+        else if (sortQuery === "cena_dsc") return b.price - a.price;
+        else if (sortQuery === "ocena_asc") return a.reputation - b.reputation;
+        else if (sortQuery === "ocena_dsc") return b.reputation - a.reputation;
 
         return 0;
       });

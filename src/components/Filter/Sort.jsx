@@ -11,12 +11,12 @@ const Sort = (props) => {
   };
 
   const sortSelectHandler = (event) => {
-    if(!sortState) return;
-    
+    if (!sortState) return;
+
     const selectOption = event.target.dataset.option;
 
     setSort(selectOption);
-    props.sortProduct(selectOption)
+    props.sortProduct(selectOption);
   };
 
   return (

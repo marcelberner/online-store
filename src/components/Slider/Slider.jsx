@@ -12,14 +12,8 @@ const Slider = () => {
 
   return (
     <section className="slider">
-      <Window
-        SLIDES={SLIDES}
-        currentPosition={thumbsSwiper}
-      />
-      <Preview
-        SLIDES={SLIDES}
-        selectSlide={setThumbsSwiper}
-      />
+      <Window SLIDES={SLIDES} currentPosition={thumbsSwiper} />
+      <Preview SLIDES={SLIDES} selectSlide={setThumbsSwiper} />
     </section>
   );
 };

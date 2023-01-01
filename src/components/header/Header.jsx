@@ -14,7 +14,9 @@ let lastPosition = 0;
 const Header = () => {
   const resolution = useSelector((state) => state.window.resolution);
 
-  const [navigationState, setNavigationState] = useState(resolution <= 800 ? false : true)
+  const [navigationState, setNavigationState] = useState(
+    resolution <= 800 ? false : true
+  );
 
   const navRef = useRef();
 
@@ -22,7 +24,7 @@ const Header = () => {
     navRef.current.style.top = "100%";
     setNavigationState(true);
   };
-  
+
   const navHide = () => {
     navRef.current.style.top = `-${navRef.current.clientHeight}px`;
     setNavigationState(false);
@@ -50,19 +52,23 @@ const Header = () => {
         <Logo />
         <QuickSearch />
         {resolution > 1024 ? (
-          <UserControls navShow={navShow} navHide={navHide} navState={navigationState}/>
+          <UserControls
+            navShow={navShow}
+            navHide={navHide}
+            navState={navigationState}
+          />
         ) : (
           ReactDOM.createPortal(
-            <UserControls navShow={navShow} navHide={navHide} navState={navigationState}/>,
+            <UserControls
+              navShow={navShow}
+              navHide={navHide}
+              navState={navigationState}
+            />,
             document.getElementById("controls-root")
           )
         )}
       </div>
-      <Navigation
-        navRef={navRef}
-        navShow={navShow}
-        navHide={navHide}
-      />
+      <Navigation navRef={navRef} navShow={navShow} navHide={navHide} />
     </header>
   );
 };

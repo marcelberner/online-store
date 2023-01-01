@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { logout } from "../../store/userAuth";
-import dataRequest from "../../store/dataRequest";
 import { dataClear } from "../../store/userData";
 
 import "./AccountPage.scss";
@@ -14,9 +13,9 @@ const AccountPage = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     dispatch(logout());
     dispatch(dataClear());
-    dispatch(dataRequest());
     navigate("/");
   }
 

@@ -3,12 +3,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import useData from "./useData";
 import { login } from "../store/userAuth";
 
 const useAuth = () => {
-  const { dataRequest } = useData();
-
   const [error, setError] = useState();
 
   const navigate = useNavigate();
@@ -16,8 +13,8 @@ const useAuth = () => {
 
   const authRequest = async (data) => {
     try {
-      const loginURL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU";
-      const signupURL = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDkqipfOWliQ3pu_Vuz3-5mVFQnpD3XRFU";
+      const loginURL = "https://online-store-backend.onrender.com/api/users/login";
+      const signupURL = "https://online-store-backend.onrender.com/api/users/signup";
 
       const response = await fetch(
         `${data.currentForm === "login" ? loginURL : ""}${
@@ -28,7 +25,6 @@ const useAuth = () => {
           body: JSON.stringify({
             email: data.email,
             password: data.password,
-            returnSecureToken: true,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -40,31 +36,12 @@ const useAuth = () => {
 
       const resData = await response.json();
 
-      localStorage.setItem("token", resData.localId);
-      
-      if (data.currentForm === "signup") {
-        dataRequest({
-          method: "POST",
-          database: "users",
-          body: {
-            userId: resData.localId,
-            email: data.email,
-            name: "",
-            surname: "",
-            address: {
-              city: "",
-              street: "",
-              zipcode: "",
-            },
-            cart: false,
-            wishlist: false,
-            admin: false,
-          },
-        });
-      }
+
+      localStorage.setItem("token", resData.token);
+      localStorage.setItem("userId", resData.userId);
       
       setTimeout(() => {
-        dispatch(login(resData.localId));
+        dispatch(login({token :resData.token , userId :resData.userId}));
         navigate("/");
       }, 2000);
 

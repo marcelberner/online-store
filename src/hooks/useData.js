@@ -1,18 +1,24 @@
 import { useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 
 const useData = () => {
   const [resData, setResData] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  const token = useSelector((state) => state.userAuth.token);
+
   const dataRequest = useCallback(async (body) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`https://online-store-a1383-default-rtdb.europe-west1.firebasedatabase.app/${body.database}.json`,
+      const response = await fetch(`https://online-store-backend.onrender.com/api/${body.database}`,
         {
           method: body.method,
-          headers: {"Content-Type": "application/json"},
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer" + token
+          },
           body: body.body && JSON.stringify(body.body),
         });
 
@@ -24,61 +30,18 @@ const useData = () => {
 
       const data = await response.json();
 
-      const loadedData = [];
-      
-      for (const key in data) {
-        if (body.database === "products") {
-          loadedData.push({
-            id: key,
-            name: data[key].name,
-            img: data[key].img,
-            amount: data[key].amount,
-            price: data[key].price,
-            recomendation: data[key].recomendation,
-            reputation: data[key].reputation,
-            description: data[key].description,
-            specyfication: data[key].specyfication,
-            category: data[key].category,
-          });
-        } 
-        else if (body.database === "users") {
-          loadedData.push({
-            id: key,
-            name: data[key].name,
-            surname: data[key].surname,
-            email: data[key].email,
-            phone: data[key].phone,
-            userId: data[key].userId,
-            admin: data[key].admin,
-            address: data[key].address,
-            cart: data[key].cart,
-            wishlist: data[key].wishlist,
-          });
-        } 
-        else if (body.database === "orders") {
-          loadedData.push({
-            id: key,
-            customerData: data[key].customerData,
-            deliveryMethod: data[key].deliveryMethod,
-            paymentMethod: data[key].paymentMethod,
-            products: data[key].products,
-            userId: data[key].userId,
-            status: data[key].status,
-            totalPrice: data[key].totalPrice,
-            date: data[key].date,
-          });
-        } 
-      }
+      const loadedData = Object.values(data)[0];
 
       setResData(loadedData);
       setIsLoading(false);
+
       return loadedData;
     }
     catch (error) {
-      console.log(error.message);
       setError(error.messsage);
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { resData, error, dataRequest, isLoading };

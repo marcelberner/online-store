@@ -18,10 +18,10 @@ const ProductDetail = () => {
   const { dataRequest } = useData();
 
   const getProduct = async () => {
-    const reqponse = await dataRequest({ method: "GET", database: "products" });
-    const product = reqponse.find((product) => product.id === params.productId);
+    const reqponse = await dataRequest({ method: "GET", database: `products/${params.productId}` });
+    // const product = reqponse.find((product) => product.id === params.productId);
 
-    setProduct(product);
+    setProduct(reqponse);
   };
 
   useEffect(() => {
@@ -50,6 +50,7 @@ const ProductDetail = () => {
           <ProductSpecyfication
             spec={product.specyfication}
             product={product}
+            size={"large"}
           />
         </>
       ) : (

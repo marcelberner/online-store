@@ -53,7 +53,9 @@ const userData = createSlice({
       state.wishlist = [...state.wishlist, action.payload];
     },
     wishlistRemove: (state, action) => {
-      state.wishlist = state.wishlist.filter((e) => e !== action.payload);
+      state.wishlist = state.wishlist.filter(
+        (e) => e.productId !== action.payload.productId
+      );
     },
     dataClear: (state) => {
       state.userData = null;

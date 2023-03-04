@@ -23,8 +23,8 @@ const LastWatched = (props) => {
             {props.products.map((product, index) => (
               <SwiperSlide className="slide" key={index}>
                 <ProductItem
-                  key={product.id}
-                  id={product.id}
+                  key={product._id}
+                  id={product._id}
                   img={product.img}
                   name={product.name}
                   price={product.price}

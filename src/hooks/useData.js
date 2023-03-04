@@ -1,50 +1,73 @@
-import { useState, useCallback } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import axios from "axios";
 
 const useData = () => {
-  const [resData, setResData] = useState();
-  const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  // const token = useSelector((state) => state.userAuth.token);
+  const userId = localStorage.getItem("userId");
 
-  const token = useSelector((state) => state.userAuth.token);
+  const url = {
+    dev: "http://localhost:5000/api/",
+    prod: "https://online-store-backend.onrender.com/api/",
+  };
 
-  const dataRequest = useCallback(async (body) => {
-    setIsLoading(true);
+  const getProducts = (filter) => {
+    return axios
+      .get(url.dev + `products${filter || ""}`)
+      .then((response) => response.data.products);
+  };
 
-    try {
-      const response = await fetch(`https://online-store-backend.onrender.com/api/${body.database}`,
-        {
-          method: body.method,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer" + token
-          },
-          body: body.body && JSON.stringify(body.body),
-        });
+  const getProductById = (productId) => {
+    return axios
+      .get(url.dev + `products/${productId}`)
+      .then((response) => response.data.product);
+  };
 
-      if (!response.ok) {
-        throw new Error(`Błąd: ${body.method === "GET"
-              ? "Nie udało się pobrać danych."
-              : "Nie udało się wysłać danych."}`);
-      }
+  const addToCart = (data) => {
+    return axios
+      .post(url.dev + `users/${userId}/cart/add`, { ...data })
+      .then((response) => response.data);
+  };
 
-      const data = await response.json();
+  const removeFromCart = (productId) => {
+    return axios
+      .post(url.dev + `users/${userId}/cart/remove`, { ...productId })
+      .then((response) => response.data);
+  };
 
-      const loadedData = Object.values(data)[0];
+  const deleteFromCart = (productId) => {
+    return axios
+      .delete(url.dev + `users/${userId}/cart/delete`, { ...productId })
+      .then((response) => response.data);
+  };
 
-      setResData(loadedData);
-      setIsLoading(false);
+  const clearCart = () => {
+    return axios
+      .delete(url.dev + `users/${userId}/cart/clear`)
+      .then((response) => response.data);
+  };
 
-      return loadedData;
-    }
-    catch (error) {
-      setError(error.messsage);
-    }
+  const getCartItems = () => {
+    return axios
+      .get(url.dev + `users/${userId}/cart`)
+      .then((response) => response.data);
+  };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const getUserData = () => {
+    return axios
+      .get(url.dev + `users/${userId}`)
+      .then((response) => response.data.userData);
+  };
 
-  return { resData, error, dataRequest, isLoading };
+  return {
+    getProducts,
+    getProductById,
+    addToCart,
+    getCartItems,
+    removeFromCart,
+    deleteFromCart,
+    getUserData,
+    clearCart,
+  };
 };
 
 export default useData;

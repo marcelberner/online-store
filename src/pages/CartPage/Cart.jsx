@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Outlet, useNavigate } from "react-router-dom";
-
-import { setTotalPrice } from "../../store/orderData";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 
 import useData from "../../hooks/useData";
 
@@ -19,50 +18,55 @@ const Cart = () => {
   const deliveryMethod = useSelector((state) => state.orderData.deliveryMethod);
   const paymentMethod = useSelector((state) => state.orderData.paymentMethod);
   const totalPrice = useSelector((state) => state.orderData.totalPrice);
-  const userId = useSelector((state) => state.userAuth.userId);
   const cart = useSelector((state) => state.userData.cart);
+  const userId = localStorage.getItem("userId");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { dataRequest } = useData();
+  const { getCartItems, deleteFromCart } = useData();
+  const queryClient = useQueryClient();
 
   const location = useLocation();
-
   const formRef = useRef(null);
 
-  let cartTotalPrice = 0;
+  const { data } = useQuery({
+    queryKey: ["user-cart", { exact: true }],
+    queryFn: (query) => getCartItems(),
+  });
 
-  for (let i = 0; i < cart.length; i++) {
-    cartTotalPrice += cart[i].price * cart[i].amount;
-  }
+  const sendOrderMutation = useMutation({
+    mutationFn: (mutation) => mutation,
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+
+  const clearCartMutation = useMutation({
+    mutationFn: () => deleteFromCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
 
   const sendOrderHandler = async () => {
-    await dataRequest({
-      method: "POST",
-      database: "orders/order",
-      body: {
-        deliveryMethod: deliveryMethod,
-        paymentMethod: paymentMethod,
-        totalPrice: totalPrice,
-        userId: userId,
-        products: cart,
-      },
+    sendOrderMutation.mutate({
+      deliveryMethod: deliveryMethod,
+      paymentMethod: paymentMethod,
+      totalPrice: totalPrice,
+      userId: userId,
+      products: cart,
     });
 
-    if (userId)
-      await dataRequest({
-        method: "DELETE",
-        database: `users/${userId}/cart/clear`,
-      });
+    if (userId) clearCartMutation.mutate();
+    else dispatch(cartClear());
 
-    dispatch(cartClear());
     navigate("/konto/historia-zamowien");
   };
 
   const switchPage = () => {
     if (location.pathname === "/koszyk") {
-      dispatch(setTotalPrice(cartTotalPrice));
+      // dispatch(setTotalPrice(cartTotalPrice));
       navigate("/koszyk/dostawa");
     } else if (location.pathname === "/koszyk/dostawa") {
       const isFormValid = formRef.current();
@@ -78,26 +82,28 @@ const Cart = () => {
     <section className="cart">
       <div className="cart__container">
         <div className="cart__header">
-          <h1 className="cart__title">{`${
-            location.pathname === "/koszyk" ? "Twój koszyk" : ""
-          }${location.pathname === "/koszyk/dostawa" ? "Dostawa" : ""}${
-            location.pathname === "/koszyk/podsumowanie" ? "Podsumowanie" : ""
-          }`}</h1>
+          <h1 className="cart__title">
+            {location.pathname === "/koszyk"
+              ? "Twój koszyk"
+              : location.pathname === "/koszyk/dostawa"
+              ? "Dostawa"
+              : location.pathname === "/koszyk/podsumowanie"
+              ? "Podsumowanie"
+              : ""}
+          </h1>
         </div>
         <div
           className={`cart__progress ${
-            location.pathname === "/koszyk" ? "cart__progress--stage1" : ""
-          }${
-            location.pathname === "/koszyk/dostawa"
+            location.pathname === "/koszyk"
+              ? "cart__progress--stage1"
+              : location.pathname === "/koszyk/dostawa"
               ? "cart__progress--stage2"
-              : ""
-          }${
-            location.pathname === "/koszyk/podsumowanie"
+              : location.pathname === "/koszyk/podsumowanie"
               ? "cart__progress--stage3"
               : ""
           }`}
         ></div>
-        {cart.length > 0 ? (
+        {data && data.cart.length > 0 ? (
           <>
             <div className="cart__content">
               <Outlet context={formRef} />
@@ -110,6 +116,7 @@ const Cart = () => {
               >
                 <div className="cart__button">
                   <SubmitButton
+                    action={switchPage}
                     size={"large"}
                     center={
                       location.pathname === "/koszyk/dostawa" ||
@@ -118,17 +125,12 @@ const Cart = () => {
                     text={`${
                       location.pathname === "/koszyk"
                         ? "Dostawa i płatność"
-                        : ""
-                    }${
-                      location.pathname === "/koszyk/dostawa"
+                        : location.pathname === "/koszyk/dostawa"
                         ? "Podsumowanie"
-                        : ""
-                    }${
-                      location.pathname === "/koszyk/podsumowanie"
+                        : location.pathname === "/koszyk/podsumowanie"
                         ? "Płacę i zamawiam"
                         : ""
                     }`}
-                    action={switchPage}
                   />
                 </div>
                 <div
@@ -137,9 +139,9 @@ const Cart = () => {
                   }`}
                 >
                   <span className="cart__text">Łączna kwota:</span>
-                  <span className="cart__text">{`${cartTotalPrice.toFixed(
-                    2
-                  )} zł`}</span>
+                  <span className="cart__text">
+                    {data.totalPrice.toFixed(2)} zł
+                  </span>
                 </div>
                 <PriceItems
                   cart={cart}

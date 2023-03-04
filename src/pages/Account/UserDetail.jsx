@@ -1,25 +1,31 @@
-import { useSelector } from "react-redux";
+import { useQuery } from "react-query";
+import useData from "../../hooks/useData";
 
 import UserForm from "../../components/Form/UserForm/UserForm";
 
 import "./UserDetail.scss";
 
 const UserDetail = () => {
-  const userData = useSelector((state) => state.userData.userData);
+  const { getUserData } = useData();
+
+  const { data } = useQuery({
+    queryKey: ["user-data"],
+    queryFn: () => getUserData(),
+  });
 
   return (
     <>
-      {userData && (
+      {data && (
         <div className="user-details">
           <div className="user-details__header">
-            {userData.name ? (
-              <span className="user-details__title">{`Cześć, ${userData.name}`}</span>
+            {data.name ? (
+              <span className="user-details__title">{`Cześć, ${data.name}`}</span>
             ) : (
-              <span className="user-details__title">{userData.email}</span>
+              <span className="user-details__title">{data.email}</span>
             )}
           </div>
           <div className="user-details__content">
-            <UserForm userData={userData}/>
+            <UserForm userData={data} />
           </div>
         </div>
       )}

@@ -1,54 +1,36 @@
-import { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useQuery } from "react-query";
 
 import useData from "../../hooks/useData";
 
-import { setProducts } from "../../store/orderData";
-
 import CartItem from "../../components/Cart/CartItem/CartItem";
+import LoadSpinner from "../../components/UI/LoadSpinner/LoadSpinner";
 
 import "./CartItems.scss";
 
 const CartItems = () => {
-  const cart = useSelector((state) => state.userData.cart);
-  const [cartProducts, setCartProducts] = useState();
+  const { getCartItems } = useData();
 
-  const dispatch = useDispatch();
-
-  const { dataRequest } = useData();
-
-  const getProductData = useCallback(async () => {
-    const products = await dataRequest({ method: "GET", database: "products" });
-
-    const seekProducts = [];
-
-    for (let i = 0; i < cart.length; i++) {
-      const seekProduct = products.find(
-        (product) => product.id === cart[i].productId
-      );
-      seekProducts.push(seekProduct);
-    }
-
-    dispatch(setProducts(seekProducts));
-    setCartProducts(seekProducts);
-  }, [cart, dispatch, dataRequest]);
-
-  useEffect(() => {
-    getProductData();
-  }, [getProductData]);
+  const { data, isLoading } = useQuery({
+    queryKey: ["user-cart", { exact: true }],
+    queryFn: () => getCartItems(),
+  });
 
   return (
     <div className="cart-items">
-      {cartProducts &&
-        cartProducts.map((product, index) => (
+      {isLoading ? (
+        <LoadSpinner />
+      ) : (
+        data.cart.map((product, index) => (
           <CartItem
+            productId={product._id}
             key={index}
             img={product.img}
             name={product.name}
-            amount={cart[index] && cart[index].amount}
-            cart={cart[index]}
+            amount={product.amount}
+            price={product.price}
           />
-        ))}
+        ))
+      )}
     </div>
   );
 };

@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-
+import { useQuery } from "react-query";
 import useData from "../../hooks/useData";
 
 import Slider from "../../components/Slider/Slider";
@@ -15,25 +14,30 @@ import INFORMATIONS from "../../data/informations";
 import "./HomePage.scss";
 
 const HomePage = () => {
-  const { resData, dataRequest } = useData();
+  const { getProducts } = useData();
 
-  useEffect(() => {
-    dataRequest({ method: "GET", database: "products" });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  const { data, isError, error } = useQuery({
+    queryKey: ["products", { featured: "true" }],
+    queryFn: () => getProducts("?featured=true"),
+  });
+
+  if (isError) console.log(error);
 
   return (
     <div className="home-page">
       <Slider />
-      <Recomended products={resData && resData.slice(0,8)}/>
+      <Recomended products={data && data.slice(0, 8)} />
       <Informations
         title={"Odkryj Online Store"}
         content={INFORMATIONS}
         mediumSize={true}
       />
-      <Bestsellers title={"Bestsellery"} products={resData && resData.slice(0,12)} />
+      <Bestsellers title={"Bestsellery"} products={data && data.slice(0, 12)} />
       <Informations title={"Aktualności"} content={NEWS} />
-      <LastWatched title={"Ostatnio oglądane"} products={resData && resData.slice(0,12)} />
+      <LastWatched
+        title={"Ostatnio oglądane"}
+        products={data && data.slice(0, 12)}
+      />
       <Informations title={"Poradniki"} content={TUTORIALS} />
     </div>
   );

@@ -18,7 +18,7 @@ const Hotshot = (props) => {
   return (
     <>
       {randomProduct && (
-        <Link to={`/product/${randomProduct.id}`}>
+        <Link to={`/product/${randomProduct._id}`}>
           <div className="hotshot">
             <h2 className="hotshot__element hotshot__header">Gorący strzał</h2>
             <div

@@ -1,6 +1,5 @@
-import { useEffect, useCallback, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-
+import { useQuery } from "react-query";
 import useData from "../../hooks/useData";
 
 import Sort from "../../components/Filter/Sort";
@@ -16,10 +15,7 @@ const ProductList = () => {
   const loctaion = useLocation();
   const navigate = useNavigate();
 
-  const [products, setProducts] = useState();
-  const [productsLength, setProductsLength] = useState();
-
-  const { dataRequest, isLoading } = useData();
+  const { getProducts } = useData();
 
   const queryParams = new URLSearchParams(loctaion.search);
 
@@ -57,62 +53,38 @@ const ProductList = () => {
     );
   };
 
-  const loadProducts = useCallback(async () => {
-    const resData = await dataRequest({ method: "GET", database: "products" });
-
-    let products = null;
-
-    if (params.productCategory === "search") {
-      products = resData.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchQuery) ||
-          product.category.category.toLowerCase().includes(searchQuery) ||
-          (product.category.subcategory &&
-            product.category.subcategory.toLowerCase().includes(searchQuery))
-      );
-    } else {
-      products = resData.filter(
-        (product) =>
-          product.category.category === params.productCategory ||
-          product.category.subcategory === params.productCategory
-      );
-    }
-
-    if (sortQuery)
-      products = products.sort((a, b) => {
-        if (sortQuery === "cena_asc") return a.price - b.price;
-        else if (sortQuery === "cena_dsc") return b.price - a.price;
-        else if (sortQuery === "ocena_asc") return a.reputation - b.reputation;
-        else if (sortQuery === "ocena_dsc") return b.reputation - a.reputation;
-
-        return 0;
-      });
-
-    const productSlice = products.slice(
-      0 + (pageQuery - 1) * 12,
-      pageQuery * 12
-    );
-
-    setProductsLength(products.length);
-    setProducts(productSlice);
-  }, [dataRequest, params.productCategory, pageQuery, searchQuery, sortQuery]);
-
-  useEffect(() => {
-    loadProducts();
-  }, [loadProducts, dataRequest]);
+  const { data, isError, error, isLoading } = useQuery({
+    queryKey: [
+      "products",
+      params.productCategory,
+      { search: searchQuery, page: pageQuery, sort: sortQuery },
+    ],
+    queryFn: () =>
+      getProducts(
+        `?${
+          params.productCategory
+            ? "category=" + params.productCategory + "&"
+            : ""
+        }${searchQuery ? "search=" + searchQuery + "&" : ""}${
+          pageQuery ? "page=" + pageQuery + "&" : 1
+        }${searchQuery ? "search=" + searchQuery + "&" : ""}${
+          sortQuery ? "sort=" + sortQuery + "&" : ""
+        }`
+      ),
+  });
 
   return (
     <div className="product-list-page">
       <div className="product-list">
         <Sort sortProduct={sortProductsHandler} />
         {isLoading && <LoadSpinner />}
-        {!isLoading && products && products.length > 0 && (
+        {!isLoading && data && data.length > 0 && (
           <>
             <div className="products-container">
-              {products.map((product, index) => (
+              {data.map((product, index) => (
                 <div className="product-item" key={index}>
                   <ProductItem
-                    id={product.id}
+                    id={product._id}
                     img={product.img}
                     name={product.name}
                     price={product.price}
@@ -126,13 +98,13 @@ const ProductList = () => {
             </div>
             <SelectPage
               currentPage={pageQuery}
-              productsLength={productsLength}
+              productsLength={data.length}
               swapForward={swapForwardHandler}
               swapBackward={swapBackwardHandler}
             />
           </>
         )}
-        {!isLoading && products && products.length === 0 && (
+        {!isLoading && data && data.length === 0 && (
           <NoFoundHeader text={"Nie znaleziono produktu"} />
         )}
       </div>

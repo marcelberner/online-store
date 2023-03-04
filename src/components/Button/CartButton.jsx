@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useMutation, useQueryClient } from "react-query";
 
 import { cartAdd } from "../../store/userData";
 
@@ -10,20 +11,23 @@ const CartButton = (props) => {
   const userId = useSelector((state) => state.userAuth.userId);
 
   const dispatch = useDispatch();
-  const { dataRequest } = useData();
+  const { addToCart } = useData();
+  const queryClient = useQueryClient();
+
+  const addToCartMutation = useMutation({
+    mutationFn: addToCart,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["user-cart", { exact: true }]);
+    },
+  });
 
   const addToCartHandler = async () => {
     dispatch(cartAdd({ productId: props.id, amount: 1, price: props.price }));
 
     if (userId) {
-      await dataRequest({
-        method: "POST",
-        database: `users/${userId}/cart/add`,
-        body: {
-          productId: props.id,
-          amount: 1,
-          price: props.price,
-        },
+      addToCartMutation.mutate({
+        productId: props.id,
+        price: props.price,
       });
     }
   };

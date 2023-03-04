@@ -17,7 +17,7 @@ const AccountPage = () => {
     dispatch(logout());
     dispatch(dataClear());
     navigate("/");
-  }
+  };
 
   return (
     <section className="account-page">
@@ -37,9 +37,7 @@ const AccountPage = () => {
           </Link>
           <Link to={"/konto/historia-zamowien"}>
             <li className="account-page__option">
-              <span className="account-page__title">
-                Historia zamówień
-              </span>
+              <span className="account-page__title">Historia zamówień</span>
             </li>
           </Link>
           <Link to={"/listy-zakupowe"}>
@@ -47,7 +45,10 @@ const AccountPage = () => {
               <span className="account-page__title">Listy zakupowe</span>
             </li>
           </Link>
-          <li className="account-page__option account-page__option--separate" onClick={logoutHandler}>
+          <li
+            className="account-page__option account-page__option--separate"
+            onClick={logoutHandler}
+          >
             <span className="account-page__title">Wyloguj się</span>
           </li>
           <li className="account-page__option account-page__option--warn">

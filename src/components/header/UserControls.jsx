@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useQuery } from "react-query";
+import useData from "../../hooks/useData";
 
 import ControlButton from "./ControlButton";
 import Backdrop from "../UI/Backdrop/Backdrop";
@@ -10,16 +12,13 @@ const UserControls = (props) => {
   const state = useSelector((state) => state.userAuth.token);
   const resolution = useSelector((state) => state.window.resolution);
   const userData = useSelector((state) => state.userData.userData);
-  const cart = useSelector((state) => state.userData.cart);
 
-  let cartTotalPrice = 0;
-  let cartTotalAmount = 0;
+  const { getCartItems } = useData();
 
-  for (let i = 0; i < cart.length; i++) {
-    cartTotalPrice += cart[i].price * cart[i].amount;
-
-    cartTotalAmount += cart[i].amount;
-  }
+  const { data } = useQuery({
+    queryKey: ["user-cart", { exact: true }],
+    queryFn: () => getCartItems(),
+  });
 
   const navToggle = () => {
     if (props.navState) props.navHide();
@@ -58,14 +57,14 @@ const UserControls = (props) => {
           <ControlButton
             icon={
               <i className="fa-solid fa-cart-shopping control__button-icon">
-                {cartTotalAmount > 0 && (
+                {data && data.totalPrice > 0 && (
                   <span className="control__button-info">
-                    {cartTotalAmount}
+                    {data.totalAmount}
                   </span>
                 )}
               </i>
             }
-            description={`${cartTotalPrice.toFixed(2)} zł`}
+            description={`${data && data.totalPrice.toFixed(2)} zł`}
           />
         </Link>
         <div

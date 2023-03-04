@@ -30,32 +30,30 @@ const AuthForm = (props) => {
     isEmpty: true,
   });
 
-  const [isCnfPasswordValid, validateCnfPassword, clearCnfPassword] = useValidate({
-    inputRef: cnfPassword,
-    isEmpty: true,
-    isEqualTo: password,
-  });
+  const [isCnfPasswordValid, validateCnfPassword, clearCnfPassword] =
+    useValidate({
+      inputRef: cnfPassword,
+      isEmpty: true,
+      isEqualTo: password,
+    });
 
   const userAuthHandler = async (event) => {
     event.preventDefault();
 
     const currentEmail = email.current.value;
     const currentPassword = password.current.value;
-    const currentCnfPassword = props.currentForm === "signup"
-        ? cnfPassword.current.value
-        : true;
-    const currentCheckbox = props.currentForm === "signup" 
-        ? checkbox.current.value 
-        : true;
-        
+    const currentCnfPassword =
+      props.currentForm === "signup" ? cnfPassword.current.value : true;
+    const currentCheckbox =
+      props.currentForm === "signup" ? checkbox.current.value : true;
+
     const validEmail = validateEmail();
     const validPassword = validatePassword();
-    const validCnfPassword = props.currentForm === "signup" 
-        ? validateCnfPassword()
-        : false;
+    const validCnfPassword =
+      props.currentForm === "signup" ? validateCnfPassword() : false;
 
     if (validEmail && validPassword) {
-      if(props.currentForm === "signup" && !validCnfPassword) {
+      if (props.currentForm === "signup" && !validCnfPassword) {
         allert({ type: "fail", text: "Wpisz poprawne hasło" });
         return;
       }
@@ -68,11 +66,12 @@ const AuthForm = (props) => {
         checkbox: currentCheckbox,
       });
 
-      if(authResponse && props.currentForm === "signup") allert({ type: "succes", text: "Pomyślnie utworzono konto" });
-      else if(authResponse) allert({ type: "succes", text: "Pomyślnie zalogowano" });
+      if (authResponse && props.currentForm === "signup")
+        allert({ type: "succes", text: "Pomyślnie utworzono konto" });
+      else if (authResponse)
+        allert({ type: "succes", text: "Pomyślnie zalogowano" });
       else allert({ type: "fail", text: "Nie udało się zarejestrować" });
-    }
-    else allert({ type: "fail", text: "Popraw błędne pola" });
+    } else allert({ type: "fail", text: "Popraw błędne pola" });
   };
 
   return (
@@ -141,9 +140,9 @@ const AuthForm = (props) => {
             <SubmitButton text={"Załóż konto"} size={"large"} />
           )}
         </div>
-          {(allertType && allertText) && (
-            <Allert type={allertType} text={allertText} />
-          )} 
+        {allertType && allertText && (
+          <Allert type={allertType} text={allertText} />
+        )}
       </form>
     </div>
   );

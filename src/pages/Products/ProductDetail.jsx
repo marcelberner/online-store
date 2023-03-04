@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 import { useParams } from "react-router-dom";
 import useData from "../../hooks/useData";
@@ -11,50 +11,38 @@ import "./ProductDetail.scss";
 import LoadSpinner from "../../components/UI/LoadSpinner/LoadSpinner";
 
 const ProductDetail = () => {
-  const [product, setProduct] = useState(null);
-
   const params = useParams();
 
-  const { dataRequest } = useData();
+  const { getProductById } = useData();
 
-  const getProduct = async () => {
-    const reqponse = await dataRequest({ method: "GET", database: `products/${params.productId}` });
-    // const product = reqponse.find((product) => product.id === params.productId);
-
-    setProduct(reqponse);
-  };
-
-  useEffect(() => {
-    getProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data, isError, error, isLoading } = useQuery({
+    queryKey: ["product", params.productId],
+    queryFn: () => getProductById(params.productId),
+  });
 
   return (
     <div className="product-detail-page">
-      {product ? (
+      {isLoading ? (
+        <LoadSpinner />
+      ) : (
         <>
           <ProductCard
-            id={product.id}
-            images={product.img}
-            name={product.name}
-            price={product.price}
-            spec={product.specyfication}
-            rep={product.reputation}
-            recomendation={product.recomendation}
-            product={product}
+            id={data._id}
+            images={data.img}
+            name={data.name}
+            price={data.price}
+            spec={data.specyfication}
+            rep={data.reputation}
+            recomendation={data.recomendation}
+            product={data}
           />
-          <ProductDescription
-            description={product.description}
-            product={product}
-          />
+          <ProductDescription description={data.description} product={data} />
           <ProductSpecyfication
-            spec={product.specyfication}
-            product={product}
+            spec={data.specyfication}
+            product={data}
             size={"large"}
           />
         </>
-      ) : (
-        <LoadSpinner />
       )}
     </div>
   );

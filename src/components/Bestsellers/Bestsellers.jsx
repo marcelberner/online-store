@@ -14,8 +14,8 @@ const Bestselers = (props) => {
           <div className="bestselers__content">
             {props.products.map((product) => (
               <ProductItem
-                key={product.id}
-                id={product.id}
+                key={product._id}
+                id={product._id}
                 img={product.img}
                 name={product.name}
                 price={product.price}

@@ -23,7 +23,7 @@ const WishlistPage = () => {
     // eslint-disable-next-line array-callback-return
     const seekProducts = products.filter((product) => {
       const productIsFound = wishlistItems.find(
-        (element) => element.productId === product.id
+        (element) => element.productId === product._id
       );
       if (productIsFound) return product;
     });

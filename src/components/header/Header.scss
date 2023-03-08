@@ -9,9 +9,6 @@
   width: 100%;
   height: max-content;
   z-index: 10;
-  &--hide {
-    display: none;
-  }
   &__content {
     display: flex;
     flex-direction: row;

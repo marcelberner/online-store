@@ -1,44 +1,30 @@
-import { useSelector, useDispatch } from "react-redux";
-
-import { wishlistAdd, wishlistRemove } from "../../store/userData";
+import { useMutation, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 
 import useData from "../../hooks/useData";
 
 import "./WishButton.scss";
 
 const WishButton = (props) => {
-  const userId = useSelector((state) => state.userAuth.userId);
-  const wishlist = useSelector((state) => state.userData.wishlist);
-  const dispatch = useDispatch();
+  const userId = localStorage.getItem("userId");
 
-  const { dataRequest } = useData();
+  const { toggleWishlist, getWishlistProduct } = useData();
+  const queryClients = useQueryClient();
 
-  const wishlistProduct = wishlist.find(
-    (product) => product.productId === props.id
-  );
+  const { data } = useQuery({
+    queryKey: ["wishlist", props.id],
+    queryFn: () => getWishlistProduct(props.id),
+  });
+
+  const addToWishlistMutation = useMutation({
+    mutationFn: toggleWishlist,
+    onSuccess: () => {
+      queryClients.invalidateQueries("wishlist");
+    },
+  });
 
   const wishlistAddHandler = async () => {
-    if (!wishlistProduct) {
-      dispatch(wishlistAdd({ productId: props.id }));
-
-      await dataRequest({
-        method: "POST",
-        database: `users/${userId}/wishlist/add`,
-        body: {
-          productId: props.id,
-        },
-      });
-    } else {
-      dispatch(wishlistRemove({ productId: props.id }));
-
-      await dataRequest({
-        method: "POST",
-        database: `users/${userId}/wishlist/remove`,
-        body: {
-          productId: props.id,
-        },
-      });
-    }
+    if (userId) addToWishlistMutation.mutate(props.id);
   };
 
   return (
@@ -50,7 +36,7 @@ const WishButton = (props) => {
         props.size === "small" && "wish-button--small"
       }`}
     >
-      {wishlistProduct ? (
+      {data ? (
         <i className="fa-solid fa-heart-circle-minus"></i>
       ) : (
         <i className="fa-solid fa-heart-circle-plus"></i>

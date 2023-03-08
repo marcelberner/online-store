@@ -10,7 +10,6 @@ const Sumarry = () => {
   const paymentMethod = useSelector((state) => state.orderData.paymentMethod);
   const deliveryMethod = useSelector((state) => state.orderData.deliveryMethod);
   const orderProducts = useSelector((state) => state.orderData.products);
-  const cart = useSelector((state) => state.userData.cart);
 
   return (
     <div className="summary">
@@ -22,7 +21,7 @@ const Sumarry = () => {
               key={index}
               img={product.img}
               name={product.name}
-              amount={cart[index] && cart[index].amount}
+              amount={product.amount}
               compact={true}
             />
           ))}

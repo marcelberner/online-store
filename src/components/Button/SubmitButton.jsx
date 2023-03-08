@@ -3,6 +3,7 @@ import "./SubmitButton.scss";
 const SubmitButton = (props) => {
   return (
     <input
+      disabled={props.disabled}
       onClick={props.action}
       className={`submit-button ${
         props.center ? "submit-button--center" : ""

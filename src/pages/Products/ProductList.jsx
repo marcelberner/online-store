@@ -78,10 +78,10 @@ const ProductList = () => {
       <div className="product-list">
         <Sort sortProduct={sortProductsHandler} />
         {isLoading && <LoadSpinner />}
-        {!isLoading && data && data.length > 0 && (
+        {!isLoading && data.products && data.products.length > 0 && (
           <>
             <div className="products-container">
-              {data.map((product, index) => (
+              {data.products.map((product, index) => (
                 <div className="product-item" key={index}>
                   <ProductItem
                     id={product._id}
@@ -98,13 +98,13 @@ const ProductList = () => {
             </div>
             <SelectPage
               currentPage={pageQuery}
-              productsLength={data.length}
+              productsLimit={data.limit}
               swapForward={swapForwardHandler}
               swapBackward={swapBackwardHandler}
             />
           </>
         )}
-        {!isLoading && data && data.length === 0 && (
+        {!isLoading && data.products && data.products.length === 0 && (
           <NoFoundHeader text={"Nie znaleziono produktu"} />
         )}
       </div>

@@ -1,14 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useMutation, useQueryClient } from "react-query";
 
-import { cartAdd } from "../../store/userData";
+import { productAdd } from "../../store/orderData";
 
 import useData from "../../hooks/useData";
 
 import "./CartButton.scss";
 
 const CartButton = (props) => {
-  const userId = useSelector((state) => state.userAuth.userId);
+  const token = localStorage.getItem("token");
 
   const dispatch = useDispatch();
   const { addToCart } = useData();
@@ -16,20 +16,27 @@ const CartButton = (props) => {
 
   const addToCartMutation = useMutation({
     mutationFn: addToCart,
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["user-cart", { exact: true }]);
     },
   });
 
   const addToCartHandler = async () => {
-    dispatch(cartAdd({ productId: props.id, amount: 1, price: props.price }));
-
-    if (userId) {
+    if (token)
       addToCartMutation.mutate({
         productId: props.id,
         price: props.price,
       });
-    }
+    else
+      dispatch(
+        productAdd({
+          _id: props.id,
+          amount: 1,
+          price: props.price,
+          img: props.img,
+          name: props.name,
+        })
+      );
   };
 
   return (

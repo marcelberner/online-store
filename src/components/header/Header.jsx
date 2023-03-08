@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import ReactDOM from "react-dom";
 
@@ -34,15 +34,16 @@ const Header = () => {
     if (resolution <= 800) navHide();
     else navShow();
 
-    window.addEventListener("scroll", () => {
+    const toggleEvent = () => {
       if (resolution > 800) {
         if (window.scrollY < lastPosition) navShow();
         else navHide();
 
         lastPosition = window.scrollY;
       }
-    });
-
+    };
+    window.addEventListener("scroll", toggleEvent);
+    return () => window.removeEventListener("scroll", toggleEvent);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

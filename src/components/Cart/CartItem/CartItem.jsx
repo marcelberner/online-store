@@ -1,9 +1,9 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useMutation, useQueryClient } from "react-query";
 
 import useData from "../../../hooks/useData";
 
-import { cartRemove, cartDelete, cartAdd } from "../../../store/userData";
+import { productAdd, productRemove, productDelete } from "../../../store/orderData";
 
 import "./CartItem.scss";
 
@@ -42,7 +42,7 @@ const CartItem = (props) => {
       });
     } else
       dispatch(
-        cartAdd({
+        productAdd({
           productId: props.productId,
           amount: props.amount,
           price: props.price,
@@ -51,14 +51,13 @@ const CartItem = (props) => {
   };
 
   const decreseAmount = async () => {
-    console.log(props.productId);
     if (userId) {
       removeFromCartMutation.mutate({
         productId: props.productId,
       });
     } else
       dispatch(
-        cartRemove({
+        productRemove({
           productId: props.productId,
           amount: props.amount,
           price: props.price,
@@ -73,7 +72,7 @@ const CartItem = (props) => {
       });
     } else
       dispatch(
-        cartDelete({
+        productDelete({
           productId: props.productId,
           amount: props.amount,
           price: props.price,

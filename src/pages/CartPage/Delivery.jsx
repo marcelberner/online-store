@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useQuery } from "react-query";
 
 import { useOutletContext } from "react-router-dom";
+import useData from "../../hooks/useData";
 
 import useValidate from "../../hooks/useValidate";
 import useAllert from "../../hooks/useAllert";
@@ -18,11 +20,11 @@ import {
 import "./Delivery.scss";
 
 const Delivery = () => {
-  const userData = useSelector((state) => state.userData.userData);
   const [payment, setPayment] = useState("Karta płatnicza online");
   const [delivery, setDelivery] = useState("Kurier - InPost, UPS, FedEx, DTS");
 
   const { allert, allertType, allertText } = useAllert();
+  const { getUserData } = useData();
 
   const dispatch = useDispatch();
 
@@ -33,6 +35,11 @@ const Delivery = () => {
   const zipcode = useRef();
   const phone = useRef();
   const email = useRef();
+
+  const { data: userData, isLoading } = useQuery({
+    queryKey: ["user-data"],
+    queryFn: () => getUserData(),
+  });
 
   const [isNameValid, validateName, clearName] = useValidate({
     inputRef: name,
@@ -120,7 +127,7 @@ const Delivery = () => {
         <input
           onChange={clearName}
           type={"text"}
-          defaultValue={userData && userData.name}
+          defaultValue={(userData && userData.name) || ""}
           ref={name}
           className={`delivery__input ${
             !isNameValid ? "delivery__input--invalid" : ""
@@ -130,7 +137,7 @@ const Delivery = () => {
         <input
           onChange={clearSurname}
           type={"text"}
-          defaultValue={userData && userData.surname}
+          defaultValue={(userData && userData.surname) || ""}
           ref={surname}
           className={`delivery__input ${
             !isSurnameValid ? "delivery__input--invalid" : ""
@@ -140,7 +147,9 @@ const Delivery = () => {
         <input
           onChange={clearStreet}
           type={"text"}
-          defaultValue={userData.address && userData.address.street}
+          defaultValue={
+            (userData && userData.address && userData.address.street) || ""
+          }
           ref={street}
           className={`delivery__input ${
             !isStreetValid ? "delivery__input--invalid" : ""
@@ -150,7 +159,9 @@ const Delivery = () => {
         <input
           onChange={clearCity}
           type={"text"}
-          defaultValue={userData.address && userData.address.city}
+          defaultValue={
+            (userData && userData.address && userData.address.city) || ""
+          }
           ref={city}
           className={`delivery__input ${
             !isCityValid ? "delivery__input--invalid" : ""
@@ -160,7 +171,9 @@ const Delivery = () => {
         <input
           onChange={clearCode}
           type={"text"}
-          defaultValue={userData.address && userData.address.zipcode}
+          defaultValue={
+            (userData && userData.address && userData.address.zipcode) || ""
+          }
           ref={zipcode}
           className={`delivery__input ${
             !isCodeValid ? "delivery__input--invalid" : ""
@@ -170,7 +183,7 @@ const Delivery = () => {
         <input
           onChange={clearEmail}
           type={"text"}
-          defaultValue={userData && userData.email}
+          defaultValue={(userData && userData.email) || ""}
           ref={email}
           className={`delivery__input ${
             !isEmailValid ? "delivery__input--invalid" : ""
@@ -180,7 +193,7 @@ const Delivery = () => {
         <input
           onChange={clearPhone}
           type={"text"}
-          defaultValue={userData && userData.phone}
+          defaultValue={(userData && userData.phone) || ""}
           ref={phone}
           className={`delivery__input ${
             !isPhoneValid ? "delivery__input--invalid" : ""

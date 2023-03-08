@@ -1,9 +1,6 @@
 import React, { useEffect, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
-
-import useData from "./hooks/useData";
 
 import { setResolution } from "./store/window";
 

@@ -1,21 +1,23 @@
 import { Link, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "react-query";
 
-import { logout } from "../../store/userAuth";
-import { dataClear } from "../../store/userData";
+import { clearOrderData } from "../../store/orderData";
 
 import "./AccountPage.scss";
 
 const AccountPage = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const queryClient = useQueryClient();
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-    dispatch(logout());
-    dispatch(dataClear());
+    dispatch(clearOrderData());
+    queryClient.removeQueries();
     navigate("/");
   };
 
@@ -30,11 +32,11 @@ const AccountPage = () => {
               </span>
             </li>
           </Link>
-          <Link to={"/konto/twoje-produkty"}>
+          {/* <Link to={"/konto/twoje-produkty"}>
             <li className="account-page__option">
               <span className="account-page__title">Twoje produkty</span>
             </li>
-          </Link>
+          </Link> */}
           <Link to={"/konto/historia-zamowien"}>
             <li className="account-page__option">
               <span className="account-page__title">Historia zamówień</span>

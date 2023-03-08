@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 import PurchaseInfo from "./PurchaseInfo";
 import WishButton from "../../Button/WishButton";
 import CartButton from "../../Button/CartButton";
@@ -7,7 +5,7 @@ import CartButton from "../../Button/CartButton";
 import "./PurchaseBar.scss";
 
 const PurchaseBar = (props) => {
-  const isAuth = useSelector((state) => state.userAuth.token);
+  const token = localStorage.getItem("token");
 
   return (
     <div className="purchase-bar">
@@ -16,8 +14,14 @@ const PurchaseBar = (props) => {
           {props.price.toFixed(2) + " zł"}
         </span>
         <div className="purchase-bar__buttons">
-          {isAuth && <WishButton id={props.id} size={"large"} />}
-          <CartButton id={props.id} price={props.price} size={"large"} />
+          {token && <WishButton id={props.id} size={"large"} />}
+          <CartButton
+            id={props.id}
+            img={props.img}
+            name={props.name}
+            price={props.price}
+            size={"large"}
+          />
         </div>
       </div>
       <PurchaseInfo

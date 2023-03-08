@@ -2,10 +2,7 @@ import "./ProductSlider.scss";
 
 const ProductSlider = (props) => {
   return (
-    <div
-      className="product-slider"
-      // style={{ backgroundImage: `url(${props.images})` }}
-    >
+    <div className="product-slider">
       <img
         src={props.images}
         alt="product img"

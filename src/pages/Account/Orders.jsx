@@ -1,66 +1,32 @@
-import { useEffect, useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import { useQuery } from "react-query";
 
 import useData from "../../hooks/useData";
 
 import NoFoundHeader from "../../components/UI/Allerts/NoFoundHeader";
+import LoadSpinner from "../../components/UI/LoadSpinner/LoadSpinner";
 
 import "./Orders.scss";
 
 const Orders = () => {
-  const userId = useSelector((state) => state.userAuth.userId);
-  const [orders, setOrders] = useState();
-  const { dataRequest } = useData();
+  const { getOrders } = useData();
 
-  const getOrders = useCallback(async () => {
-    const findOrder = await dataRequest({
-      method: "GET",
-      database: `orders/${userId}`,
-    });
-
-    const findProducts = await dataRequest({
-      method: "GET",
-      database: "products",
-    });
-
-    const formatOrders = findOrder.map((orders) => {
-      const productNames = [];
-
-      orders.products.forEach((product) => {
-        const seekProduct = findProducts.find(
-          (products) => products.id === product.productId
-        );
-        productNames.push(seekProduct.name);
-      });
-
-      return {
-        date: orders.date,
-        id: orders.id,
-        status: orders.status,
-        totalPrice: orders.totalPrice,
-        products: productNames,
-      };
-    });
-
-    setOrders(formatOrders);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    getOrders();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data, isLoading } = useQuery({
+    queryKey: "orders",
+    queryFn: () => getOrders(),
+  });
 
   return (
     <section className="orders">
       <div className="orders__container">
-        {orders && orders.length > 0 ? (
-          orders.map((order, index) => {
+        {isLoading ? (
+          <LoadSpinner />
+        ) : data.length > 0 ? (
+          data.map((order, index) => {
             return (
               <div className="orders__item" key={index}>
                 <div className="orders__column">
                   <span className="orders__label">Numer zamówienia: </span>
-                  <span>{order.id}</span>
+                  <span>{order._id}</span>
                 </div>
                 <div className="orders__column">
                   <span className="orders__label">status:</span>
@@ -75,7 +41,7 @@ const Orders = () => {
                       order.products.map((product, index) => {
                         return (
                           <span className="orders__product" key={index}>
-                            {product}
+                            {product.name}
                           </span>
                         );
                       })}

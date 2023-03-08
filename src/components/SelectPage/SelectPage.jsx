@@ -15,9 +15,7 @@ const SelectPage = (props) => {
       <span className="select-page__current">{props.currentPage}</span>
       <button
         className={`select-page__button select-page__button--right ${
-          props.currentPage * 12 > props.productsLength
-            ? "select-page__button--hide"
-            : ""
+          props.productsLimit ? "select-page__button--hide" : ""
         }`}
         onClick={props.swapForward}
       >

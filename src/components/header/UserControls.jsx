@@ -9,15 +9,21 @@ import Backdrop from "../UI/Backdrop/Backdrop";
 import "./UserControls.scss";
 
 const UserControls = (props) => {
-  const state = useSelector((state) => state.userAuth.token);
+  const token = localStorage.getItem("token");
   const resolution = useSelector((state) => state.window.resolution);
-  const userData = useSelector((state) => state.userData.userData);
+  const totalPrice = useSelector((state) => state.orderData.totalPrice);
+  const totalAmount = useSelector((state) => state.orderData.totalAmount);
 
-  const { getCartItems } = useData();
+  const { getCartItems, getUserData } = useData();
 
   const { data } = useQuery({
     queryKey: ["user-cart", { exact: true }],
     queryFn: () => getCartItems(),
+  });
+
+  const { data: userData } = useQuery({
+    queryKey: ["user-data"],
+    queryFn: () => getUserData(),
   });
 
   const navToggle = () => {
@@ -43,12 +49,12 @@ const UserControls = (props) => {
             description={"Listy zakupowe"}
           />
         </Link>
-        <Link to={state ? "/konto" : "/logowanie"}>
+        <Link to={token ? "/konto" : "/logowanie"}>
           <ControlButton
             icon={<i className="fa-solid fa-user control__button-icon"></i>}
             description={`${
-              state
-                ? `${userData && userData.name ? userData.name : "Twoje konto"}`
+              token
+                ? `${(userData && userData.name) || "Twoje konto"}`
                 : "Zaloguj się"
             }`}
           />
@@ -57,14 +63,18 @@ const UserControls = (props) => {
           <ControlButton
             icon={
               <i className="fa-solid fa-cart-shopping control__button-icon">
-                {data && data.totalPrice > 0 && (
+                {((data && data.totalPrice > 0) || totalAmount > 0) && (
                   <span className="control__button-info">
-                    {data.totalAmount}
+                    {token ? data.totalAmount : totalAmount}
                   </span>
                 )}
               </i>
             }
-            description={`${data && data.totalPrice.toFixed(2)} zł`}
+            description={`${
+              token
+                ? (data && data.totalPrice.toFixed(2)) || (0).toFixed(2)
+                : totalPrice.toFixed(2)
+            } zł`}
           />
         </Link>
         <div

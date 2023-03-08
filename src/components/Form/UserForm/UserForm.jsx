@@ -1,11 +1,9 @@
 import { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useMutation, useQueryClient } from "react-query";
 
 import useData from "../../../hooks/useData";
 import useValidate from "../../../hooks/useValidate";
 import useAllert from "../../../hooks/useAllert";
-
-import { setUserData } from "../../../store/userData";
 
 import SubmitButton from "../../Button/SubmitButton";
 import Allert from "../../Allert/Allert";
@@ -15,11 +13,10 @@ import "./UserForm.scss";
 const UserForm = (props) => {
   const [isChanged, setIsChanged] = useState(false);
 
-  const { dataRequest } = useData();
+  const { updateUserData } = useData();
+  const queryClient = useQueryClient();
 
   const { allert, allertType, allertText } = useAllert();
-
-  const dispatch = useDispatch();
 
   const name = useRef();
   const surname = useRef();
@@ -27,6 +24,17 @@ const UserForm = (props) => {
   const street = useRef();
   const code = useRef();
   const city = useRef();
+
+  const updateDataMutation = useMutation({
+    mutationFn: updateUserData,
+    onSuccess: () => {
+      queryClient.invalidateQueries("user-data");
+      allert({ type: "succes", text: "Pomyślnie dokonano zmian" });
+    },
+    onError: (err) => {
+      allert({ type: "fail", text: "Popraw błędne pola" });
+    },
+  });
 
   const [isNameValid, validateName, clearName] = useValidate({
     inputRef: name,
@@ -108,37 +116,19 @@ const UserForm = (props) => {
       validStreet &&
       validCity
     ) {
-      dispatch(
-        setUserData({
-          address: {
-            city: city.current.value,
-            zipcode: code.current.value,
-            street: street.current.value,
-          },
-          name: name.current.value,
-          surname: surname.current.value,
-          phone: phone.current.value,
-        })
-      );
-      const responnse = await dataRequest({
-        method: "PATCH",
-        database: `users/${props.userData.id}/update`,
-        body: {
-          address: {
-            city: city.current.value,
-            zipcode: code.current.value,
-            street: street.current.value,
-          },
-          name: name.current.value,
-          surname: surname.current.value,
-          phone: phone.current.value,
+      updateDataMutation.mutate({
+        address: {
+          city: city.current.value,
+          zipcode: code.current.value,
+          street: street.current.value,
         },
+        name: name.current.value,
+        surname: surname.current.value,
+        phone: phone.current.value,
       });
 
       setIsChanged(false);
-      if (responnse)
-        allert({ type: "succes", text: "Pomyślnie dokonano zmian" });
-    } else allert({ type: "fail", text: "Popraw błędne pola" });
+    }
   };
 
   return (

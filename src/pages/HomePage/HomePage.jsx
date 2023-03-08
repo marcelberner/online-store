@@ -21,22 +21,20 @@ const HomePage = () => {
     queryFn: () => getProducts("?featured=true"),
   });
 
-  if (isError) console.log(error);
-
   return (
     <div className="home-page">
       <Slider />
-      <Recomended products={data && data.slice(0, 8)} />
+      <Recomended products={data && data.products.slice(0, 8)} />
       <Informations
         title={"Odkryj Online Store"}
         content={INFORMATIONS}
         mediumSize={true}
       />
-      <Bestsellers title={"Bestsellery"} products={data && data.slice(0, 12)} />
+      <Bestsellers title={"Bestsellery"} products={data && data.products.slice(0, 12)} />
       <Informations title={"Aktualności"} content={NEWS} />
       <LastWatched
         title={"Ostatnio oglądane"}
-        products={data && data.slice(0, 12)}
+        products={data && data.products.slice(0, 12)}
       />
       <Informations title={"Poradniki"} content={TUTORIALS} />
     </div>

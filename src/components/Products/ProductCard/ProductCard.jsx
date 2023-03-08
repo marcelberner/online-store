@@ -15,7 +15,7 @@ const ProductCard = (props) => {
         id={props.id}
         recomendation={props.recomendation}
       />
-      <PurchaseBar id={props.id} price={props.price} />
+      <PurchaseBar id={props.id} price={props.price} name={props.name} img={props.images}/>
     </section>
   );
 };

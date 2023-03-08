@@ -10,7 +10,7 @@ import ProductReputation from "../ProductReputation/ProductReputation";
 import "./ProductItem.scss";
 
 const ProductItem = (props) => {
-  const isAuth = useSelector((state) => state.userAuth.token);
+  const token = localStorage.getItem("token");
 
   return (
     <div className="product-container">
@@ -56,9 +56,11 @@ const ProductItem = (props) => {
           </div>
         </div>
       </Link>
-      {isAuth && <WishButton id={props.id} hide={true} size={props.size} />}
+      {token && <WishButton id={props.id} hide={true} size={props.size} />}
       <CartButton
         id={props.id}
+        img={props.img}
+        name={props.name}
         price={props.price}
         hide={true}
         size={props.size}
